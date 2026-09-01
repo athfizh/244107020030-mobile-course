@@ -1,30 +1,50 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:my_first_app/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  // ─── Test Group: ProfilMahasiswaPage ───────────────────────────────────────
+  group('ProfilMahasiswaPage', () {
+    testWidgets('menampilkan nama mahasiswa', (WidgetTester tester) async {
+      await tester.pumpWidget(const MyApp());
+      expect(find.text('Athaulla Hafizh'), findsOneWidget);
+    });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    testWidgets('menampilkan NIM mahasiswa', (WidgetTester tester) async {
+      await tester.pumpWidget(const MyApp());
+      expect(find.text('NIM: 244107020030'), findsOneWidget);
+    });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    testWidgets('menampilkan judul AppBar', (WidgetTester tester) async {
+      await tester.pumpWidget(const MyApp());
+      expect(find.text('Profil Mahasiswa'), findsOneWidget);
+    });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    testWidgets('menampilkan ikon school', (WidgetTester tester) async {
+      await tester.pumpWidget(const MyApp());
+      expect(find.byIcon(Icons.school), findsOneWidget);
+    });
+
+    testWidgets('menampilkan label Program Studi', (WidgetTester tester) async {
+      await tester.pumpWidget(const MyApp());
+      expect(find.text('Program Studi'), findsOneWidget);
+    });
+
+    testWidgets('menampilkan info minat utama', (WidgetTester tester) async {
+      await tester.pumpWidget(const MyApp());
+      expect(find.text('Minat Utama'), findsOneWidget);
+    });
+
+    testWidgets('widget tree mengandung Scaffold', (WidgetTester tester) async {
+      await tester.pumpWidget(const MyApp());
+      expect(find.byType(Scaffold), findsOneWidget);
+    });
+
+    testWidgets('widget tree mengandung SingleChildScrollView',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(const MyApp());
+      expect(find.byType(SingleChildScrollView), findsOneWidget);
+    });
   });
 }
