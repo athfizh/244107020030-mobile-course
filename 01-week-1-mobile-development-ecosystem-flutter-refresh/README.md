@@ -68,7 +68,7 @@ flutter test
 ### Versi Awal (dari praktikum, sebelum Mini Assignment)
 <img src="screenshots/profil_mahasiswa_v1.png" width="250" alt="Profil Mahasiswa - versi awal dari praktikum">
 
-> Versi ini hanya menampilkan nama dan ikon — tanpa NIM dan tanpa info tambahan. Versi ini adalah **baseline** sebelum pengerjaan Mini Assignment.
+> Versi ini hanya menampilkan nama dan ikon tanpa NIM dan tanpa info tambahan. Versi ini adalah **baseline** sebelum pengerjaan Mini Assignment.
 
 ---
 
@@ -98,7 +98,7 @@ Native (Swift/Kotlin) lebih tepat ketika:
 - **Performa kritis**: game 3D, AR/VR, pemrosesan kamera real-time, audio latency rendah
 - **Akses hardware penuh**: API khusus platform yang belum ada bridge-nya (custom Bluetooth low-energy profile, NFC tertentu)
 - **UI platform-spesifik wajib**: aplikasi yang harus mengikuti Human Interface Guidelines iOS *secara sempurna* (mis. banking app yang sudah punya design system kuat per platform)
-- **Tim besar** yang sudah memiliki spesialisasi Android dan iOS terpisah — cross-platform justru menambah kompleksitas
+- **Tim besar** yang sudah memiliki spesialisasi Android dan iOS terpisah, cross-platform justru menambah kompleksitas
 
 Cross-platform (Flutter, React Native) tepat ketika: MVP cepat, tim kecil, codebase tunggal, atau fitur utama tidak bergantung pada API platform-spesifik.
 
@@ -108,7 +108,7 @@ Cross-platform (Flutter, React Native) tepat ketika: MVP cepat, tim kecil, codeb
 
 Dalam Flutter, UI adalah **fungsi dari state**: `UI = f(state)`.
 
-- Widget tree dibangun ulang (`rebuild`) setiap kali state berubah — bukan memanipulasi DOM/view secara langsung.
+- Widget tree dibangun ulang (`rebuild`) setiap kali state berubah bukan memanipulasi DOM/view secara langsung.
 - `setState()` menandai widget sebagai *dirty* → Flutter memanggil ulang `build()` → menghasilkan widget tree baru.
 - Flutter kemudian **membandingkan** (diffing) tree lama vs baru menggunakan *reconciliation* untuk menentukan perubahan minimal pada *render tree*.
 - Hasilnya: developer hanya perlu mendeklarasikan **apa yang harus tampil** (bukan *bagaimana* mengubah UI), dan Flutter mengurus pembaruan layar secara efisien.
@@ -131,5 +131,5 @@ User tap → setState() → build() dipanggil → Widget tree baru → Diff → 
 **Manfaat bagi portfolio:**
 - Riwayat commit mencerminkan **proses berpikir dan disiplin kerja** developer
 - Perekrut/tim dapat melihat progres nyata, bukan satu "mega commit" di akhir
-- Pesan commit yang baik (`feat:`, `fix:`, `docs:`) menunjukkan pemahaman **Conventional Commits** — sinyal profesionalisme
+- Pesan commit yang baik (`feat:`, `fix:`, `docs:`) menunjukkan pemahaman **Conventional Commits** sinyal profesionalisme
 - Menunjukkan kebiasaan kerja *incremental* yang aman dan terukur
