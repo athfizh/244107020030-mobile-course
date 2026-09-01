@@ -53,8 +53,22 @@ flutter test
 
 ---
 
-## Screenshot
-Lihat folder [`screenshots/`](screenshots/) untuk bukti visual hasil aplikasi.
+## Screenshot & Bukti Visual Mini Assignment
+
+### Versi Terbaru (setelah upgrade Mini Assignment)
+![Profil Mahasiswa - versi final dengan NIM badge dan info cards](screenshots/profil_mahasiswa_v2.jpg)
+
+> **Keterangan gambar:**
+> - 🔵 **AppBar** "Profil Mahasiswa" → widget `AppBar` + `Text`
+> - 👤 **Avatar** dengan ikon `school` → widget `CircleAvatar` + `Icon`
+> - 🏷️ **NIM: 244107020030** → widget `Container` (pill badge) + `Text` *(poin Mini Assignment: tambah NIM)*
+> - 📋 **4 Info Card** (Program Studi, Angkatan, Minat Utama, Platform) → widget `_InfoCard` reusable *(poin Mini Assignment: informasi tambahan)*
+> - 📝 **Footer** mata kuliah → widget `Text`
+
+### Versi Awal (dari praktikum, sebelum Mini Assignment)
+![Profil Mahasiswa - versi awal dari praktikum](screenshots/Screenshot_20260901_003130.png)
+
+> Versi ini hanya menampilkan nama dan ikon — tanpa NIM dan tanpa info tambahan. Versi ini adalah **baseline** sebelum pengerjaan Mini Assignment.
 
 ---
 
