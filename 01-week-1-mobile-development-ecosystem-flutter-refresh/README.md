@@ -18,8 +18,8 @@ Memahami evolusi ekosistem pengembangan mobile (native vs cross-platform), melak
 ---
 
 ## Stack Teknologi
-- **Bahasa:** Dart 3.x (null safety penuh)
-- **Framework:** Flutter SDK ≥ 3.13
+- **Bahasa:** Dart 3.13.2 (null safety penuh)
+- **Framework:** Flutter SDK 3.47.2 (stable channel)
 - **Tools:** Android Studio Meerkat, Git, Flutter CLI
 - **Testing:** `flutter_test` (widget tests)
 
