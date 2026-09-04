@@ -1,0 +1,35 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+.migrate/
+
+# IDE files
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Flutter / Dart build & tool files
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+
+# Ignore platform-specific build folders as requested
+**/android/
+**/ios/
+**/web/
+**/linux/
+**/macos/
+**/windows/
+**/.metadata
