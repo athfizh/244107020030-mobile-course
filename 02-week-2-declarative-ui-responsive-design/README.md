@@ -80,26 +80,3 @@ Saat menambahkan baris email pada kartu profil dengan pola `Expanded(child: Text
 **Solusi:** Memindahkan `Expanded` ke teks nilai email dan menyesuaikan `fontSize`, atau menggunakan `Spacer()` sehingga label memiliki lebar alami dan teks email sejajar di sebelah kanan.
 
 ---
-
-## Refleksi
-
-### 1. Apa perbedaan antara Imperative UI dan Declarative UI pada Flutter?
-
-- **Imperative UI**: Developer secara manual mengubah status dan properti elemen UI satu per satu ketika terjadi perubahan data (contoh: `textView.setText("Hello")` di Android SDK lama).
-- **Declarative UI**: Developer mendeskripsikan bentuk UI berdasarkan state saat itu (`UI = f(state)`). Ketika state berubah, Flutter membangun ulang widget tree dan menyesuaikan tampilan secara otomatis.
-
----
-
-### 2. Bagaimana LayoutBuilder membantu membuat aplikasi yang responsif?
-
-`LayoutBuilder` menyediakan parameter `BoxConstraints` yang memberikan informasi batas lebar dan tinggi maksimum yang tersedia dari widget induk (`constraints.maxWidth`). 
-
-Dengan informasi ini, developer dapat menentukan logika kondisional (misalnya merubah jumlah kolom pada `GridView` dari 1 kolom menjadi 2 kolom jika lebar layar >= 700px).
-
----
-
-### 3. Mengapa widget Semantics penting dalam pengembangan aplikasi mobile?
-
-Widget `Semantics` berfungsi memberikan informasi kontekstual dan deskriptif kepada fitur aksesibilitas sistem operasi (seperti TalkBack pada Android atau VoiceOver pada iOS).
-
-Hal ini memungkinkan pengguna dengan keterbatasan penglihatan dapat memahami fungsi dari setiap elemen interaktif (seperti tombol sakelar atau kartu informasi) melalui pembaca layar.
