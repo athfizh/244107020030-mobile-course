@@ -43,13 +43,13 @@ flutter test
 ---
 
 ## Hasil yang Dicapai
-- ✅ Environment Flutter berhasil dikonfigurasi (`flutter doctor` clean)
-- ✅ Repository Git terstruktur 16 minggu dibuat
-- ✅ Widget tree default diganti menjadi **Profil Mahasiswa** lengkap
-- ✅ NIM `244107020030` ditampilkan sebagai badge biru
-- ✅ Informasi tambahan: Program Studi, Angkatan, Minat Utama, Platform
-- ✅ Widget test baru memverifikasi nama, NIM, AppBar, dan widget tree
-- ✅ Latihan mandiri Dart: fungsi, class, null safety (`??` operator)
+- Environment Flutter berhasil dikonfigurasi (`flutter doctor` clean)
+- Repository Git terstruktur 16 minggu dibuat
+- Widget tree default diganti menjadi **Profil Mahasiswa** lengkap
+- NIM `244107020030` ditampilkan sebagai badge biru
+- Informasi tambahan: Program Studi, Angkatan, Minat Utama, Platform
+- Widget test baru memverifikasi nama, NIM, AppBar, dan widget tree
+- Latihan mandiri Dart: fungsi, class, null safety (`??` operator)
 
 ---
 
@@ -59,11 +59,11 @@ flutter test
 <img src="screenshots/profil_mahasiswa_v2.png" width="250" alt="Profil Mahasiswa - versi final dengan NIM badge dan info cards">
 
 > **Keterangan gambar:**
-> - 🔵 **AppBar** "Profil Mahasiswa" → widget `AppBar` + `Text`
-> - 👤 **Avatar** dengan ikon `school` → widget `CircleAvatar` + `Icon`
-> - 🏷️ **NIM: 244107020030** → widget `Container` (pill badge) + `Text` *(poin Mini Assignment: tambah NIM)*
-> - 📋 **4 Info Card** (Program Studi, Angkatan, Minat Utama, Platform) → widget `_InfoCard` reusable *(poin Mini Assignment: informasi tambahan)*
-> - 📝 **Footer** mata kuliah → widget `Text`
+> - **AppBar** "Profil Mahasiswa" -> widget `AppBar` + `Text`
+> - **Avatar** dengan ikon `school` -> widget `CircleAvatar` + `Icon`
+> - **NIM: 244107020030** -> widget `Container` (pill badge) + `Text`
+> - **4 Info Card** (Program Studi, Angkatan, Minat Utama, Platform) -> widget `_InfoCard` reusable
+> - **Footer** mata kuliah -> widget `Text`
 
 ### Versi Awal (dari praktikum, sebelum Mini Assignment)
 <img src="screenshots/profil_mahasiswa_v1.png" width="250" alt="Profil Mahasiswa - versi awal dari praktikum">
@@ -84,9 +84,9 @@ Saat menjalankan `flutter doctor`, muncul peringatan:
 **Penyebab:** Instalasi Android Studio tidak menyertakan `Android SDK Command-line Tools` secara default.
 
 **Solusi:**
-1. Buka **Android Studio → SDK Manager → SDK Tools**
-2. Centang **Android SDK Command-line Tools (latest)** → Apply
-3. Jalankan ulang `flutter doctor` → status berubah menjadi ✅
+1. Buka **Android Studio -> SDK Manager -> SDK Tools**
+2. Centang **Android SDK Command-line Tools (latest)** -> Apply
+3. Jalankan ulang `flutter doctor` -> status berubah menjadi clean
 
 ---
 
@@ -109,13 +109,13 @@ Cross-platform (Flutter, React Native) tepat ketika: MVP cepat, tim kecil, codeb
 Dalam Flutter, UI adalah **fungsi dari state**: `UI = f(state)`.
 
 - Widget tree dibangun ulang (`rebuild`) setiap kali state berubah bukan memanipulasi DOM/view secara langsung.
-- `setState()` menandai widget sebagai *dirty* → Flutter memanggil ulang `build()` → menghasilkan widget tree baru.
+- `setState()` menandai widget sebagai *dirty* -> Flutter memanggil ulang `build()` -> menghasilkan widget tree baru.
 - Flutter kemudian **membandingkan** (diffing) tree lama vs baru menggunakan *reconciliation* untuk menentukan perubahan minimal pada *render tree*.
 - Hasilnya: developer hanya perlu mendeklarasikan **apa yang harus tampil** (bukan *bagaimana* mengubah UI), dan Flutter mengurus pembaruan layar secara efisien.
 
 Contoh alur:
 ```
-User tap → setState() → build() dipanggil → Widget tree baru → Diff → RenderObject diperbarui → Layar berubah
+User tap -> setState() -> build() dipanggil -> Widget tree baru -> Diff -> RenderObject diperbarui -> Layar berubah
 ```
 
 ---
