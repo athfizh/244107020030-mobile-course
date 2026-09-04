@@ -53,7 +53,7 @@ flutter test
 ## Screenshot & Bukti Visual
 
 ### Student Dashboard (Mode Terang & Gelap)
-<img src="screenshots/Screenshot_20260904_095256.png" width="250" alt="Student Dashboard Light Mode"> <img src="screenshots/Screenshot_20260904_095309.png" width="250" alt="Student Dashboard Dark Mode">
+<img src="screenshots/Praktikum Dashboard Responsif Light Theme.png" width="250" alt="Student Dashboard Light Theme"> <img src="screenshots/Praktikum Dashboard Responsif Dark Theme.png" width="250" alt="Student Dashboard Dark Theme">
 
 > **Keterangan gambar:**
 > - **AppBar** "Student Dashboard" dengan ikon mode dan `CupertinoSwitch`
