@@ -6,7 +6,7 @@
 
 ## Minggu 2 – Declarative UI & Responsive Design
 
-**Tanggal:** 3 September 2026
+**Tanggal:** 7 September 2026
 
 ### Yang Dipelajari
 - Declarative UI dalam Flutter
