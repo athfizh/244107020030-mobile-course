@@ -10,7 +10,7 @@
 | Minggu | Topik | Status | Link |
 |--------|-------|--------|------|
 | 01 | Mobile Development Ecosystem & Flutter Refresh | ✅ Selesai | [Folder](01-week-1-mobile-development-ecosystem-flutter-refresh/) |
-| 02 | Declarative UI & Responsive Design | ⏳ Belum | [Folder](02-week-2-declarative-ui-responsive-design/) |
+| 02 | Declarative UI & Responsive Design | ✅ Selesai | [Folder](02-week-2-declarative-ui-responsive-design/) |
 | 03 | Navigation & State Management | ⏳ Belum | [Folder](03-week-3-navigation-state-management/) |
 | 04 | Networking & REST API | ⏳ Belum | [Folder](04-week-4-networking-rest-api/) |
 | 05 | Local Storage & Offline First | ⏳ Belum | [Folder](05-week-5-local-storage-offline-first/) |
@@ -43,4 +43,19 @@
 
 ---
 
-*Diperbarui: 1 September 2026*
+## Minggu 2 – Highlight
+
+### Tugas Utama: Academic Overview & Dashboard Responsif
+- **Layout Responsif:** Menggunakan `LayoutBuilder` dengan breakpoint `700px` (`kWideBreakpoint`) untuk beralih antara 1 kolom (layar sempit) dan 2 kolom (layar lebar).
+- **Interaktivitas Tema:** Implementasi `StatefulWidget` dengan `CupertinoSwitch` untuk mengganti tema terang dan gelap secara *real-time*.
+- **Aksesibilitas & Reusable Widget:** Ekstraksi komponen kartu menjadi widget `InfoCard` serta penambahan `Semantics` untuk *screen reader*.
+- **Testing & Analisis:** Berhasil melewati verifikasi `flutter analyze` tanpa error serta lulus seluruh widget test di folder `test/`.
+
+### Refleksi & Referensi Minggu 2
+1. **Imperative vs Declarative UI** → Imperative mengubah UI langkah demi langkah secara manual; Declarative merekonstruksi UI secara reaktif berdasarkan state saat ini (`UI = f(state)`).
+2. **Peran Expanded** → Sangat membantu dalam membagi ruang proporsional di dalam `Row`/`Column`, namun memicu error constraint unconstrained jika diletakkan di dalam container scroll horizontal/vertikal yang tak bertepi.
+3. **Breakpoint & Theme** → Memastikan adaptasi visual optimal di berbagai ukuran perangkat serta meningkatkan kenyamanan dan aksesibilitas pengguna.
+
+---
+
+*Diperbarui: 3 September 2026*

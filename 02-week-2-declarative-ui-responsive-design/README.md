@@ -104,25 +104,28 @@ Saat menambahkan baris email pada kartu profil dengan pola `Expanded(child: Text
 
 ---
 
-## Refleksi
+## Refleksi dan referensi
 
-### 1. Apa perbedaan antara Imperative UI dan Declarative UI pada Flutter?
+### Refleksi
 
-- **Imperative UI**: Developer secara manual mengubah status dan properti elemen UI satu per satu ketika terjadi perubahan data (contoh: `textView.setText("Hello")` di Android SDK lama).
-- **Declarative UI**: Developer mendeskripsikan bentuk UI berdasarkan state saat itu (`UI = f(state)`). Ketika state berubah, Flutter membangun ulang widget tree dan menyesuaikan tampilan secara otomatis.
+- **Apa perbedaan cara berpikir imperative dan declarative saat membangun UI?**
+  Pendekatan imperative mengharuskan developer mengubah UI secara manual langkah demi langkah setiap kali state/data berubah (misal: `textView.setText("Baru")`). Sedangkan pendekatan declarative pada Flutter bersifat reaktif; developer mendeskripsikan *blueprint* UI untuk setiap kemungkinan state (`UI = f(state)`). Ketika state berubah, Flutter secara otomatis merender ulang (rebuild) bagian widget tree yang terdampak tanpa perlu intervensi manual.
 
----
+- **Kapan `Expanded` membantu dan kapan penggunaannya justru menghasilkan layout error?**
+  `Expanded` sangat membantu saat kita ingin membagi sisa ruang kosong secara proporsional dalam `Row` atau `Column`. Namun, `Expanded` akan menyebabkan *layout error* (overflow atau constraint tidak terbatas) jika ditempatkan di dalam widget scroll (seperti `SingleChildScrollView` horizontal untuk `Row` atau vertikal untuk `Column`) atau di dalam parent yang tidak memberikan batasan ukuran secara tegas.
 
-### 2. Bagaimana LayoutBuilder membantu membuat aplikasi yang responsif?
+- **Bagaimana breakpoint dan theme memengaruhi pengalaman pengguna?**
+  Breakpoint memastikan bahwa layout aplikasi beradaptasi dengan ukuran layar perangkat (misal: ponsel vs tablet/desktop), sehingga mencegah UI terlihat terlalu kosong di layar besar atau terhimpit di layar kecil. Theme (khususnya *dark mode*) memengaruhi kenyamanan visual pengguna saat berinteraksi di kondisi pencahayaan rendah, mengurangi kelelahan mata, dan meningkatkan aksesibilitas kontras teks.
 
-`LayoutBuilder` menyediakan parameter `BoxConstraints` yang memberikan informasi batas lebar dan tinggi maksimum yang tersedia dari widget induk (`constraints.maxWidth`). 
+- **Apa yang Anda verifikasi dari rekomendasi AI setelah tugas inti selesai?**
+  Saya memverifikasi tiga hal utama dari saran AI:
+  1. **Tingkat Responsivitas**: Memastikan aplikasi benar-benar berpindah ke tata letak 1 kolom pada layar di bawah 700px dan 2 kolom saat di atasnya.
+  2. **Dampak Aksesibilitas**: Mengecek penggunaan widget `Semantics` apakah memberi kejelasan pembacaan pada *screen reader* tanpa merusak tata letak yang ada.
+  3. **Ketersediaan Widget**: Mengonfirmasi bahwa komponen pendukung seperti `CupertinoSwitch` dan `LayoutBuilder` beroperasi stabil tanpa masalah versi pada SDK terbaru.
 
-Dengan informasi ini, developer dapat menentukan logika kondisional (misalnya merubah jumlah kolom dari 1 kolom menjadi 2 kolom jika lebar layar >= 700px).
+### Referensi
 
----
-
-### 3. Mengapa widget Semantics penting dalam pengembangan aplikasi mobile?
-
-Widget `Semantics` berfungsi memberikan informasi kontekstual dan deskriptif kepada fitur aksesibilitas sistem operasi (seperti TalkBack pada Android atau VoiceOver pada iOS).
-
-Hal ini memungkinkan pengguna dengan keterbatasan penglihatan dapat memahami fungsi dari setiap elemen interaktif (seperti tombol sakelar atau kartu informasi) melalui pembaca layar.
+- [Flutter UI documentation](https://docs.flutter.dev/ui)
+- [Building responsive apps](https://docs.flutter.dev/ui/adaptive-responsive)
+- [Material Design 3](https://m3.material.io/)
+- [Flutter accessibility](https://docs.flutter.dev/ui/accessibility)
