@@ -9,7 +9,7 @@ Memahami prinsip dasar Declarative UI pada Flutter, membangun komponen layout da
 | Fitur | Keterangan |
 |---|---|
 | **Profil Mahasiswa** | Kartu profil (`ProfileCard`) berisi avatar, nama, NIM, kelas, dan email (`profile_card.dart`) |
-| **Student Dashboard** | Grid kartu informasi mahasiswa (`main.dart`) |
+| **Student Dashboard** | Grid kartu informasi mahasiswa dengan CupertinoSwitch (`main.dart`) |
 | **Academic Overview** | Halaman akademik lengkap dengan header profil dan 4 kartu indikator (`academic_overview.dart`) |
 | **Responsive Layout** | `LayoutBuilder` dengan breakpoint 700px (1 kolom pada HP, 2 kolom pada layar lebar) |
 | **Dark Mode Toggle** | `CupertinoSwitch` pada AppBar untuk mengganti tema terang dan gelap |
@@ -33,10 +33,13 @@ cd 02-week-2-declarative-ui-responsive-design
 # 2. Install dependencies
 flutter pub get
 
-# 3. Jalankan aplikasi Academic Overview (Tugas Utama)
+# 3. Jalankan aplikasi Dashboard Responsif (Praktikum 5)
+flutter run lib/main.dart
+
+# 4. Jalankan aplikasi Academic Overview (Tugas Utama)
 flutter run lib/academic_overview.dart
 
-# 4. Jalankan test responsif
+# 5. Jalankan test responsif
 flutter test test/academic_overview_test.dart
 ```
 
@@ -54,7 +57,7 @@ flutter test test/academic_overview_test.dart
 
 ## Screenshot & Bukti Visual
 
-### Academic Overview (Hasil Tugas: Light Theme & Dark Theme)
+### Tugas Utama: Academic Overview (Light Theme & Dark Theme)
 <img src="screenshots/Hasil Tugas Light Theme.png" width="250" alt="Hasil Tugas Light Theme"> <img src="screenshots/Hasil Tugas Dark Theme.png" width="250" alt="Hasil Tugas Dark Theme">
 
 > **Keterangan gambar:**
@@ -62,7 +65,14 @@ flutter test test/academic_overview_test.dart
 > - **Light & Dark Theme** dengan kontras teks dan warna latar belakang yang terbaca jelas
 > - **Toggle Switch** (`CupertinoSwitch`) di AppBar untuk mengganti tema
 
-### Kartu Profil Mahasiswa (Warm-up)
+### Praktikum 5: Dashboard Responsif (Light Theme & Dark Theme)
+<img src="screenshots/Praktikum Dashboard Responsif Light Theme.png" width="250" alt="Praktikum Dashboard Responsif Light Theme"> <img src="screenshots/Praktikum Dashboard Responsif Dark Theme.png" width="250" alt="Praktikum Dashboard Responsif Dark Theme">
+
+> **Keterangan gambar:**
+> - **Student Dashboard** dengan 4 kartu grid (Assignments, Attendance, Portfolio, Current week)
+> - **CupertinoSwitch** pada AppBar untuk mengubah mode terang dan gelap
+
+### Praktikum 4: Kartu Profil Mahasiswa (Warm-up)
 <img src="screenshots/Hasil Praktikum layout sederhana (warm-up).png" width="250" alt="Hasil Praktikum layout sederhana - Kartu Profil">
 
 > **Keterangan gambar:**
