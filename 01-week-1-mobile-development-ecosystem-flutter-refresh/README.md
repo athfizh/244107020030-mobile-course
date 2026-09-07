@@ -133,3 +133,12 @@ User tap -> setState() -> build() dipanggil -> Widget tree baru -> Diff -> Rende
 - Perekrut/tim dapat melihat progres nyata, bukan satu "mega commit" di akhir
 - Pesan commit yang baik (`feat:`, `fix:`, `docs:`) menunjukkan pemahaman **Conventional Commits** sinyal profesionalisme
 - Menunjukkan kebiasaan kerja *incremental* yang aman dan terukur
+
+---
+
+## Referensi
+
+- [Flutter installation guide](https://docs.flutter.dev/install)
+- [Flutter: declarative UI](https://docs.flutter.dev/flutter-for/declarative)
+- [Official Dart language documentation](https://dart.dev/language)
+- [Learn Dart in Y Minutes](https://learnxinyminutes.com/dart/)
