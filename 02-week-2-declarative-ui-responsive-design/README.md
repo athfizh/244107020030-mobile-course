@@ -54,13 +54,13 @@ flutter test test/academic_overview_test.dart
 
 ## Screenshot & Bukti Visual
 
-### Student Dashboard (Mode Terang & Gelap)
-<img src="screenshots/Praktikum Dashboard Responsif Light Theme.png" width="250" alt="Student Dashboard Light Theme"> <img src="screenshots/Praktikum Dashboard Responsif Dark Theme.png" width="250" alt="Student Dashboard Dark Theme">
+### Academic Overview (Hasil Tugas: Light Theme & Dark Theme)
+<img src="screenshots/Hasil Tugas Light Theme.png" width="250" alt="Hasil Tugas Light Theme"> <img src="screenshots/Hasil Tugas Dark Theme.png" width="250" alt="Hasil Tugas Dark Theme">
 
 > **Keterangan gambar:**
-> - **AppBar** "Student Dashboard" dengan ikon mode dan `CupertinoSwitch`
-> - **Grid Cards** 4 kartu (Assignments, Attendance, Portfolio, Current week)
-> - **Toggle Dark Mode** peralihan tema terang dan gelap secara instan
+> - **Header Profil** dan **4 Kartu Informasi** (SKS, IPK, Kehadiran, Tugas Aktif)
+> - **Light & Dark Theme** dengan kontras teks dan warna latar belakang yang terbaca jelas
+> - **Toggle Switch** (`CupertinoSwitch`) di AppBar untuk mengganti tema
 
 ### Kartu Profil Mahasiswa (Warm-up)
 <img src="screenshots/Hasil Praktikum layout sederhana (warm-up).png" width="250" alt="Hasil Praktikum layout sederhana - Kartu Profil">
@@ -96,7 +96,7 @@ flutter test test/academic_overview_test.dart
 ## Kendala Setup & Solusi
 
 ### Kendala: Teks "Email" terpotong/tertekuk menjadi dua baris ("Ema il")
-Saat menambahkan baris email pada kartu profil dengan pola `Expanded(child: Text('Email'))`, kata "Email" terpotong menjadi two baris secara vertikal.
+Saat menambahkan baris email pada kartu profil dengan pola `Expanded(child: Text('Email'))`, kata "Email" terpotong menjadi dua baris secara vertikal.
 
 **Penyebab:** Teks nilai email yang panjang memakan sebagian besar lebar terbatas dari `Container` (320px), sehingga sisa lebar yang diberikan `Expanded` kepada label "Email" terlalu kecil.
 
@@ -104,7 +104,7 @@ Saat menambahkan baris email pada kartu profil dengan pola `Expanded(child: Text
 
 ---
 
-## Refleksi dan referensi
+## Refleksi dan Referensi
 
 ### Refleksi
 
