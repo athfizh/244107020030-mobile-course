@@ -2,7 +2,7 @@
 
 **Nama:** Athaulla Hafizh  
 **NIM:** 244107020030  
-**Tanggal:** 3 September 2026
+**Tanggal:** 7 September 2026
 
 ---
 
