@@ -1,16 +1,35 @@
-# Refleksi - Week 2
+# Refleksi – Minggu 2: Declarative UI & Responsive Design
 
-1. **Apa perbedaan cara berpikir imperative dan declarative saat membangun UI?**
-   Pendekatan imperative mengharuskan developer mengubah UI secara manual langkah demi langkah setiap kali state/data berubah (misal: `textView.setText("Baru")`). Sedangkan pendekatan declarative pada Flutter bersifat reaktif; developer mendeskripsikan *blueprint* UI untuk setiap kemungkinan state (`UI = f(state)`). Ketika state berubah, Flutter secara otomatis merender ulang (rebuild) bagian widget tree yang terdampak tanpa perlu intervensi manual.
+**Nama:** Athaulla Hafizh  
+**NIM:** 244107020030  
+**Tanggal:** 3 September 2026
 
-2. **Kapan `Expanded` membantu dan kapan penggunaannya justru menghasilkan layout error?**
-   `Expanded` sangat membantu saat kita ingin membagi sisa ruang kosong secara proporsional dalam `Row` atau `Column`. Namun, `Expanded` akan menyebabkan *layout error* (overflow atau constraint tidak terbatas) jika ditempatkan di dalam widget scroll (seperti `SingleChildScrollView` horizontal untuk `Row` atau vertikal untuk `Column`) atau di dalam parent yang tidak memberikan batasan ukuran secara tegas.
+---
 
-3. **Bagaimana breakpoint dan theme memengaruhi pengalaman pengguna?**
-   Breakpoint memastikan bahwa layout aplikasi beradaptasi dengan ukuran layar perangkat (misal: ponsel vs tablet/desktop), sehingga mencegah UI terlihat terlalu kosong di layar besar atau terhimpit di layar kecil. Theme (khususnya *dark mode*) memengaruhi kenyamanan visual pengguna saat berinteraksi di kondisi pencahayaan rendah, mengurangi kelelahan mata, dan meningkatkan aksesibilitas kontras teks.
+## 1. Apa perbedaan cara berpikir imperative dan declarative saat membangun UI?
 
-4. **Apa yang Anda verifikasi dari rekomendasi AI setelah tugas inti selesai?**
-   Saya memverifikasi tiga hal utama dari saran AI:
-   - **Tingkat Responsivitas**: Memastikan aplikasi benar-benar berpindah ke tata letak 1 kolom pada layar di bawah 700px dan 2 kolom saat di atasnya.
-   - **Dampak Aksesibilitas**: Mengecek penggunaan widget `Semantics` apakah memberi kejelasan pembacaan pada *screen reader* tanpa merusak tata letak yang ada.
-   - **Ketersediaan Widget**: Mengonfirmasi bahwa komponen pendukung seperti `CupertinoSwitch` dan `LayoutBuilder` beroperasi stabil tanpa masalah versi pada SDK terbaru.
+- **Imperative UI**: Developer secara manual mengubah status dan properti elemen UI satu per satu ketika terjadi perubahan data (contoh: `textView.setText("Hello")` di Android SDK lama).
+- **Declarative UI**: Developer mendeskripsikan bentuk UI berdasarkan state saat itu (`UI = f(state)`). Ketika state berubah, Flutter membangun ulang widget tree dan menyesuaikan tampilan secara otomatis.
+
+---
+
+## 2. Kapan `Expanded` membantu dan kapan penggunaannya justru menghasilkan layout error?
+
+- **Membantu**: Saat kita ingin membagi sisa ruang kosong secara proporsional di dalam widget perata seperti `Row` atau `Column`.
+- **Menghasilkan Error**: Jika ditempatkan di dalam wadah *scrollable* dengan ukuran tanpa batas (seperti `SingleChildScrollView` horizontal untuk `Row`), `Expanded` akan memicu *render flex error* karena berusaha memenuhi ruang tak terhingga.
+
+---
+
+## 3. Bagaimana breakpoint dan theme memengaruhi pengalaman pengguna?
+
+- **Breakpoint**: Memastikan layout aplikasi beradaptasi dengan ukuran layar perangkat (ponsel vs tablet/desktop), mencegah UI terlihat terlalu kosong atau terhimpit.
+- **Theme**: Memberikan kenyamanan visual (seperti *dark mode*) pada kondisi pencahayaan rendah dan meningkatkan aksesibilitas kontras teks.
+
+---
+
+## 4. Apa yang Anda verifikasi dari rekomendasi AI setelah tugas inti selesai?
+
+Saya memverifikasi tiga hal utama dari saran AI:
+1. **Tingkat Responsivitas**: Memastikan aplikasi benar-benar berpindah ke tata letak 1 kolom pada layar di bawah 700px dan 2 kolom saat di atasnya.
+2. **Dampak Aksesibilitas**: Mengecek penggunaan widget `Semantics` apakah memberi kejelasan pembacaan pada *screen reader* tanpa merusak tata letak yang ada.
+3. **Ketersediaan Widget**: Mengonfirmasi bahwa komponen pendukung seperti `CupertinoSwitch` dan `LayoutBuilder` beroperasi stabil tanpa masalah versi pada SDK terbaru.

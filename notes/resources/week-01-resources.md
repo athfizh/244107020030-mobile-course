@@ -1,4 +1,10 @@
-# Resource Link - Week 1
+# Resource Link – Minggu 1: Mobile Development Ecosystem & Flutter Refresh
+
+**Athaulla Hafizh | NIM: 244107020030**
+
+---
+
+## Referensi Resmi
 
 - [Flutter installation guide](https://docs.flutter.dev/install)
 - [Flutter: declarative UI](https://docs.flutter.dev/flutter-for/declarative)
