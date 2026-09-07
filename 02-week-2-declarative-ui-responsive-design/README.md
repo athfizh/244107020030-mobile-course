@@ -1,7 +1,7 @@
 # Minggu 2 – Declarative UI & Responsive Design
 
 ## Tujuan
-Memahami prinsip dasar Declarative UI pada Flutter, membangun komponen layout dasar (Row, Column, Container, Expanded, Spacer), serta membuat aplikasi Student Dashboard yang responsif menggunakan LayoutBuilder, GridView, dan CupertinoSwitch.
+Memahami prinsip dasar Declarative UI pada Flutter, membangun komponen layout dasar (Row, Column, Container, Expanded, Spacer), serta membuat aplikasi Student Dashboard dan Academic Overview yang responsif menggunakan LayoutBuilder, GridView, dan CupertinoSwitch.
 
 ---
 
@@ -10,6 +10,7 @@ Memahami prinsip dasar Declarative UI pada Flutter, membangun komponen layout da
 |---|---|
 | **Profil Mahasiswa** | Kartu profil (`ProfileCard`) berisi avatar, nama, NIM, kelas, dan email (`profile_card.dart`) |
 | **Student Dashboard** | Grid kartu informasi mahasiswa (`main.dart`) |
+| **Academic Overview** | Halaman akademik lengkap dengan header profil dan 4 kartu indikator (`academic_overview.dart`) |
 | **Responsive Layout** | `LayoutBuilder` dengan breakpoint 700px (1 kolom pada HP, 2 kolom pada layar lebar) |
 | **Dark Mode Toggle** | `CupertinoSwitch` pada AppBar untuk mengganti tema terang dan gelap |
 | **Aksesibilitas** | Widget `Semantics` pada switch dan kartu dashboard untuk dukungan screen reader |
@@ -32,11 +33,11 @@ cd 02-week-2-declarative-ui-responsive-design
 # 2. Install dependencies
 flutter pub get
 
-# 3. Jalankan di emulator / perangkat fisik
-flutter run
+# 3. Jalankan aplikasi Academic Overview (Tugas Utama)
+flutter run lib/academic_overview.dart
 
-# 4. Jalankan test
-flutter test
+# 4. Jalankan test responsif
+flutter test test/academic_overview_test.dart
 ```
 
 ---
@@ -44,9 +45,10 @@ flutter test
 ## Hasil yang Dicapai
 - Kartu profil sederhana berhasil dibangun menggunakan `Row`, `Column`, `Container`, dan `Expanded`
 - Dashboard responsif berhasil diimplementasikan dengan `LayoutBuilder` dan `GridView.count`
+- Halaman Academic Overview berhasil dibangun dengan komponen reusable `InfoCard` dan tema dinamis
 - Pengaturan tema terang/gelap berhasil diintegrasikan menggunakan `StatefulWidget` dan `CupertinoSwitch`
 - Widget `Semantics` berhasil diterapkan pada elemen interaktif untuk aksesibilitas
-- Widget test berhasil diverifikasi dengan hasil sukses (`flutter test`)
+- Seluruh widget test responsif berhasil diverifikasi dan lulus (`flutter test`)
 
 ---
 
@@ -70,13 +72,57 @@ flutter test
 
 ---
 
+## AI Prompt Challenge & Exploration
+
+### 1. Desain Layout: GridView vs LayoutBuilder + Column
+- **Prompt:** "Bandingkan dua tata letak dashboard akademik untuk Flutter: versi GridView dan versi LayoutBuilder + Column. Jelaskan trade-off responsif dan aksesibilitasnya."
+- **Analisis & Keputusan:** 
+  `GridView` efisien untuk grid item seragam berulang. Namun, `LayoutBuilder + Column/Row` (yang diterapkan di `academic_overview.dart`) memberikan kontrol spasi dan tinggi kartu secara penuh. Secara aksesibilitas, urutan pembacaan *screen reader* pada `Row` dan `Column` teratur dengan jelas dari atas ke bawah.
+
+### 2. Penguatan Konsep: Jebakan Widget Expanded
+- **Prompt:** "Jelaskan kapan penggunaan Expanded justru menyebabkan overflow di dalam Row, beri contoh kode yang gagal dan perbaikannya."
+- **Analisis & Keputusan:** 
+  `Expanded` gagal ketika ditaruh di dalam `Row` yang berada di dalam widget *scrollable* arah horizontal (seperti `SingleChildScrollView` horizontal). Flutter akan memicu error `RenderFlex children have non-zero flex but incoming width constraints are unbounded` karena `Expanded` mencoba mengambil lebar tak terhingga. Perbaikannya adalah mengganti `Expanded` dengan widget yang memiliki batas lebar pasti atau membuang scroll horizontal.
+
+### 3. Verification Audit
+- **Prompt:** "Periksa kembali rekomendasi layout di atas: apakah tetap responsif di bawah 600px, apakah mengurangi aksesibilitas, dan apakah ada widget yang tidak tersedia di Flutter stabil saat ini?"
+- **Analisis & Keputusan:**
+  - **Responsif < 600px:** Lulus. Breakpoint diset pada `700px` (`kWideBreakpoint`), sehingga layar HP biasa (360px-600px) otomatis tampil 1 kolom.
+  - **Aksesibilitas:** Lulus. Ditambahkan widget `Semantics` pada switch dan kartu informasi.
+  - **Kestabilan Widget:** Lulus. Seluruh widget yang digunakan (`LayoutBuilder`, `Card`, `CupertinoSwitch`) 100% stabil pada SDK Flutter saat ini.
+
+---
+
 ## Kendala Setup & Solusi
 
 ### Kendala: Teks "Email" terpotong/tertekuk menjadi dua baris ("Ema il")
-Saat menambahkan baris email pada kartu profil dengan pola `Expanded(child: Text('Email'))`, kata "Email" terpotong menjadi dua baris secara vertikal.
+Saat menambahkan baris email pada kartu profil dengan pola `Expanded(child: Text('Email'))`, kata "Email" terpotong menjadi two baris secara vertikal.
 
 **Penyebab:** Teks nilai email yang panjang memakan sebagian besar lebar terbatas dari `Container` (320px), sehingga sisa lebar yang diberikan `Expanded` kepada label "Email" terlalu kecil.
 
 **Solusi:** Memindahkan `Expanded` ke teks nilai email dan menyesuaikan `fontSize`, atau menggunakan `Spacer()` sehingga label memiliki lebar alami dan teks email sejajar di sebelah kanan.
 
 ---
+
+## Refleksi
+
+### 1. Apa perbedaan antara Imperative UI dan Declarative UI pada Flutter?
+
+- **Imperative UI**: Developer secara manual mengubah status dan properti elemen UI satu per satu ketika terjadi perubahan data (contoh: `textView.setText("Hello")` di Android SDK lama).
+- **Declarative UI**: Developer mendeskripsikan bentuk UI berdasarkan state saat itu (`UI = f(state)`). Ketika state berubah, Flutter membangun ulang widget tree dan menyesuaikan tampilan secara otomatis.
+
+---
+
+### 2. Bagaimana LayoutBuilder membantu membuat aplikasi yang responsif?
+
+`LayoutBuilder` menyediakan parameter `BoxConstraints` yang memberikan informasi batas lebar dan tinggi maksimum yang tersedia dari widget induk (`constraints.maxWidth`). 
+
+Dengan informasi ini, developer dapat menentukan logika kondisional (misalnya merubah jumlah kolom dari 1 kolom menjadi 2 kolom jika lebar layar >= 700px).
+
+---
+
+### 3. Mengapa widget Semantics penting dalam pengembangan aplikasi mobile?
+
+Widget `Semantics` berfungsi memberikan informasi kontekstual dan deskriptif kepada fitur aksesibilitas sistem operasi (seperti TalkBack pada Android atau VoiceOver pada iOS).
+
+Hal ini memungkinkan pengguna dengan keterbatasan penglihatan dapat memahami fungsi dari setiap elemen interaktif (seperti tombol sakelar atau kartu informasi) melalui pembaca layar.
