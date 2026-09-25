@@ -49,26 +49,37 @@ Fungsi invalidate dari Riverpod terbukti mampu mereset provider dan menjalankan 
 
 ## Screenshot dan Bukti Visual
 
-### Praktikum 1 Navigasi GoRouter
-<!-- <img src="screenshots/p1_home.png" width="250" alt="HomePage - daftar item"> <img src="screenshots/p1_detail.png" width="250" alt="DetailPage - path parameter"> -->
+### Praktikum 1: Navigasi GoRouter
+<img src="screenshots/Praktikum 1 Home.png" width="250" alt="HomePage daftar item"> <img src="screenshots/Praktikum 1 Detail.png" width="250" alt="DetailPage path parameter">
 
-Keterangan: Halaman awal menampilkan ListView 10 item dengan tombol navigasi ke tugas lainnya di bagian bawah. Halaman detail menampilkan id item yang diteruskan lewat path parameter GoRouter.
+> **Keterangan gambar:**
+> - **Halaman Awal** menampilkan ListView berisi 10 item beserta tombol navigasi tugas di bagian bawah
+> - **Halaman Detail** menampilkan id item yang diteruskan langsung lewat mekanisme path parameter GoRouter
 
-### Praktikum 2 ToDo dengan Riverpod
-<!-- <img src="screenshots/p2_empty.png" width="250" alt="TodoPage - belum ada tugas"> <img src="screenshots/p2_list.png" width="250" alt="TodoPage - daftar tugas terisi"> <img src="screenshots/p2_done.png" width="250" alt="TodoPage - item dicoret"> -->
+### Praktikum 2: ToDo dengan Riverpod
+<img src="screenshots/Praktikum 2 Empty.png" width="250" alt="TodoPage belum ada tugas"> <img src="screenshots/Praktikum 2 List.png" width="250" alt="TodoPage daftar tugas terisi"> <img src="screenshots/Praktikum 2 Done.png" width="250" alt="TodoPage item dicoret">
 
-Keterangan: Kondisi kosong memunculkan teks informasi bahwa belum ada tugas. Setelah data ditambah, daftar tugas akan tampil. Item bisa ditandai selesai dengan efek coret dan dihapus sepenuhnya.
+> **Keterangan gambar:**
+> - **Kondisi Kosong** memunculkan teks informasi bahwa belum ada tugas yang tersimpan
+> - **Daftar Tugas** tampil otomatis di layar sesaat setelah pengguna menambahkan entri data baru
+> - **Tandai Selesai** menerapkan efek coret pada teks item dan dapat dihapus sepenuhnya lewat tombol tempat sampah
 
-### Praktikum 3 AsyncValue (Loading, Error, Success)
-<!-- <img src="screenshots/p3_loading.png" width="250" alt="ProductPage - loading"> <img src="screenshots/p3_error.png" width="250" alt="ProductPage - error state"> <img src="screenshots/p3_success.png" width="250" alt="ProductPage - data tampil"> -->
+### Praktikum 3: AsyncValue (Loading, Error, Success)
+<img src="screenshots/Praktikum 3 Loading.png" width="250" alt="ProductPage loading"> <img src="screenshots/Praktikum 3 Error.png" width="250" alt="ProductPage error state"> <img src="screenshots/Praktikum 3 Success.png" width="250" alt="ProductPage data tampil">
 
-Keterangan: Tampilan loading berupa indikator putar melingkar muncul selama 2 detik pertama. Tampilan error berupa teks peringatan dengan tombol coba lagi. Tampilan sukses menyajikan ListView berisi 3 produk (Keyboard, Mouse, Monitor).
+> **Keterangan gambar:**
+> - **Tampilan Loading** berupa indikator putar melingkar yang menahan layar selama proses asinkron 2 detik pertama
+> - **Tampilan Error** memunculkan teks peringatan sistem beserta tombol coba lagi untuk percobaan ulang
+> - **Tampilan Sukses** menyajikan antarmuka ListView yang langsung memuat data produk (Keyboard, Mouse, Monitor)
 
-### Tugas 6 Refactoring dan Testing
-<!-- <img src="screenshots/t6_nav_todo.png" width="250" alt="Navigation Bar ToDo"> <img src="screenshots/t6_nav_stats.png" width="250" alt="Navigation Bar Statistik"> <img src="screenshots/t6_filter.png" width="250" alt="Filter ToDo Aktif"> -->
-<!-- <img src="screenshots/t6_test.png" width="500" alt="Widget Test Berhasil"> -->
+### Tugas 6: Refactoring dan Testing
+<img src="screenshots/Tugas 6 Nav Todo.png" width="250" alt="Navigation Bar ToDo"> <img src="screenshots/Tugas 6 Nav Stats.png" width="250" alt="Navigation Bar Statistik"> <img src="screenshots/Tugas 6 Filter.png" width="250" alt="Filter ToDo Aktif">
+<br><img src="screenshots/Tugas 6 Test.png" width="500" alt="Widget Test Berhasil">
 
-Keterangan: Integrasi NavigationBar berhasil menjembatani navigasi antara halaman ToDo dan Statistik menggunakan ShellRoute. Fitur penyaringan membatasi halaman ToDo sehingga hanya menampilkan tugas yang belum selesai. Tugas langsung hilang seketika dari layar sesaat setelah dicentang. Pengujian perangkat lunak lewat flutter test lulus untuk simulasi penambahan tugas baru.
+> **Keterangan gambar:**
+> - **Integrasi NavigationBar** sukses menjembatani navigasi antara halaman ToDo dan Statistik menggunakan perutean ShellRoute
+> - **Fitur Penyaringan** membatasi tampilan halaman ToDo sehingga tugas akan langsung menghilang seketika saat dicentang selesai
+> - **Pengujian Perangkat Lunak** lewat perintah flutter test terbukti lulus untuk uji coba logika penambahan tugas baru pada UI
 
 ## Refleksi
 
