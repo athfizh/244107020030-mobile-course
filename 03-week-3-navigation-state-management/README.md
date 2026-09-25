@@ -141,8 +141,10 @@ Requirements:
 3. Kerangka uji fungsional dirancang ulang dengan penambahan metode *listen* dan *delay* sepersekian detik untuk menanggulangi respons lamban ketika simulasi lemparan peringatan *error* tereksekusi.
 4. Kelas fiktif yang digunakan untuk manipulasi pengujian ikut disempurnakan dengan penimpahan ulang pada fungsi percobaan kedua agar variabel peluang kegagalan 30 persen berhasil dihindari pada skenario yang mensyaratkan jaminan sukses.
 
-## Referensi
-1. GoRouter documentation (pub.dev)
-2. Riverpod documentation (riverpod.dev)
-3. Flutter state management (docs.flutter.dev)
-4. Learn Dart in Y Minutes
+## Referensi pendukung
+- [Slide: Navigation & State Management](https://drive.google.com/file/d/1NB58_3HbR6pQhPTWG1Kbr4p4bHIcm45B/view)
+- [Flutter: Navigation overview](https://docs.flutter.dev/ui/navigation)
+- [GoRouter package](https://pub.dev/packages/go_router)
+- [Riverpod: Getting started](https://riverpod.dev/docs/introduction/getting_started)
+- [Riverpod: AsyncNotifier dan AsyncValue](https://riverpod.dev/docs/concepts/async_notifiers)
+- [Learn Dart in Y Minutes](https://learnxinyminutes.com/dart/)
