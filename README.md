@@ -1,6 +1,6 @@
-<div align="center">
+﻿<div align="center">
 
-```
+```text
 ███╗   ███╗ ██████╗ ██████╗ ██╗██╗     ███████╗
 ████╗ ████║██╔═══██╗██╔══██╗██║██║     ██╔════╝
 ██╔████╔██║██║   ██║██████╔╝██║██║     █████╗  
@@ -100,8 +100,8 @@ Repository ini berisi modul praktikum berbasis codelab untuk mata kuliah **Pemro
 |:--:|---|---|:---:|:---:|
 | 01 | Mobile Development Ecosystem & Flutter Refresh | Ekosistem pengembangan mobile, arsitektur Flutter, refresh Dart dasar, kesiapan environment kerja | [Week 1](./01-week-1-mobile-development-ecosystem-flutter-refresh) | ✅ |
 | 02 | Declarative UI & Responsive Design | Widget dasar, layout responsif, material design, theme, prinsip UI deklaratif pada Flutter | [Week 2](./02-week-2-declarative-ui-responsive-design) | ✅ |
-| 03 | Navigation & State Management | Navigasi dan state management dasar dengan Riverpod, loading/error/success state | [Week 3](./03-week-3-navigation-state-management) | Coming Soon |
-| 04 | Networking & REST API | Integrasi HTTP, Dio, JSON, model data, repository, penanganan loading & error | [Week 4](./04-week-4-networking-rest-api) | Coming Soon |
+| 03 | Navigation & State Management | Navigasi dan state management dasar dengan Riverpod, loading/error/success state | [Week 3](./03-week-3-navigation-state-management) | ✅ |
+| 04 | Networking & REST API | Integrasi HTTP, Dio, JSON, model data, repository, penanganan loading & error | [Week 4](./04-week-4-networking-rest-api) | ✅ |
 | 05 | Local Storage & Offline First | SharedPreferences, Hive/SQLite, cache, pola offline-first untuk penyimpanan data lokal | [Week 5](./05-week-5-local-storage-offline-first) | Coming Soon |
 | 06 | Authentication, Security & FCM | Autentikasi, keamanan dasar, Firebase Cloud Messaging untuk notifikasi real-time | [Week 6](./06-week-6-authentication-security-fcm) | Coming Soon |
 | 07 | Clean Architecture | Prinsip SOLID, layer separation, repository, use case, dependency injection | [Week 7](./07-week-7-clean-architecture) | Coming Soon |
@@ -141,8 +141,8 @@ Repository ini berisi modul praktikum berbasis codelab untuk mata kuliah **Pemro
 
 - [x] Memahami ekosistem pengembangan mobile, arsitektur Flutter, dan dasar-dasar Dart.
 - [x] Membangun UI deklaratif yang responsif dengan widget, layout, dan material design.
-- [ ] Menerapkan navigasi dan state management menggunakan Riverpod.
-- [ ] Mengintegrasikan REST API serta menangani loading, error, dan success state.
+- [x] Menerapkan navigasi dan state management menggunakan Riverpod.
+- [x] Mengintegrasikan REST API serta menangani loading, error, dan success state.
 - [ ] Menerapkan local storage dan pola offline-first pada aplikasi.
 - [ ] Menerapkan autentikasi, keamanan dasar, dan notifikasi real-time dengan FCM.
 - [ ] Menata arsitektur project dengan prinsip Clean Architecture & SOLID.
