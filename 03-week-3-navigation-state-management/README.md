@@ -50,14 +50,14 @@ Fungsi invalidate dari Riverpod terbukti mampu mereset provider dan menjalankan 
 ## Screenshot dan Bukti Visual
 
 ### Praktikum 1: Navigasi GoRouter
-<img src="screenshots/Praktikum 1 Home.png" width="250" alt="HomePage daftar item"> <img src="screenshots/Praktikum 1 Detail.png" width="250" alt="DetailPage path parameter">
+<img src="screenshots/Praktikum%201%20%E2%80%94%20Aplikasi%20multi-page%20dengan%20GoRouter%20(1).png" width="250" alt="HomePage daftar item"> <img src="screenshots/Praktikum%201%20%E2%80%94%20Aplikasi%20multi-page%20dengan%20GoRouter%20(2).png" width="250" alt="DetailPage path parameter">
 
 > **Keterangan gambar:**
 > - **Halaman Awal** menampilkan ListView berisi 10 item beserta tombol navigasi tugas di bagian bawah
 > - **Halaman Detail** menampilkan id item yang diteruskan langsung lewat mekanisme path parameter GoRouter
 
 ### Praktikum 2: ToDo dengan Riverpod
-<img src="screenshots/Praktikum 2 Empty.png" width="250" alt="TodoPage belum ada tugas"> <img src="screenshots/Praktikum 2 List.png" width="250" alt="TodoPage daftar tugas terisi"> <img src="screenshots/Praktikum 2 Done.png" width="250" alt="TodoPage item dicoret">
+<img src="screenshots/Praktikum%202%20%E2%80%94%20Halaman%20ToDo%20kosong.png" width="250" alt="TodoPage belum ada tugas"> <img src="screenshots/Praktikum%202%20%E2%80%94%20Daftar%20ToDo%20terisi.png" width="250" alt="TodoPage daftar tugas terisi"> <img src="screenshots/Praktikum%202%20%E2%80%94%20Toggle.png" width="250" alt="TodoPage item dicoret">
 
 > **Keterangan gambar:**
 > - **Kondisi Kosong** memunculkan teks informasi bahwa belum ada tugas yang tersimpan
@@ -65,7 +65,7 @@ Fungsi invalidate dari Riverpod terbukti mampu mereset provider dan menjalankan 
 > - **Tandai Selesai** menerapkan efek coret pada teks item dan dapat dihapus sepenuhnya lewat tombol tempat sampah
 
 ### Praktikum 3: AsyncValue (Loading, Error, Success)
-<img src="screenshots/Praktikum 3 Loading.png" width="250" alt="ProductPage loading"> <img src="screenshots/Praktikum 3 Error.png" width="250" alt="ProductPage error state"> <img src="screenshots/Praktikum 3 Success.png" width="250" alt="ProductPage data tampil">
+<img src="screenshots/Praktikum%203%20%E2%80%94%20State%20Loading.png" width="250" alt="ProductPage loading"> <img src="screenshots/Praktikum%203%20%E2%80%94%20State%20Error.png" width="250" alt="ProductPage error state"> <img src="screenshots/Praktikum%203%20%E2%80%94%20State%20Success%20(Data).png" width="250" alt="ProductPage data tampil">
 
 > **Keterangan gambar:**
 > - **Tampilan Loading** berupa indikator putar melingkar yang menahan layar selama proses asinkron 2 detik pertama
@@ -73,8 +73,8 @@ Fungsi invalidate dari Riverpod terbukti mampu mereset provider dan menjalankan 
 > - **Tampilan Sukses** menyajikan antarmuka ListView yang langsung memuat data produk (Keyboard, Mouse, Monitor)
 
 ### Tugas 6: Refactoring dan Testing
-<img src="screenshots/Tugas 6 Nav Todo.png" width="250" alt="Navigation Bar ToDo"> <img src="screenshots/Tugas 6 Nav Stats.png" width="250" alt="Navigation Bar Statistik"> <img src="screenshots/Tugas 6 Filter.png" width="250" alt="Filter ToDo Aktif">
-<br><img src="screenshots/Tugas 6 Test.png" width="500" alt="Widget Test Berhasil">
+<img src="screenshots/Refactor&Testing%20%E2%80%94%20Tampilan%20NavigationBar.png" width="250" alt="Navigation Bar ToDo"> <img src="screenshots/AI%20Challenge%20%E2%80%94%20State%20Success%20(Data).png" width="250" alt="Navigation Bar Statistik"> <img src="screenshots/Refactor&Testing%20%E2%80%94%20Efek%20Filter%20di%20Halaman%20ToDo.png" width="250" alt="Filter ToDo Aktif">
+<br><img src="screenshots/Refactor&Testing%20%E2%80%94%20Hasil%20Lulus%20flutter%20test.png" width="500" alt="Widget Test Berhasil">
 
 > **Keterangan gambar:**
 > - **Integrasi NavigationBar** sukses menjembatani navigasi antara halaman ToDo dan Statistik menggunakan perutean ShellRoute
