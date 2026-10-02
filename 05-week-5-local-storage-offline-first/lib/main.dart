@@ -5,6 +5,7 @@ import 'pages/settings_page.dart';
 import 'pages/notes_page.dart';
 import 'pages/posts_page.dart';
 import 'pages/note_detail_page.dart';
+import 'data/prefs.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
