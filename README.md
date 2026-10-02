@@ -1,4 +1,4 @@
-﻿<div align="center">
+<div align="center">
 
 ```text
 ███╗   ███╗ ██████╗ ██████╗ ██╗██╗     ███████╗
@@ -155,14 +155,13 @@ Repository ini berisi modul praktikum berbasis codelab untuk mata kuliah **Pemro
 
 ## 📚 Referensi
 
-| Referensi | Tautan |
-|---|:---:|
-| Flutter Documentation | [Akses Docs](https://docs.flutter.dev/) |
-| Dart Documentation | [Akses Docs](https://dart.dev/guides) |
-| Learn Dart in Y Minutes | [Akses Tutorial](https://learnxinyminutes.com/dart/) |
-| Riverpod Documentation | [Akses Docs](https://riverpod.dev/) |
-| Firebase Cloud Messaging Documentation | [Akses Docs](https://firebase.google.com/docs/cloud-messaging) |
-| Flutter DevTools | [Akses Docs](https://docs.flutter.dev/tools/devtools) |
+> Seluruh rujukan materi, pedoman praktikum, serta referensi _codelab_ resmi untuk mata kuliah ini diakses terpusat melalui portal **JTI Polinema**.
+
+<div align="center">
+  <a href="https://jti-polinema.github.io/flutter-codelab/">
+    <img src="https://img.shields.io/badge/Akses_Portal_Codelab-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Portal Codelab JTI Polinema" />
+  </a>
+</div>
 
 ---
 
