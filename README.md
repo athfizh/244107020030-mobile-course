@@ -102,8 +102,8 @@ Repository ini berisi modul praktikum berbasis codelab untuk mata kuliah **Pemro
 | 02 | Declarative UI & Responsive Design | Widget dasar, layout responsif, material design, theme, prinsip UI deklaratif pada Flutter | [Week 2](./02-week-2-declarative-ui-responsive-design) | ✅ |
 | 03 | Navigation & State Management | Navigasi dan state management dasar dengan Riverpod, loading/error/success state | [Week 3](./03-week-3-navigation-state-management) | ✅ |
 | 04 | Networking & REST API | Integrasi HTTP, Dio, JSON, model data, repository, penanganan loading & error | [Week 4](./04-week-4-networking-rest-api) | ✅ |
-| 05 | Local Storage & Offline First | SharedPreferences, Hive/SQLite, cache, pola offline-first untuk penyimpanan data lokal | [Week 5](./05-week-5-local-storage-offline-first) | Coming Soon |
-| 06 | Authentication, Security & FCM | Autentikasi, keamanan dasar, Firebase Cloud Messaging untuk notifikasi real-time | [Week 6](./06-week-6-authentication-security-fcm) | Coming Soon |
+| 05 | Local Storage & Offline First | SharedPreferences, Hive/SQLite, cache, pola offline-first untuk penyimpanan data lokal | [Week 5](./05-week-5-local-storage-offline-first) | ✅ |
+| 06 | Authentication, Security & FCM | Autentikasi, keamanan dasar, Firebase Cloud Messaging untuk notifikasi real-time | [Week 6](./06-week-6-authentication-security-fcm) | ✅ |
 | 07 | Clean Architecture | Prinsip SOLID, layer separation, repository, use case, dependency injection | [Week 7](./07-week-7-clean-architecture) | Coming Soon |
 | 08 | Mid Project Review & Code Review | Review kode, GitFlow, pull request, static analysis, evaluasi progress project | [Week 8](./08-week-8-mid-project-review) | Coming Soon |
 | 09 | AI-assisted Development / Vibe Coding | Penggunaan AI coding assistant secara bertanggung jawab, validasi output AI | [Week 9](./09-week-9-ai-assisted-development) | Coming Soon |
