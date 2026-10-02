@@ -13,8 +13,8 @@
 | 02 | Declarative UI & Responsive Design | ✅ Selesai | [Folder](02-week-2-declarative-ui-responsive-design/) |
 | 03 | Navigation & State Management | ✅ Selesai | [Folder](03-week-3-navigation-state-management/) |
 | 04 | Networking & REST API | ✅ Selesai | [Folder](04-week-4-networking-rest-api/) |
-| 05 | Local Storage & Offline First | ⏳ Belum | [Folder](05-week-5-local-storage-offline-first/) |
-| 06 | Authentication, Security & FCM | ⏳ Belum | [Folder](06-week-6-authentication-security-fcm/) |
+| 05 | Local Storage & Offline First | ✅ Selesai | [Folder](05-week-5-local-storage-offline-first/) |
+| 06 | Authentication, Security & FCM | ✅ Selesai | [Folder](06-week-6-authentication-security-fcm/) |
 | 07 | Clean Architecture | ⏳ Belum | [Folder](07-week-7-clean-architecture/) |
 | 08 | Mid-Project Review | ⏳ Belum | [Folder](08-week-8-mid-project-review/) |
 | 09 | AI-Assisted Development | ⏳ Belum | [Folder](09-week-9-ai-assisted-development/) |
