@@ -86,4 +86,33 @@
 
 ---
 
-*Diperbarui: 25 September 2026*
+
+---
+
+## Minggu 5 — Highlight
+
+### Tugas Utama: Local Storage & Offline First
+- **Preferensi Ringkas:** Penempatan tombol perpindahan mode visual disematkan menembus penutupan aplikasi dengan memanfaatkan *SharedPreferences*.
+- **Database Relasional:** Konstruksi entitas lokal mengandalkan `sqflite` (SQLite) agar proses memori terkontrol tanpa risiko kepenuhan kapasitas (OOM).
+- **Asinkron Latar Belakang:** Penerapan metode *AsyncNotifier* (Riverpod) demi menahan aliran unggah ke awan secara tak kentara (*background sync*).
+- **Skenario Tahan Banting:** Berhasil menekan risiko layar *blank/loading* saat modul jaringan ditutup secara paksa.
+
+### Refleksi Kunci Minggu 5
+1. **SharedPreferences vs SQLite:** Pemakaian SharedPreferences pada data skala relasional json ribuan entitas tidak dapat ditoleransi karena arsitekturnya yang merender seluruh data ke memori RAM sekali muat.
+2. **Defensive Offline:** Memprioritaskan penampakan layar lokal (*cache-first*) mencegah pengguna merasa aplikasinya tersendat maupun lumpuh secara fungsionalitas.
+
+---
+
+## Minggu 6 — Highlight
+
+### Tugas Utama: Authentication, Security & FCM
+- **Token JWT Terselubung:** Isolasi parameter token sensitif rahasia ke ranah native enkripsi Keychain/Keystore (modul *flutter_secure_storage*).
+- **Siklus Hidup Notifikasi:** Penanganan *deep linking* dari notifikasi *Push* FCM menembus tiga lapis keamanan kesadaran perangkat (Foreground, Background, dan Terminated).
+- **Pengunci Antarmuka:** Modul *GoRouter Redirect Guard* menyaring identitas anonim sebelum membiarkan mereka melenggang menuju halaman rumah utama.
+- **Penyegar Otomatis:** Perancangan modul tangkapan pada Dio (Interceptor) merespons error 401 dan melakukan injeksi silang penggantian Token secara senyap ke server backend tiruan.
+
+### Refleksi Kunci Minggu 6
+1. **Rahasia Identitas:** Menyimpan tiket otentikasi di repositori yang tak ber-enkripsi (*plain-text*) adalah bencana maut bagi aplikasi standar industri/perbankan.
+2. **Segmentasi Saluran Komunikasi FCM:** Memisahkan jalur berita umum (*Topic*) dari jalur berita rahasia (*Device Token*) menyehatkan infrastruktur dan efisiensi *bandwith* notifikasi skala masif.
+
+*Diperbarui: 2 Oktober 2026*
