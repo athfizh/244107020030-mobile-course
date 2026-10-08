@@ -1,10 +1,10 @@
-# Learning Journal – Semester Mobile Development
+# Learning Journal - Semester Mobile Development
 
 **Athaulla Hafizh | NIM: 244107020030**
 
 ---
 
-## Minggu 2 – Declarative UI & Responsive Design
+## Minggu 2 - Declarative UI & Responsive Design
 
 **Tanggal:** 7 September 2026
 

@@ -1,10 +1,10 @@
-# Learning Journal — Semester Mobile Development
+# Learning Journal - Semester Mobile Development
 
 **Athaulla Hafizh | NIM: 244107020030**
 
 ---
 
-## Minggu 4 — Networking & REST API
+## Minggu 4 - Networking & REST API
 
 **Tanggal:** 25 September 2026
 

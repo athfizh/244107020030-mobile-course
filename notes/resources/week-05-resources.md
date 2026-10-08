@@ -1,4 +1,4 @@
-# Resource Link — Minggu 5: Local Storage & Offline First
+# Resource Link - Minggu 5: Local Storage & Offline First
 
 **Athaulla Hafizh | NIM: 244107020030**
 

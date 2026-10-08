@@ -1,4 +1,4 @@
-# Refleksi – Minggu 1: Mobile Development Ecosystem & Flutter Refresh
+# Refleksi - Minggu 1: Mobile Development Ecosystem & Flutter Refresh
 
 **Nama:** Athaulla Hafizh  
 **NIM:** 244107020030  
@@ -8,7 +8,7 @@
 
 ## 1. Kapan native lebih tepat dipilih daripada cross-platform?
 
-**Jawaban singkat:** Ketika performa, akses hardware penuh, atau kepatuhan ketat terhadap UI guidelines platform menjadi keharusan bisnis — bukan sekadar preferensi.
+**Jawaban singkat:** Ketika performa, akses hardware penuh, atau kepatuhan ketat terhadap UI guidelines platform menjadi keharusan bisnis - bukan sekadar preferensi.
 
 ### Perbandingan terstruktur
 
@@ -26,7 +26,7 @@
 
 ## 2. Bagaimana perubahan state berhubungan dengan widget tree dan UI deklaratif?
 
-**Konsep inti:** `UI = f(state)` — UI adalah *fungsi murni* dari state saat ini.
+**Konsep inti:** `UI = f(state)` - UI adalah *fungsi murni* dari state saat ini.
 
 ### Alur lengkap
 
@@ -56,10 +56,10 @@
 ```
 
 ### Poin kunci
-- **Widget = blueprint** – widget itu ringan dan immutable, bukan objek visual nyata
-- **Element Tree** – Flutter mempertahankan *element tree* sebagai "jembatan" antara widget dan render object untuk efisiensi
-- **`setState()` vs state management** – `setState()` cocok untuk state lokal; untuk state global gunakan Provider/Riverpod/BLoC
-- **Hot Reload** bekerja karena Flutter bisa membangun ulang widget tree tanpa restart penuh — ini hanya mungkin karena arsitektur deklaratif
+- **Widget = blueprint** - widget itu ringan dan immutable, bukan objek visual nyata
+- **Element Tree** - Flutter mempertahankan *element tree* sebagai "jembatan" antara widget dan render object untuk efisiensi
+- **`setState()` vs state management** - `setState()` cocok untuk state lokal; untuk state global gunakan Provider/Riverpod/BLoC
+- **Hot Reload** bekerja karena Flutter bisa membangun ulang widget tree tanpa restart penuh - ini hanya mungkin karena arsitektur deklaratif
 
 ---
 
@@ -69,10 +69,10 @@
 
 **Analogi:** Commit adalah *log buku harian proyek*. Tim yang membaca log tersebut harus memahami konteks tanpa harus bertanya kepada penulisnya.
 
-1. **Debugging dengan `git bisect`** – commit kecil mempersempit pencarian bug secara eksponensial
-2. **Code review yang manusiawi** – PR 500 baris vs 50 baris: yang mana lebih mungkin direview dengan teliti?
-3. **Parallel development** – konflik merge terjadi pada wilayah yang lebih kecil dan lebih mudah diselesaikan
-4. **Accountability** – setiap keputusan teknis tercatat; tidak ada "magic change" yang tidak bisa dijelaskan
+1. **Debugging dengan `git bisect`** - commit kecil mempersempit pencarian bug secara eksponensial
+2. **Code review yang manusiawi** - PR 500 baris vs 50 baris: yang mana lebih mungkin direview dengan teliti?
+3. **Parallel development** - konflik merge terjadi pada wilayah yang lebih kecil dan lebih mudah diselesaikan
+4. **Accountability** - setiap keputusan teknis tercatat; tidak ada "magic change" yang tidak bisa dijelaskan
 
 ### Perspektif portfolio
 
@@ -107,5 +107,5 @@ git commit -m "docs(readme): tambah refleksi 3 poin dan kendala setup cmdline-to
 | Kapan dipakai | Ubah UI/logika tanpa state reset | Ubah `initState`, konstruktor, atau konstanta |
 | Cara trigger | `r` di terminal atau ⚡ di IDE | `R` di terminal atau 🔄 di IDE |
 
-### Dart Null Safety — Insight
-`String?` vs `String` bukan sekadar sintaks — ini adalah **kontrak compile-time**. Compiler menolak kode yang bisa menyebabkan `NullPointerException` sebelum runtime. Ini adalah salah satu keunggulan Dart dibanding JavaScript/Python untuk pengembangan mobile yang membutuhkan keandalan tinggi.
+### Dart Null Safety - Insight
+`String?` vs `String` bukan sekadar sintaks - ini adalah **kontrak compile-time**. Compiler menolak kode yang bisa menyebabkan `NullPointerException` sebelum runtime. Ini adalah salah satu keunggulan Dart dibanding JavaScript/Python untuk pengembangan mobile yang membutuhkan keandalan tinggi.

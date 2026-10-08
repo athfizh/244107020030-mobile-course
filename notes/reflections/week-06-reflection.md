@@ -1,4 +1,4 @@
-# Refleksi — Minggu 6: Authentication, Security & FCM
+# Refleksi - Minggu 6: Authentication, Security & FCM
 
 **Nama:** Athaulla Hafizh  
 **NIM:** 244107020030  
@@ -7,7 +7,7 @@
 ---
 
 ## 1. Mengapa refresh token tidak boleh disimpan di SharedPreferences? Apa risikonya bila bocor?
-SharedPreferences menyimpan data dalam bentuk *plain-text* murni tanpa enkripsi sedikit pun. Bila perangkat Android di-*root* atau disusupi *malware*, peretas dapat dengan mudah mencuri `refresh_token` (yang biasanya berumur panjang) untuk mengambil alih sesi pengguna secara utuh (*Account Takeover*).
+SharedPreferences menyimpan data dalam bentuk *plain-text* murni tanpa enkripsi sedikit pun. Bila perangkat Android di-*root* atau disusupi *malware*, peretas dapat dengan mudah mencuri `refresh_token` (yang biasanya berumur panjang) untuk mengambil alih sesi pengguna penuh (*Account Takeover*).
 
 ## 2. Apa yang rusak bila onTokenRefresh diabaikan selama satu semester perkuliahan?
 Token identitas unit perangkat (*FCM Token*) sewaktu-waktu dapat dirotasi secara sepihak oleh Google. Jika aplikasi tidak memberikan *callback* penyegaran token baru ini ke backend, maka server kampus akan memegang "Token Basi" (stale). Akibatnya seluruh notifikasi kritis akan selalu gagal dikirimkan (*bouncing*).

@@ -1,4 +1,4 @@
-# Resource Link — Minggu 4: Networking & REST API
+# Resource Link - Minggu 4: Networking & REST API
 
 **Athaulla Hafizh | NIM: 244107020030**
 

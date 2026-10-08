@@ -1,4 +1,4 @@
-# Resource Link – Minggu 2: Declarative UI & Responsive Design
+# Resource Link - Minggu 2: Declarative UI & Responsive Design
 
 **Athaulla Hafizh | NIM: 244107020030**
 

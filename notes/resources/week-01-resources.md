@@ -1,4 +1,4 @@
-# Resource Link – Minggu 1: Mobile Development Ecosystem & Flutter Refresh
+# Resource Link - Minggu 1: Mobile Development Ecosystem & Flutter Refresh
 
 **Athaulla Hafizh | NIM: 244107020030**
 

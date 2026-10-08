@@ -1,4 +1,4 @@
-# Refleksi – Minggu 2: Declarative UI & Responsive Design
+# Refleksi - Minggu 2: Declarative UI & Responsive Design
 
 **Nama:** Athaulla Hafizh  
 **NIM:** 244107020030  

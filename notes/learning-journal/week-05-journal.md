@@ -1,10 +1,10 @@
-# Learning Journal — Semester Mobile Development
+# Learning Journal - Semester Mobile Development
 
 **Athaulla Hafizh | NIM: 244107020030**
 
 ---
 
-## Minggu 5 — Local Storage & Offline First
+## Minggu 5 - Local Storage & Offline First
 
 **Tanggal:** 2 Oktober 2026
 

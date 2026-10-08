@@ -25,8 +25,8 @@ Praktikum ini bertujuan untuk memahami implementasi penyimpanan lokal dan strate
 ## Tahapan Praktikum
 
 ### Praktikum 1: SharedPreferences
-<img src="screenshots/Praktikum%201%20-%20Halaman%20Catatan%20%E2%80%94%20State%20Kosong.png" width="250" alt="Praktikum 1 - Halaman Catatan — State Kosong.png"> <img src="screenshots/Praktikum%201%20-%20Halaman%20Catatan%20%E2%80%94%20Dialog%20Tambah.png" width="250" alt="Praktikum 1 - Halaman Catatan — Dialog Tambah.png"> <img src="screenshots/Praktikum%201%20-%20Halaman%20Catatan%20%E2%80%94%20State%20Sukses%20%28Ada%20Data%29.png" width="250" alt="Praktikum 1 - Halaman Catatan — State Sukses (Ada Data).png">
-<br><img src="screenshots/Praktikum%201%20-%20Halaman%20Pengaturan%20%E2%80%94%20Mode%20Terang.png" width="250" alt="Praktikum 1 - Halaman Pengaturan — Mode Terang.png"> <img src="screenshots/Praktikum%201%20-%20Halaman%20Pengaturan%20%E2%80%94%20Mode%20Gelap.png" width="250" alt="Praktikum 1 - Halaman Pengaturan — Mode Gelap.png">
+<img src="screenshots/Praktikum%201%20-%20Halaman%20Catatan%20%E2%80%94%20State%20Kosong.png" width="250" alt="Praktikum 1 - Halaman Catatan - State Kosong.png"> <img src="screenshots/Praktikum%201%20-%20Halaman%20Catatan%20%E2%80%94%20Dialog%20Tambah.png" width="250" alt="Praktikum 1 - Halaman Catatan - Dialog Tambah.png"> <img src="screenshots/Praktikum%201%20-%20Halaman%20Catatan%20%E2%80%94%20State%20Sukses%20%28Ada%20Data%29.png" width="250" alt="Praktikum 1 - Halaman Catatan - State Sukses (Ada Data).png">
+<br><img src="screenshots/Praktikum%201%20-%20Halaman%20Pengaturan%20%E2%80%94%20Mode%20Terang.png" width="250" alt="Praktikum 1 - Halaman Pengaturan - Mode Terang.png"> <img src="screenshots/Praktikum%201%20-%20Halaman%20Pengaturan%20%E2%80%94%20Mode%20Gelap.png" width="250" alt="Praktikum 1 - Halaman Pengaturan - Mode Gelap.png">
 <br><img src="screenshots/Praktikum%201%20-%20Hasil%20Flutter%20Analyze.png" width="500" alt="Praktikum 1 - Hasil Flutter Analyze.png">
 
 > **Keterangan gambar**
@@ -34,8 +34,8 @@ Praktikum ini bertujuan untuk memahami implementasi penyimpanan lokal dan strate
 > - Waktu terakhir aplikasi dibuka juga dicatat dalam SharedPreferences dan ditampilkan pada halaman utama.
 
 ### Praktikum 2: SQLite dan Repository Catatan
-<img src="screenshots/Praktikum%202%20-%20Halaman%20Catatan%20%E2%80%94%20State%20Kosong.png" width="250" alt="Praktikum 2 - Halaman Catatan — State Kosong.png"> <img src="screenshots/Praktikum%202%20-%20Halaman%20Catatan%20%E2%80%94%20Dialog%20Tambah.png" width="250" alt="Praktikum 2 - Halaman Catatan — Dialog Tambah.png">
-<br><img src="screenshots/Praktikum%202%20-%20Halaman%20Catatan%20%E2%80%94%20State%20Sukses%20%2B%20Badge%20Cloud%20belum%20sync.png" width="250" alt="Praktikum 2 - Halaman Catatan — State Sukses + Badge Cloud belum sync.png"> <img src="screenshots/Praktikum%202%20-%20Halaman%20Catatan%20%E2%80%94%20Setelah%20Sync%20Badge%20Hilang.png" width="250" alt="Praktikum 2 - Halaman Catatan — Setelah Sync Badge Hilang.png">
+<img src="screenshots/Praktikum%202%20-%20Halaman%20Catatan%20%E2%80%94%20State%20Kosong.png" width="250" alt="Praktikum 2 - Halaman Catatan - State Kosong.png"> <img src="screenshots/Praktikum%202%20-%20Halaman%20Catatan%20%E2%80%94%20Dialog%20Tambah.png" width="250" alt="Praktikum 2 - Halaman Catatan - Dialog Tambah.png">
+<br><img src="screenshots/Praktikum%202%20-%20Halaman%20Catatan%20%E2%80%94%20State%20Sukses%20%2B%20Badge%20Cloud%20belum%20sync.png" width="250" alt="Praktikum 2 - Halaman Catatan - State Sukses + Badge Cloud belum sync.png"> <img src="screenshots/Praktikum%202%20-%20Halaman%20Catatan%20%E2%80%94%20Setelah%20Sync%20Badge%20Hilang.png" width="250" alt="Praktikum 2 - Halaman Catatan - Setelah Sync Badge Hilang.png">
 <br><img src="screenshots/Praktikum%202%20-%20Hasil%20Flutter%20Analyze.png" width="500" alt="Praktikum 2 - Hasil Flutter Analyze.png">
 
 > **Keterangan gambar**
@@ -43,8 +43,8 @@ Praktikum ini bertujuan untuk memahami implementasi penyimpanan lokal dan strate
 > - Ikon awan abu-abu menunjukkan indikasi data kotor (belum disinkronkan), ikon ceklis hijau menandakan data sudah sinkron (dummy).
 
 ### Praktikum 3: Cache-first dan Antrean Sync
-<img src="screenshots/Praktikum%203%20-%20Halaman%20Feed%20%E2%80%94%20Cache%20Offline.png" width="250" alt="Praktikum 3 - Halaman Feed — Cache Offline.png"> <img src="screenshots/Praktikum%203%20-%20Halaman%20Pengaturan%20%E2%80%94%20Simulasi%20Offline%20NonAktif.png" width="250" alt="Praktikum 3 - Halaman Pengaturan — Simulasi Offline NonAktif.png"> <img src="screenshots/Praktikum%203%20-%20Halaman%20Pengaturan%20%E2%80%94%20Simulasi%20Offline%20Aktif.png" width="250" alt="Praktikum 3 - Halaman Pengaturan — Simulasi Offline Aktif.png">
-<br><img src="screenshots/Praktikum%203%20-%20Halaman%20Catatan%20%E2%80%94%20Sinkronisasi%20Gagal%20%28Offline%29.png" width="250" alt="Praktikum 3 - Halaman Catatan — Sinkronisasi Gagal (Offline).png"> <img src="screenshots/Praktikum%203%20-%20Halaman%20Pengaturan%20%E2%80%94%20Berhasil%20Sinkronisasi.png" width="250" alt="Praktikum 3 - Halaman Pengaturan — Berhasil Sinkronisasi.png">
+<img src="screenshots/Praktikum%203%20-%20Halaman%20Feed%20%E2%80%94%20Cache%20Offline.png" width="250" alt="Praktikum 3 - Halaman Feed - Cache Offline.png"> <img src="screenshots/Praktikum%203%20-%20Halaman%20Pengaturan%20%E2%80%94%20Simulasi%20Offline%20NonAktif.png" width="250" alt="Praktikum 3 - Halaman Pengaturan - Simulasi Offline NonAktif.png"> <img src="screenshots/Praktikum%203%20-%20Halaman%20Pengaturan%20%E2%80%94%20Simulasi%20Offline%20Aktif.png" width="250" alt="Praktikum 3 - Halaman Pengaturan - Simulasi Offline Aktif.png">
+<br><img src="screenshots/Praktikum%203%20-%20Halaman%20Catatan%20%E2%80%94%20Sinkronisasi%20Gagal%20%28Offline%29.png" width="250" alt="Praktikum 3 - Halaman Catatan - Sinkronisasi Gagal (Offline).png"> <img src="screenshots/Praktikum%203%20-%20Halaman%20Pengaturan%20%E2%80%94%20Berhasil%20Sinkronisasi.png" width="250" alt="Praktikum 3 - Halaman Pengaturan - Berhasil Sinkronisasi.png">
 <br><img src="screenshots/Praktikum%203%20-%20Hasil%20Flutter%20Analyze.png" width="500" alt="Praktikum 3 - Hasil Flutter Analyze.png">
 
 > **Keterangan gambar**

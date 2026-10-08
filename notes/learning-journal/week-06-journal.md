@@ -1,10 +1,10 @@
-# Learning Journal — Semester Mobile Development
+# Learning Journal - Semester Mobile Development
 
 **Athaulla Hafizh | NIM: 244107020030**
 
 ---
 
-## Minggu 6 — Authentication, Security & FCM
+## Minggu 6 - Authentication, Security & FCM
 
 **Tanggal:** 2 Oktober 2026
 

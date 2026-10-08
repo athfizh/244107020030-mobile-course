@@ -1,9 +1,9 @@
-# Learning Journal – Semester Mobile Development
+# Learning Journal - Semester Mobile Development
 **Athaulla Hafizh | NIM: 244107020030**
 
 ---
 
-## Minggu 1 – Mobile Development Ecosystem & Flutter Refresh
+## Minggu 1 - Mobile Development Ecosystem & Flutter Refresh
 
 **Tanggal:** 1 September 2026
 
@@ -27,4 +27,4 @@
 - **Solusi:** Install via SDK Manager → SDK Tools → Android SDK Command-line Tools (latest)
 
 ### Key Takeaway
-> UI deklaratif Flutter mengubah cara berpikir dari "bagaimana saya mengubah tampilan ini?" menjadi "tampilan apa yang seharusnya ada jika state-nya adalah X?" — perbedaan paradigma yang membutuhkan waktu untuk diinternalisasi tetapi sangat powerful setelah terbiasa.
+> UI deklaratif Flutter mengubah cara berpikir dari "bagaimana saya mengubah tampilan ini?" menjadi "tampilan apa yang seharusnya ada jika state-nya adalah X?" - perbedaan paradigma yang membutuhkan waktu untuk diinternalisasi tetapi sangat powerful setelah terbiasa.

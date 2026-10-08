@@ -70,7 +70,7 @@ Seluruh modifikasi dan eksperimentasi integrasi awal antara _FCM_ dengan asisten
 
 **1. Mengapa refresh token tidak boleh disimpan di SharedPreferences? Apa risikonya bila bocor?**
 
-`SharedPreferences` menyimpan data dalam bentuk *plain-text* murni tanpa enkripsi sedikit pun. Bila perangkat Android berhasil dibobol (di-*root* atau disusupi *malware* pembaca _file directory_), peretas dapat dengan mudah mencuri `refresh_token` (yang biasanya berumur panjang hingga hitungan minggu/bulan) untuk mengambil alih sesi pengguna secara utuh (*Account Takeover*). Penggunaan `flutter_secure_storage` (yang diamankan langsung oleh _OS Keystore/Keychain_) adalah syarat mutlak dalam standar perbankan/industri.
+`SharedPreferences` menyimpan data dalam bentuk *plain-text* murni tanpa enkripsi sedikit pun. Bila perangkat Android berhasil dibobol (di-*root* atau disusupi *malware* pembaca _file directory_), peretas dapat dengan mudah mencuri `refresh_token` (yang biasanya berumur panjang hingga hitungan minggu/bulan) untuk mengambil alih sesi pengguna penuh (*Account Takeover*). Penggunaan `flutter_secure_storage` (yang diamankan langsung oleh _OS Keystore/Keychain_) adalah syarat mutlak dalam standar perbankan/industri.
 
 **2. Apa yang rusak bila onTokenRefresh diabaikan selama satu semester perkuliahan?**
 
@@ -84,7 +84,7 @@ Token identitas unik perangkat (*FCM Token*) sewaktu-waktu dapat dirotasi (digan
 **4. Bagian mana dari draf AI yang Anda tolak atau perbaiki, dan mengapa?**
 
 - **Format Argumen Lokal Notifikasi**: Saya mengganti format susunan parameter dari usulan awal AI yang masih kuno menjadi pola *Named Parameter* (`id:`, `title:`, `settings:`), sebab *plugin* `flutter_local_notifications` versi 22.0.0 ke atas sudah sepenuhnya memblokir format lama.
-- **Keamanan Token (Log Truncating)**: Kode awal AI mencetak (`print`) token secara utuh panjang-lebar. Saya secara manual memodifikasi kodenya agar disensor: `token.length > 12 ? '${token.substring(0, 12)}...' : token;` untuk menjaga rahasia saat tangkapan layar debug terjadi.
+- **Keamanan Token (Log Truncating)**: Kode awal AI mencetak (`print`) token penuh panjang-lebar. Saya secara manual memodifikasi kodenya agar disensor: `token.length > 12 ? '${token.substring(0, 12)}...' : token;` untuk menjaga rahasia saat tangkapan layar debug terjadi.
 - **Izin AndroidManifest**: Usulan kodingan _permission_ awal AI gagal bekerja secara diam-diam di Emulator Android 13+. Saya harus membongkar direktori lokal dan menambah baris `<uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>` langsung di *manifest* *Native* Android agar siklus OS terpicu dengan benar.
 
 ---

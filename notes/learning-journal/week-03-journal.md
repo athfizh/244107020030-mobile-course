@@ -1,10 +1,10 @@
-# Learning Journal — Semester Mobile Development
+# Learning Journal - Semester Mobile Development
 
 **Athaulla Hafizh | NIM: 244107020030**
 
 ---
 
-## Minggu 3 — Navigation & State Management
+## Minggu 3 - Navigation & State Management
 
 **Tanggal:** 25 September 2026
 

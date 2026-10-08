@@ -1,4 +1,4 @@
-# Resource Link — Minggu 6: Authentication, Security & FCM
+# Resource Link - Minggu 6: Authentication, Security & FCM
 
 **Athaulla Hafizh | NIM: 244107020030**
 

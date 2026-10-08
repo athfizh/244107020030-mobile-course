@@ -17,10 +17,10 @@ Memahami evolusi ekosistem pengembangan mobile (native vs cross-platform), melak
 |---|---|
 | **Avatar** | `CircleAvatar` berisi ikon `school` dengan shadow |
 | **Nama Mahasiswa** | Ditampilkan dengan `Text` + styling bold |
-| **NIM Badge** | `244107020030` – tampil dalam pill/badge berwarna biru |
-| **Info Cards** | Program Studi, Angkatan, Minat Utama, Platform – menggunakan widget `_InfoCard` reusable |
+| **NIM Badge** | `244107020030` - tampil dalam pill/badge berwarna biru |
+| **Info Cards** | Program Studi, Angkatan, Minat Utama, Platform - menggunakan widget `_InfoCard` reusable |
 | **Theme** | Material 3 + `ColorScheme.fromSeed` biru navy |
-| **Latihan Mandiri** | `latihan_mandiri.dart` – latihan Dart: fungsi, OOP, null safety |
+| **Latihan Mandiri** | `latihan_mandiri.dart` - latihan Dart: fungsi, OOP, null safety |
 
 ---
 
@@ -79,7 +79,7 @@ flutter test
 ### Kendala: `cmdline-tools` Android SDK tidak terdeteksi
 Saat menjalankan `flutter doctor`, muncul peringatan:
 ```
-[!] Android toolchain – Android SDK missing command line tools
+[!] Android toolchain - Android SDK missing command line tools
     • Android SDK is missing command line tools; download them from https://developer.android.com/studio
 ```
 
@@ -125,10 +125,10 @@ User tap -> setState() -> build() dipanggil -> Widget tree baru -> Diff -> Rende
 ### 3. Mengapa commit kecil dengan pesan jelas bermanfaat bagi pekerjaan tim dan portfolio?
 
 **Manfaat bagi tim:**
-- **Traceability** – setiap perubahan memiliki alasan yang tercatat; saat bug muncul, `git bisect` dapat mempersempit commit penyebab dengan cepat
-- **Code review mudah** – PR kecil lebih mudah di-review, mengurangi risiko bug lolos
-- **Merge conflict minimal** – perubahan terisolasi pada satu konteks, konflik lebih mudah diselesaikan
-- **Rollback aman** – `git revert` satu commit tidak merusak fitur lain
+- **Traceability** - setiap perubahan memiliki alasan yang tercatat; saat bug muncul, `git bisect` dapat mempersempit commit penyebab dengan cepat
+- **Code review mudah** - PR kecil lebih mudah di-review, mengurangi risiko bug lolos
+- **Merge conflict minimal** - perubahan terisolasi pada satu konteks, konflik lebih mudah diselesaikan
+- **Rollback aman** - `git revert` satu commit tidak merusak fitur lain
 
 **Manfaat bagi portfolio:**
 - Riwayat commit mencerminkan **proses berpikir dan disiplin kerja** developer

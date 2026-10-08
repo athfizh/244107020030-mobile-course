@@ -49,4 +49,4 @@ Kami sepakat untuk menggunakan arsitektur pemisahan (*separation of concerns*) d
 
 **Alasan Teknis:**
 1. Isolasi Background FCM tidak dapat mengakses _state_ Riverpod di memori utama maupun memanipulasi *UI Thread*. Memaksa logika navigasi UI ke dalam isolasi tersebut bisa mengakibatkan *crashes* dan *Memory Leak*. 
-2. Mematuhi kebijakan token rahasia sangat krusial, kebocoran satu token dapat menjadi jalan penyusup untuk membombardir *device* target dengan pesan *spam*.
+2. Mematuhi kebijakan token rahasia sangat penting, kebocoran satu token dapat menjadi jalan penyusup untuk membombardir *device* target dengan pesan *spam*.

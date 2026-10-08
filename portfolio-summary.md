@@ -1,4 +1,4 @@
-# Portfolio Summary — 16 Minggu Mobile Development
+# Portfolio Summary - 16 Minggu Mobile Development
 **Athaulla Hafizh | NIM: 244107020030**  
 **Program Studi:** Teknik Informatika  
 **Mata Kuliah:** Pemrograman Mobile
@@ -28,7 +28,7 @@
 
 ---
 
-## Minggu 1 — Highlight
+## Minggu 1 - Highlight
 
 ### Mini Assignment: Aplikasi Profil Mahasiswa
 - **NIM:** `244107020030` ditampilkan sebagai badge biru
@@ -38,12 +38,12 @@
 
 ### Refleksi Kunci Minggu 1
 1. **Native vs Cross-platform** → Pilih native untuk performa kritis & API platform terbaru; Flutter untuk produktivitas tim & codebase tunggal
-2. **State & Widget Tree** → `UI = f(state)` — setState() memicu rebuild, Flutter diff tree untuk update minimal
+2. **State & Widget Tree** → `UI = f(state)` - setState() memicu rebuild, Flutter diff tree untuk update minimal
 3. **Commit Disiplin** → Commit kecil + pesan Conventional Commits = portfolio profesional + kolaborasi tim yang efektif
 
 ---
 
-## Minggu 2 — Highlight
+## Minggu 2 - Highlight
 
 ### Tugas Utama: Academic Overview & Dashboard Responsif
 - **Layout Responsif:** Menggunakan `LayoutBuilder` dengan breakpoint `700px` (`kWideBreakpoint`) untuk beralih antara 1 kolom (layar sempit) dan 2 kolom (layar lebar).
@@ -58,7 +58,7 @@
 
 ---
 
-## Minggu 3 — Highlight
+## Minggu 3 - Highlight
 
 ### Tugas Utama: Navigation & State Management
 - **Routing Deklaratif:** Integrasi `go_router` untuk menghubungkan navigasi statis dan jalur parameter dalam aplikasi.
@@ -72,7 +72,7 @@
 
 ---
 
-## Minggu 4 — Highlight
+## Minggu 4 - Highlight
 
 ### Tugas Utama: Networking & REST API
 - **Klien API Terpusat:** Implementasi kerangka pengatur jaringan terpusat pada antarmuka `Dio` untuk menetapkan url dasar dan penanganan pembatas waktu.
@@ -89,7 +89,7 @@
 
 ---
 
-## Minggu 5 — Highlight
+## Minggu 5 - Highlight
 
 ### Tugas Utama: Local Storage & Offline First
 - **Preferensi Ringkas:** Penempatan tombol perpindahan mode visual disematkan menembus penutupan aplikasi dengan memanfaatkan *SharedPreferences*.
@@ -103,7 +103,7 @@
 
 ---
 
-## Minggu 6 — Highlight
+## Minggu 6 - Highlight
 
 ### Tugas Utama: Authentication, Security & FCM
 - **Token JWT Terselubung:** Isolasi parameter token sensitif rahasia ke ranah native enkripsi Keychain/Keystore (modul *flutter_secure_storage*).

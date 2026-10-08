@@ -1,4 +1,4 @@
-# Resource Link — Minggu 3: Navigation & State Management
+# Resource Link - Minggu 3: Navigation & State Management
 
 **Athaulla Hafizh | NIM: 244107020030**
 
