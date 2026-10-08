@@ -4,7 +4,7 @@
 
 ---
 
-## Minggu 7 - Clean Architecture
+## Minggu 7 — Clean Architecture
 
 **Tanggal:** 8 Oktober 2026
 
