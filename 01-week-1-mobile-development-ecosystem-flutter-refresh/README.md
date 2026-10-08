@@ -5,6 +5,8 @@
 
 ---
 
+---
+
 ## Tujuan
 Memahami evolusi ekosistem pengembangan mobile (native vs cross-platform), melakukan instalasi dan verifikasi environment Flutter, menyegarkan kembali pemahaman dasar bahasa Dart (type safety, null safety, OOP), serta membuat aplikasi **Profil Mahasiswa** sebagai Mini Assignment.
 
@@ -136,7 +138,7 @@ User tap -> setState() -> build() dipanggil -> Widget tree baru -> Diff -> Rende
 
 ---
 
-## Referensi Pendukung
+## Referensi
 
 - [Flutter installation guide](https://docs.flutter.dev/install)
 - [Flutter: declarative UI](https://docs.flutter.dev/flutter-for/declarative)
