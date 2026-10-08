@@ -5,10 +5,12 @@
 
 ---
 
-## 🚀 Tujuan & Profil Proyek
+## Tujuan
+
 Repositori ini adalah kelanjutan dari refactoring aplikasi **Campus Notify** menjadi struktur **Feature-First Clean Architecture**. Tujuan utama dari proyek ini adalah untuk membuktikan pemisahan lapisan (Separation of Concerns), sterilisasi *Domain* dari hal berbau *Framework/Package*, dan mempermudah eksekusi *Unit Test* independen tanpa memerlukan koneksi langsung ke SQLite, API (Dio), atau Firebase.
 
-## 🏗️ Arsitektur & Arah Dependensi
+## Arsitektur & Arah Dependensi
+
 Pola yang diterapkan memecah setiap fitur (`auth`, `announcement`, `notes`) menjadi 3 lapisan (Layers). Aturan emasnya (Dependency Rule): **Dependensi hanya boleh mengarah ke dalam (ke Domain Layer).**
 
 ```mermaid
@@ -18,13 +20,17 @@ graph TD;
 ```
 *Catatan: Layer Data bergantung pada Domain untuk mengimplementasikan kontrak Interface, sedangkan Presentation memanggil logika bisnis melalui Use Case.*
 
-## ⚙️ Fitur Utama
-1. **Pemisahan Entitas & Model**: Semua kelas `Entity` murni Dart, sementara proses mapping (JSON/Map) diisolasi hanya pada `Model`.
-2. **Error Handling Terpusat**: Seluruh error infrastruktur (DioException, SQFlite error) dicegat pada layer `Data` dan diterjemahkan menjadi *Sealed Class* `Failure` pada layer `Domain`.
-3. **Sterilitas Ekstrim**: Lapisan *Presentation* bebas dari instansiasi `Dio/SQLite` (100% bergantung pada injeksi via Riverpod).
-4. **Mock Testing**: Semua `Use Case` diuji (11 Unit Test lulus) menggunakan metode `FakeRepository` tanpa menyentuh *database* atau REST API sesungguhnya.
+## Fitur Utama
 
-## 🛠️ Stack Teknologi
+| Fitur | Keterangan |
+|---|---|
+| Pemisahan Entitas & Model | Semua kelas `Entity` murni Dart, sementara proses mapping (JSON/Map) diisolasi hanya pada `Model` |
+| Error Handling Terpusat | Seluruh error infrastruktur (DioException, SQFlite error) dicegat pada layer `Data` dan diterjemahkan menjadi *Sealed Class* `Failure` pada layer `Domain` |
+| Sterilitas Ekstrim | Lapisan *Presentation* bebas dari instansiasi `Dio/SQLite` (100% bergantung pada injeksi via Riverpod) |
+| Mock Testing | Semua `Use Case` diuji (11 Unit Test lulus) menggunakan metode `FakeRepository` tanpa menyentuh *database* atau REST API sesungguhnya |
+
+## Stack Teknologi
+
 - **Core Framework**: Flutter (Dart)
 - **Dependency Injection & State**: Riverpod
 - **Routing**: GoRouter
@@ -32,7 +38,9 @@ graph TD;
 - **Networking**: Dio
 - **Formatting**: Intl
 
-## 🧪 Bukti Eksekusi Verifikasi Mandiri (Dependency Rule)
+---
+
+## Tahapan Praktikum & Bukti Eksekusi Verifikasi Mandiri
 
 **1. Presentation Steril dari Akses Infrastruktur Mentah**
 ```bash
@@ -57,7 +65,7 @@ PS> flutter test
 
 ---
 
-## 🧠 Refleksi Mingguan
+## Refleksi Mingguan
 
 ### 1. Mengapa interface repository harus tinggal di domain, bukan di data? Apa yang rusak bila dibalik?
 Interface (*abstract class*) hidup di Domain sebagai kontrak (aturan). Jika Interface dipindah ke Data, maka Domain (Use Case) harus mengimpor file dari layer Data agar mengetahui tipe balikan datanya. Ini melanggar *Dependency Rule* di mana Domain tidak boleh tahu-menahu soal Data layer. Selain itu, ini akan menghambat kemampuan melakukan *mocking* untuk *unit testing*.
