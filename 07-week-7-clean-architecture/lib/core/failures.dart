@@ -1,15 +1,18 @@
-// Domain: objek kegagalan murni Dart (tidak bergantung pada Dio/Flutter).
-abstract class Failure {
-  final String message;
+sealed class Failure {
   const Failure(this.message);
+  final String message;
+}
+
+class LocalFailure extends Failure {
+  const LocalFailure(super.message);
+}
+
+class NetworkFailure extends Failure {
+  const NetworkFailure([super.message = 'Tidak ada koneksi internet.']);
 }
 
 class UnauthorizedFailure extends Failure {
   const UnauthorizedFailure() : super('Sesi berakhir, silakan login ulang.');
-}
-
-class NetworkFailure extends Failure {
-  const NetworkFailure() : super('Tidak ada koneksi internet.');
 }
 
 class TimeoutFailure extends Failure {
