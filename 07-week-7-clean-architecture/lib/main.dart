@@ -6,6 +6,7 @@ import 'features/auth/presentation/providers/auth_providers.dart';
 import 'features/announcement/presentation/pages/home_page.dart';
 import 'features/announcement/presentation/pages/announcements_page.dart';
 import 'features/announcement/presentation/pages/announcement_detail_page.dart';
+import 'features/notes/presentation/pages/notes_page.dart';
 import 'routes.dart';
 
 void main() {
@@ -38,6 +39,10 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: AppRoutes.announcementDetail,
         builder: (_, s) =>
             AnnouncementDetailPage(id: s.pathParameters['id'] ?? '1'),
+      ),
+      GoRoute(
+        path: AppRoutes.notes,
+        builder: (context, _) => const NotesPage(),
       ),
     ],
   );

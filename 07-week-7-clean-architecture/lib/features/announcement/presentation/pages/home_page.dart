@@ -41,6 +41,12 @@ class HomePage extends ConsumerWidget {
               label: const Text('Lihat Pengumuman'),
               onPressed: () => context.go(AppRoutes.announcements),
             ),
+            const SizedBox(height: 16),
+            ElevatedButton.icon(
+              icon: const Icon(Icons.note),
+              label: const Text('Catatan Pribadi'),
+              onPressed: () => context.go(AppRoutes.notes),
+            ),
           ],
         ),
       ),
