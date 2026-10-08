@@ -1,88 +1,76 @@
-# Minggu 7 Clean Architecture
+﻿# Minggu 7 Clean Architecture
 
 **Nama:** Athaulla Hafizh  
 **NIM:** 244107020030  
 
 ---
 
-## Tujuan
-Praktikum ini bertujuan menguasai reorganisasi proyek yang sudah berjalan menuju **Clean Architecture**. Fokus utama mencakup pemisahan kode ke dalam 3 lapisan (Presentation, Domain, Data) dengan pola *Feature-First*, serta memastikan arah ketergantungan (Dependency Rule) selalu mengarah ke dalam agar logika bisnis murni (*Domain*) tidak bergantung pada Flutter, antarmuka jaringan (Dio), atau penyimpanan lokal. 
+## 🚀 Tujuan & Profil Proyek
+Repositori ini adalah kelanjutan dari refactoring aplikasi **Campus Notify** menjadi struktur **Feature-First Clean Architecture**. Tujuan utama dari proyek ini adalah untuk membuktikan pemisahan lapisan (Separation of Concerns), sterilisasi *Domain* dari hal berbau *Framework/Package*, dan mempermudah eksekusi *Unit Test* independen tanpa memerlukan koneksi langsung ke SQLite, API (Dio), atau Firebase.
+
+## 🏗️ Arsitektur & Arah Dependensi
+Pola yang diterapkan memecah setiap fitur (`auth`, `announcement`, `notes`) menjadi 3 lapisan (Layers). Aturan emasnya (Dependency Rule): **Dependensi hanya boleh mengarah ke dalam (ke Domain Layer).**
+
+```mermaid
+graph TD;
+    Presentation[Presentation Layer\n(UI, Notifier, Provider)] --> Domain[Domain Layer\n(Use Case, Entity, Repository Interface)];
+    Data[Data Layer\n(Model, Repository Impl, API/SQLite)] --> Domain;
+```
+*Catatan: Layer Data bergantung pada Domain untuk mengimplementasikan kontrak Interface, sedangkan Presentation memanggil logika bisnis melalui Use Case.*
+
+## ⚙️ Fitur Utama
+1. **Pemisahan Entitas & Model**: Semua kelas `Entity` murni Dart, sementara proses mapping (JSON/Map) diisolasi hanya pada `Model`.
+2. **Error Handling Terpusat**: Seluruh error infrastruktur (DioException, SQFlite error) dicegat pada layer `Data` dan diterjemahkan menjadi *Sealed Class* `Failure` pada layer `Domain`.
+3. **Sterilitas Ekstrim**: Lapisan *Presentation* bebas dari instansiasi `Dio/SQLite` (100% bergantung pada injeksi via Riverpod).
+4. **Mock Testing**: Semua `Use Case` diuji (11 Unit Test lulus) menggunakan metode `FakeRepository` tanpa menyentuh *database* atau REST API sesungguhnya.
+
+## 🛠️ Stack Teknologi
+- **Core Framework**: Flutter (Dart)
+- **Dependency Injection & State**: Riverpod
+- **Routing**: GoRouter
+- **Local Database**: SQFlite, Flutter Secure Storage
+- **Networking**: Dio
+- **Formatting**: Intl
+
+## 🧪 Bukti Eksekusi Verifikasi Mandiri (Dependency Rule)
+
+**1. Presentation Steril dari Akses Infrastruktur Mentah**
+```bash
+PS> Select-String -Path "lib\features\*\presentation\*\*.dart" -Pattern "Dio\(|openDatabase|getDatabasesPath|FlutterSecureStorage|SharedPreferences\.getInstance|jsonDecode"
+
+# (NOL HASIL)
+```
+**2. Domain Steril dari Framework & Library Infrastruktur**
+```bash
+PS> Select-String -Path "lib\features\*\domain\*\*.dart", "lib\core\*.dart" -Pattern "import 'package:flutter|import 'package:dio|import 'package:sqflite|import 'package:firebase"
+
+# (NOL HASIL)
+```
+**3. Static Analysis & Unit Test**
+```bash
+PS> flutter analyze
+No issues found! (ran in 2.4s)
+
+PS> flutter test
+00:00 +11: All tests passed!
+```
 
 ---
 
-## Tahapan Praktikum
+## 🧠 Refleksi Mingguan
 
-### Praktikum 1: Audit Layer Project Lama & Rancangan Target
+### 1. Mengapa interface repository harus tinggal di domain, bukan di data? Apa yang rusak bila dibalik?
+Interface (*abstract class*) hidup di Domain sebagai kontrak (aturan). Jika Interface dipindah ke Data, maka Domain (Use Case) harus mengimpor file dari layer Data agar mengetahui tipe balikan datanya. Ini melanggar *Dependency Rule* di mana Domain tidak boleh tahu-menahu soal Data layer. Selain itu, ini akan menghambat kemampuan melakukan *mocking* untuk *unit testing*.
 
-Dalam praktikum awal ini, dilakukan bedah arsitektur pada *source code* Week 6 (Campus Notify) untuk mencari pelanggaran *separation of concerns*.
+### 2. Kapan use case benar-benar dibutuhkan, dan kapan repository langsung ke notifier sudah cukup?
+*Use Case* sangat krusial saat sebuah proses melibatkan lebih dari 1 repository (misalnya: *fetch* dari internet API, lalu simpan datanya ke SQLite lokal) atau jika terdapat perhitungan matematis dan validasi bisnis yang kompleks. Sebaliknya, *Repository* langsung ditembak melalui *Notifier* cukup bila operasinya hanya sekadar "CRUD satu-baris" murni (baca langsung tampilkan) tanpa manipulasi apa-apa.
 
-**Tabel Hasil Audit Arsitektur Lama:**
+### 3. Apa biaya over-engineering (use case per CRUD satu-baris) bagi tim kecil? Kapan biayanya sepadan?
+Bagi tim kecil, membuat Use Case kosong hanya untuk meneruskan pemanggilan satu baris fungsi Repository akan menguras waktu, menambah ribuan *boilerplate code*, dan membingungkan rekrutan baru. Biayanya akan sepadan hanya pada proyek *Enterprise* raksasa yang mungkin harus bisa me-*swap* framework (misal dari React Native ke Flutter tapi logic Dart tetap) dan memfasilitasi tim *Quality Assurance* independen.
 
-| Nama File | Layer Saat Ini | Status & Masalah |
-|:---|:---:|:---|
-| `pages/home_page.dart` | Presentation | ❌ **DI Bocor**: Memanggil servis `PushService` langsung dari level antarmuka. |
-| `data/auth_repository.dart` | Data | ❌ **Antarmuka Tercampur**: Konsep *interface* & implementasi menyatu dalam kelas konkret. |
-| `data/api_errors.dart` | Data | ❌ **Error Silang Layer**: `pages/login_page.dart` (Presentation) mengimpor file ini langsung. |
-| `providers/auth_provider.dart`| Presentation | ⚠️ **Setup Terselubung**: Menyimpan inisiasi dependensi langsung di dalam penyedia state. |
-| `data/api_client.dart` | Data | ✅ Aman, murni dikonsumsi oleh lapisan repositori jaringan. |
-| `routes.dart` | Shared | ✅ Aman sebagai rute konstan pusat. |
-
-<br/>
-
-<div align="center">
-  <h4>Struktur Baru (Feature-First) & Pemisahan Interface Repository</h4>
-  <img src="screenshots/Praktikum 1 - Struktur Folder.png" height="350" alt="Struktur Folder Clean Architecture">
-  &nbsp;&nbsp;&nbsp;
-  <img src="screenshots/Praktikum 1 - Audit Layer.png" height="350" alt="Pemisahan Repository Interface">
-  <p><em>(Kiri) Kode dirapikan per-fitur dan per-layer. (Kanan) AuthRepository kini menjadi abstract class.</em></p>
-</div>
+### 4. Bagian mana dari usulan AI yang Anda tolak atau sederhanakan, dan mengapa?
+Pada awal draf struktur (terekam pada `docs/AI_Challenge.md`), AI mengusulkan pemakaian _package_ fungsional `dartz` agar fungsi mereturn `Either<Failure, T>`. Saya menolaknya secara tegas dan menggantinya dengan fitur bawaan Dart 3.0 yaitu *Records* (`({T? data, Failure? failure})`) dipadukan dengan `AsyncValue.guard` dari Riverpod. Langkah ini menekan ketergantungan pada *library* pihak ketiga sambil mendapatkan hasil yang identik secara fungsional (bebas lemparan *exception* tak terduga).
 
 ---
-
-### Praktikum 2-3: Eksekusi Refactoring & Validasi Pengujian
-
-Memindahkan implementasi model JSON, instansiasi Dio/SQLite, dan penyimpanan lokal *Secure Storage* mutlak ke dalam `Data Layer`, dan menyisakan entitas murni Dart di `Domain Layer`.
-
-<div align="center">
-  <h4>Verifikasi Linting dan Unit Test</h4>
-  <img src="screenshots/Praktikum 1 - Hasil Flutter Analyze.png" width="800" alt="Hasil Flutter Analyze">
-  <br><br>
-  <img src="screenshots/Praktikum 1 - Hasil Flutter Test.png" width="800" alt="Hasil Flutter Test">
-  <p><em>Sistem dinyatakan bersih tanpa cacat linter, dan sukses memvalidasi operasi bisnis dengan Mock Repository.</em></p>
-</div>
-
----
-
-## Evaluasi & Keputusan AI Challenge
-
-Eksplorasi penggunaan saran *Artificial Intelligence* untuk reorganisasi proyek ini, beserta dokumentasi *trade-off* teknis, dan alasan arsitektur akhir yang dipilih secara sadar terangkum di bawah ini:
-
-👉 **[Baca Dokumentasi Lengkap AI Challenge](docs/AI_Challenge.md)**
-
----
-
-## 📝 Refleksi
-
-**1. Apa yang terjadi bila widget memanggil Dio langsung? Prinsip SOLID mana yang dilanggar?**
-Memanggil kerangka HTTP (`Dio`) secara langsung di level antarmuka pengguna (Widget) adalah pelanggaran **Single Responsibility Principle (SRP)**. Widget menjadi punya dua fokus: mengurus tampilan layar dan mengurus cara berkomunikasi ke server. Selain itu, ini sangat melanggar **Dependency Inversion Principle (DIP)** di mana modul tingkat atas (UI) justru bergantung pada rincian teknis tingkat bawah (Dio), alih-alih pada abstraksi kontrak jembatan.
-
-**2. Mengapa entity tidak boleh punya method toJson/fromJson?**
-*Entity* merepresentasikan identitas objek bisnis paling inti yang tidak mempedulikan dari mana ia datang (baik dari SQLite lokal, internet JSON, maupun memori). Memasukkan `fromJson/toJson` memaksa *Entity* mengerti format pengiriman spesifik (seperti nama-nama *key JSON*), yang mana ini menjebol tembok batas isolasi domain layer. Urusan *parsing* adalah tugas telak milik `Model` di level *Data Layer*.
-
-**3. Apa trade-off feature-first vs layer-first? Kapan layer-first justru lebih baik?**
-Model **Feature-First** (mengelompokkan fitur seperti `/auth/domain/..` dan `/announcement/data/..`) luar biasa solid untuk aplikasi raksasa karena fitur A bisa dilepas-pasang tanpa merusak fitur B, sangat optimal untuk pengembangan tim paralel. Sebaliknya, **Layer-First** (`/domain`, `/data`, `/presentation` global) berisiko semrawut saat proyek meluas, namun justru pilihan paling brilian untuk membuat purwarupa (MVP) solo berskala mini dengan cepat tanpa *over-engineering*.
-
-**4. Bagian mana dari saran AI yang Anda tolak atau modifikasi, dan mengapa?**
-Saya merombak dan **menolak** rekomendasi mesin penjawab AI yang memaksakan pola *Functional Programming* (`Either<Failure, Type>` dari pustaka eksternal `dartz`). Untuk aplikasi berskala sedang seperti kampus ini, hal tersebut murni *over-engineering* yang tidak berdasar. Pendekatan bawaan `AsyncValue.guard()` dari *Riverpod* dikombinasikan dengan lontaran galat lazim (`throw Exception`) sudah luar biasa kokoh, ergonomis, dan minim sintaks usang dibandingkan harus menarik seluruh dependensi pustaka luar hanya demi mengakomodir monad.
-
----
-
-## Referensi Pendukung
-
-> Seluruh rujukan materi, pedoman praktikum, serta referensi _codelab_ resmi untuk mata kuliah ini diakses terpusat melalui portal **JTI Polinema**.
-
-<div align="center">
-  <a href="https://jti-polinema.github.io/flutter-codelab/">
-    <img src="https://img.shields.io/badge/Akses_Portal_Codelab-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Portal Codelab JTI Polinema" />
-  </a>
-</div>
+*Seluruh analisis detail terkait usulan vs final decision AI terdapat di folder `docs/AI_Challenge.md`.*
+*Seluruh pembuktian visual aplikasi sebelum vs sesudah refactoring (bersama uji terminal) dapat diakses pada folder `screenshots/`.*
