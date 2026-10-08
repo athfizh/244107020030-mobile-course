@@ -5,6 +5,8 @@
 
 ---
 
+---
+
 ## Tujuan
 Memahami konsep navigasi deklaratif di Flutter menggunakan GoRouter, menerapkan state management dengan Riverpod (Provider, Notifier, ConsumerWidget), dan menangani state asinkron (loading, error, success) menggunakan AsyncValue dan AsyncNotifier.
 
@@ -149,7 +151,7 @@ Requirements:
 
 ---
 
-## Referensi pendukung
+## Referensi
 - [Slide: Navigation & State Management](https://drive.google.com/file/d/1NB58_3HbR6pQhPTWG1Kbr4p4bHIcm45B/view)
 - [Flutter: Navigation overview](https://docs.flutter.dev/ui/navigation)
 - [GoRouter package](https://pub.dev/packages/go_router)
