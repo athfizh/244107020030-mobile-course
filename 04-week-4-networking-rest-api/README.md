@@ -5,6 +5,8 @@
 
 ---
 
+---
+
 ## Tujuan
 Praktikum ini bertujuan untuk memahami implementasi HTTP REST API di Flutter. Fokus utama mencakup pembuatan klien Dio terpusat lengkap dengan log interceptor serta konversi data JSON ke model Dart yang aman dari nilai null. Praktikum juga mencakup penerapan state management Riverpod untuk menangani fitur infinite scroll dan pengelolaan error handling. Selain itu tahapan ini juga membahas cara melakukan unit testing dengan memanfaatkan pola mock repository.
 
@@ -129,7 +131,7 @@ Jelaskan setiap bagian kode dalam komentar.
 
 ---
 
-## Referensi Pendukung
+## Referensi
 - [Slide Minggu 4: Networking & REST API](https://drive.google.com/open?id=1tqDg_xjU7V4kWlygn4Utxr9CdxmTu9wb&usp=drive_fs)
 - [Dio package](https://pub.dev/packages/dio)
 - [JSONPlaceholder (API dummy)](https://jsonplaceholder.typicode.com/)
