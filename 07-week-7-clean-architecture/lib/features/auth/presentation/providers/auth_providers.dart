@@ -1,22 +1,14 @@
-// DI (Dependency Injection) via Riverpod.
-// Widget TIDAK PERNAH new Repository() sendiri.
-
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+﻿import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/repositories/auth_repository_impl.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../../domain/usecases/login_usecase.dart';
 import '../../domain/usecases/logout_usecase.dart';
 import '../../domain/usecases/get_session_usecase.dart';
-
-// Provider untuk storage (dapat di-override saat testing)
-final secureStorageProvider = Provider<FlutterSecureStorage>(
-  (_) => const FlutterSecureStorage(),
-);
+import '../../data/secure_storage.dart';
 
 // Provider untuk repository (implementasi di data layer)
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
-  return AuthRepositoryImpl(storage: ref.watch(secureStorageProvider));
+  return AuthRepositoryImpl(storage: secureStorageInstance);
 });
 
 // Use Case providers
@@ -31,8 +23,7 @@ final getSessionUseCaseProvider = Provider<GetSessionUseCase>((ref) {
 });
 
 // State Notifier
-final authStateProvider =
-    AsyncNotifierProvider<AuthNotifier, bool>(AuthNotifier.new);
+final authStateProvider = AsyncNotifierProvider<AuthNotifier, bool>(AuthNotifier.new);
 
 class AuthNotifier extends AsyncNotifier<bool> {
   @override
@@ -43,10 +34,7 @@ class AuthNotifier extends AsyncNotifier<bool> {
   Future<void> login(String email, String password) async {
     state = const AsyncLoading();
     state = await AsyncValue.guard(() async {
-      await ref.read(loginUseCaseProvider).call(
-            email: email,
-            password: password,
-          );
+      await ref.read(loginUseCaseProvider).call(email: email, password: password);
       return true;
     });
   }
