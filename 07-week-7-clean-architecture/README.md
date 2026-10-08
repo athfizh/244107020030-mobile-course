@@ -1,12 +1,7 @@
-# (NOL HASIL)
+﻿# Minggu 7 Clean Architecture
 
 **Nama:** Athaulla Hafizh  
 **NIM:** 244107020030  
-
----
-
-﻿# Minggu 7 Clean Architecture
-
 
 ---
 
@@ -20,8 +15,8 @@ Pola yang diterapkan memecah setiap fitur (`auth`, `announcement`, `notes`) menj
 
 ```mermaid
 graph TD;
-    Presentation[Presentation Layer\n(UI, Notifier, Provider)] --> Domain[Domain Layer\n(Use Case, Entity, Repository Interface)];
-    Data[Data Layer\n(Model, Repository Impl, API/SQLite)] --> Domain;
+    Presentation["Presentation Layer<br>(UI, Notifier, Provider)"] --> Domain["Domain Layer<br>(Use Case, Entity, Repository Interface)"];
+    Data["Data Layer<br>(Model, Repository Impl, API/SQLite)"] --> Domain;
 ```
 *Catatan: Layer Data bergantung pada Domain untuk mengimplementasikan kontrak Interface, sedangkan Presentation memanggil logika bisnis melalui Use Case.*
 
@@ -45,7 +40,7 @@ graph TD;
 
 ---
 
-## Tahapan Praktikum
+## Tahapan Praktikum & Bukti Eksekusi Verifikasi Mandiri
 
 **1. Presentation Steril dari Akses Infrastruktur Mentah**
 ```bash
@@ -70,7 +65,7 @@ PS> flutter test
 
 ---
 
-## Refleksi
+## Refleksi Mingguan
 
 ### 1. Mengapa interface repository harus tinggal di domain, bukan di data? Apa yang rusak bila dibalik?
 Interface (*abstract class*) hidup di Domain sebagai kontrak (aturan). Jika Interface dipindah ke Data, maka Domain (Use Case) harus mengimpor file dari layer Data agar mengetahui tipe balikan datanya. Ini melanggar *Dependency Rule* di mana Domain tidak boleh tahu-menahu soal Data layer. Selain itu, ini akan menghambat kemampuan melakukan *mocking* untuk *unit testing*.
