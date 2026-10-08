@@ -5,6 +5,8 @@
 
 ---
 
+---
+
 ## Tujuan
 
 Praktikum ini bertujuan untuk memahami implementasi penyimpanan lokal dan strategi *offline-first* di Flutter. Fokus utama mencakup penggunaan SharedPreferences untuk menyimpan preferensi pengguna, pemanfaatan SQLite (sqflite) untuk menyimpan daftar catatan secara persisten, dan perancangan arsitektur *cache-first* yang disinkronisasi ke cloud menggunakan antrean sinkronisasi *background*. Selain itu tahapan ini juga membahas cara melakukan refactoring dan *unit testing* dengan memanfaatkan pola *mock repository*.
@@ -108,7 +110,7 @@ Arsitektur perpaduan **SharedPreferences** dan **sqflite** adalah opsi yang pali
 
 ---
 
-## Referensi Pendukung
+## Referensi
 - [Slide Week 5: Local Storage & Offline First](https://jti-polinema.github.io/flutter-codelab/00-slides/Week_05_Local_Storage_Offline_First.html)
 - [Flutter cookbook: Store key-value data](https://docs.flutter.dev/cookbook/persistence/key-value)
 - [shared_preferences package](https://pub.dev/packages/shared_preferences)
