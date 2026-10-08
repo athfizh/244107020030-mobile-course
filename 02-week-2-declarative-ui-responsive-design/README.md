@@ -5,6 +5,8 @@
 
 ---
 
+---
+
 ## Tujuan
 Memahami prinsip dasar Declarative UI pada Flutter, membangun komponen layout dasar (Row, Column, Container, Expanded, Spacer), serta membuat aplikasi Student Dashboard dan Academic Overview yang responsif menggunakan LayoutBuilder, GridView, dan CupertinoSwitch.
 
@@ -114,7 +116,7 @@ Saat menambahkan baris email pada kartu profil dengan pola `Expanded(child: Text
 
 ---
 
-## Refleksi dan Referensi
+## Refleksi
 
 ### Refleksi
 
@@ -135,7 +137,7 @@ Saat menambahkan baris email pada kartu profil dengan pola `Expanded(child: Text
 
 #---
 
-## Referensi Pendukung
+## Referensi
 
 - [Flutter UI documentation](https://docs.flutter.dev/ui)
 - [Building responsive apps](https://docs.flutter.dev/ui/adaptive-responsive)
