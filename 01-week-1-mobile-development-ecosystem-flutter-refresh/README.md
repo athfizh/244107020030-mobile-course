@@ -1,4 +1,9 @@
-# Minggu 1 – Mobile Development Ecosystem & Flutter Refresh
+# Minggu 1 Mobile Development Ecosystem & Flutter Refresh
+
+**Nama:** Athaulla Hafizh  
+**NIM:** 244107020030  
+
+---
 
 ## Tujuan
 Memahami evolusi ekosistem pengembangan mobile (native vs cross-platform), melakukan instalasi dan verifikasi environment Flutter, menyegarkan kembali pemahaman dasar bahasa Dart (type safety, null safety, OOP), serta membuat aplikasi **Profil Mahasiswa** sebagai Mini Assignment.
@@ -27,16 +32,12 @@ Memahami evolusi ekosistem pengembangan mobile (native vs cross-platform), melak
 
 ## Cara Menjalankan
 ```bash
-# 1. Masuk ke folder project
 cd 01-week-1-mobile-development-ecosystem-flutter-refresh
 
-# 2. Install dependencies
 flutter pub get
 
-# 3. Jalankan di emulator / perangkat fisik
 flutter run
 
-# 4. Jalankan test
 flutter test
 ```
 
@@ -61,8 +62,7 @@ flutter test
 > **Keterangan gambar:**
 > - **AppBar** "Profil Mahasiswa" -> widget `AppBar` + `Text`
 > - **Avatar** dengan ikon `school` -> widget `CircleAvatar` + `Icon`
-> - **NIM: 244107020030** -> widget `Container` (pill badge) + `Text`
-> - **4 Info Card** (Program Studi, Angkatan, Minat Utama, Platform) -> widget `_InfoCard` reusable
+> - **> - **4 Info Card** (Program Studi, Angkatan, Minat Utama, Platform) -> widget `_InfoCard` reusable
 > - **Footer** mata kuliah -> widget `Text`
 
 ### Versi Awal (dari praktikum, sebelum Mini Assignment)
@@ -136,7 +136,7 @@ User tap -> setState() -> build() dipanggil -> Widget tree baru -> Diff -> Rende
 
 ---
 
-## Referensi
+## Referensi Pendukung
 
 - [Flutter installation guide](https://docs.flutter.dev/install)
 - [Flutter: declarative UI](https://docs.flutter.dev/flutter-for/declarative)

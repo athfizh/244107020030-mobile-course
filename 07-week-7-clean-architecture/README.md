@@ -1,12 +1,11 @@
-# 07-week-7-clean-architecture
-Tugas Minggu ke-7 Praktikum Mobile Development.
+# Minggu 7 Clean Architecture
 
 **Nama:** Athaulla Hafizh  
 **NIM:** 244107020030  
 
 ---
 
-## Tujuan Pembelajaran
+## Tujuan
 Praktikum ini bertujuan menguasai reorganisasi proyek yang sudah berjalan menuju **Clean Architecture**. Fokus utama mencakup pemisahan kode ke dalam 3 lapisan (Presentation, Domain, Data) dengan pola *Feature-First*, serta memastikan arah ketergantungan (Dependency Rule) selalu mengarah ke dalam agar logika bisnis murni (*Domain*) tidak bergantung pada Flutter, antarmuka jaringan (Dio), atau penyimpanan lokal. 
 
 ---
@@ -78,7 +77,7 @@ Saya merombak dan **menolak** rekomendasi mesin penjawab AI yang memaksakan pola
 
 ---
 
-## 📚 Referensi
+## Referensi Pendukung
 
 > Seluruh rujukan materi, pedoman praktikum, serta referensi _codelab_ resmi untuk mata kuliah ini diakses terpusat melalui portal **JTI Polinema**.
 

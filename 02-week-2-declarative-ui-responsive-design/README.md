@@ -1,4 +1,9 @@
-# Minggu 2 – Declarative UI & Responsive Design
+# Minggu 2 Declarative UI & Responsive Design
+
+**Nama:** Athaulla Hafizh  
+**NIM:** 244107020030  
+
+---
 
 ## Tujuan
 Memahami prinsip dasar Declarative UI pada Flutter, membangun komponen layout dasar (Row, Column, Container, Expanded, Spacer), serta membuat aplikasi Student Dashboard dan Academic Overview yang responsif menggunakan LayoutBuilder, GridView, dan CupertinoSwitch.
@@ -27,19 +32,14 @@ Memahami prinsip dasar Declarative UI pada Flutter, membangun komponen layout da
 
 ## Cara Menjalankan
 ```bash
-# 1. Masuk ke folder project
 cd 02-week-2-declarative-ui-responsive-design
 
-# 2. Install dependencies
 flutter pub get
 
-# 3. Jalankan aplikasi Dashboard Responsif (Praktikum 5)
 flutter run lib/main.dart
 
-# 4. Jalankan aplikasi Academic Overview (Tugas Utama)
 flutter run lib/academic_overview.dart
 
-# 5. Jalankan test responsif
 flutter test test/academic_overview_test.dart
 ```
 
@@ -133,7 +133,9 @@ Saat menambahkan baris email pada kartu profil dengan pola `Expanded(child: Text
   2. **Dampak Aksesibilitas**: Mengecek penggunaan widget `Semantics` apakah memberi kejelasan pembacaan pada *screen reader* tanpa merusak tata letak yang ada.
   3. **Ketersediaan Widget**: Mengonfirmasi bahwa komponen pendukung seperti `CupertinoSwitch` dan `LayoutBuilder` beroperasi stabil tanpa masalah versi pada SDK terbaru.
 
-### Referensi
+#---
+
+## Referensi Pendukung
 
 - [Flutter UI documentation](https://docs.flutter.dev/ui)
 - [Building responsive apps](https://docs.flutter.dev/ui/adaptive-responsive)

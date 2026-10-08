@@ -1,4 +1,9 @@
-﻿# Minggu 4 Networking & REST API
+# Minggu 4 Networking & REST API
+
+**Nama:** Athaulla Hafizh  
+**NIM:** 244107020030  
+
+---
 
 ## Tujuan
 Praktikum ini bertujuan untuk memahami implementasi HTTP REST API di Flutter. Fokus utama mencakup pembuatan klien Dio terpusat lengkap dengan log interceptor serta konversi data JSON ke model Dart yang aman dari nilai null. Praktikum juga mencakup penerapan state management Riverpod untuk menangani fitur infinite scroll dan pengelolaan error handling. Selain itu tahapan ini juga membahas cara melakukan unit testing dengan memanfaatkan pola mock repository.
@@ -22,13 +27,10 @@ Praktikum ini bertujuan untuk memahami implementasi HTTP REST API di Flutter. Fo
 
 ## Cara Menjalankan
 ```bash
-# Masuk ke folder project
 cd 04-week-4-networking-rest-api
 
-# Install dependencies
 flutter pub get
 
-# Jalankan aplikasi
 flutter run
 ```
 
@@ -65,6 +67,8 @@ Aplikasi berhasil dibangun dengan pemisahan logika yang jelas antara antarmuka d
 > - Halaman Detail berpindah menggunakan rute path parameter dan memuat data detail pos
 > - Pengujian perangkat lunak menunjukkan hasil sukses pada tahapan pengujian linter dan kode tes unit
 
+---
+
 ## Refleksi
 
 **1. Mengapa UI dilarang memanggil Dio langsung? Apa yang rusak jika aturan ini dilanggar?**
@@ -90,6 +94,8 @@ Skrip fungsi dasar yang dibuat oleh AI memerlukan beberapa penyesuaian teknis. A
 | 1 | Menulis base url langsung di setiap metode panggilan | Proses pergantian alamat server API akan memakan waktu lama karena developer wajib mencari baris alamat yang bersangkutan dan merevisinya di setiap sub folder proyek secara terpisah |
 | 2 | Melakukan konversi teks data mentah secara paksa | Eksekusi aplikasi akan berhenti seketika saat server mengirimkan objek bernilai null secara acak pada fase kompilasi waktu berjalan |
 | 3 | Mengabaikan variabel batasan waktu tunggu sambungan | Respon layar aplikasi berisiko terkunci pada animasi loading dalam waktu lama ketika kualitas jaringan sedang berada dalam batas kecepatan minim |
+
+---
 
 ## AI Prompt Challenge
 
@@ -120,6 +126,8 @@ Jelaskan setiap bagian kode dalam komentar.
 ### Rincian Modifikasi Teknis
 - Merombak arsitektur model Notifier kepada wujud penyedia parameter argumen demi mengakomodasi masuknya nomor id pos spesifik
 - Mengumpulkan file terpisah kode terjemahan error buatan AI untuk dipadukan pada skrip tunggal bawaan kerangka repositori utama
+
+---
 
 ## Referensi Pendukung
 - [Slide Minggu 4: Networking & REST API](https://drive.google.com/open?id=1tqDg_xjU7V4kWlygn4Utxr9CdxmTu9wb&usp=drive_fs)

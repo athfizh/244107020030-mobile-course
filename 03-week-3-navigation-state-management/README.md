@@ -1,5 +1,10 @@
 # Minggu 3 Navigation and State Management
 
+**Nama:** Athaulla Hafizh  
+**NIM:** 244107020030  
+
+---
+
 ## Tujuan
 Memahami konsep navigasi deklaratif di Flutter menggunakan GoRouter, menerapkan state management dengan Riverpod (Provider, Notifier, ConsumerWidget), dan menangani state asinkron (loading, error, success) menggunakan AsyncValue dan AsyncNotifier.
 
@@ -22,13 +27,10 @@ Memahami konsep navigasi deklaratif di Flutter menggunakan GoRouter, menerapkan 
 
 ## Cara Menjalankan
 ```bash
-# Masuk ke folder project
 cd 03-week-3-navigation-state-management
 
-# Install dependencies
 flutter pub get
 
-# Jalankan aplikasi
 flutter run
 ```
 
@@ -81,6 +83,8 @@ Fungsi invalidate dari Riverpod terbukti mampu mereset provider dan menjalankan 
 > - **Fitur Penyaringan** membatasi tampilan halaman ToDo sehingga tugas akan langsung menghilang seketika saat dicentang selesai
 > - **Pengujian Perangkat Lunak** lewat perintah flutter test terbukti lulus untuk uji coba logika penambahan tugas baru pada UI
 
+---
+
 ## Refleksi
 
 **1. Mengapa menampilkan ulang data lama dengan indikator refresh kadang lebih baik daripada mengosongkan layar? Kapan pola itu penting?**
@@ -112,6 +116,8 @@ Bagian yang saya bedah ulang meliputi logika duplikasi proses *fetch* data, peng
 | 3 | Mengabaikan penanganan kesalahan di dalam blok fungsi `when()` | Tampilan memutih kosong saat pengambilan data dari jaringan gagal terwujud |
 | 4 | Memaksakan `setState` untuk elemen yang digunakan secara global | Data menghilang secara permanen ketika pengguna berpindah ke halaman lain |
 
+---
+
 ## AI Prompt Challenge
 
 ### Intruksi Prompt yang Digunakan
@@ -140,6 +146,8 @@ Requirements:
 2. Instruksi *retry* diubah ke bentuk *method* internal agar siklus operasinya tetap bersandar di dalam ruang lingkup Notifier aslinya.
 3. Kerangka uji fungsional dirancang ulang dengan penambahan metode *listen* dan *delay* sepersekian detik untuk menanggulangi respons lamban ketika simulasi lemparan peringatan *error* tereksekusi.
 4. Kelas fiktif yang digunakan untuk manipulasi pengujian ikut disempurnakan dengan penimpahan ulang pada fungsi percobaan kedua agar variabel peluang kegagalan 30 persen berhasil dihindari pada skenario yang mensyaratkan jaminan sukses.
+
+---
 
 ## Referensi pendukung
 - [Slide: Navigation & State Management](https://drive.google.com/file/d/1NB58_3HbR6pQhPTWG1Kbr4p4bHIcm45B/view)
