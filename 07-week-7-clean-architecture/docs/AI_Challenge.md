@@ -2,75 +2,85 @@
 
 ## 1. Prompt yang Digunakan
 ```text
-Aplikasi Flutter Campus Notify (refactor dari Week 6).
-Stack yang sudah ada: firebase_messaging, flutter_secure_storage,
-go_router, Riverpod, Dio.
+Project Flutter saya: campus_notify (auth + FCM + daftar pengumuman).
+Kondisi kini: folder lib/{data, providers, pages, messaging},
+repository tercampur dengan implementasi, widget memanggil Dio langsung.
 
-Usulkan reorganisasi project menjadi feature-first Clean Architecture dengan:
-- Tiga layer: domain, data, presentation per fitur
-- Aturan dependensi: domain tidak bergantung pada Dio/Flutter/SQLite
-- Entity vs Model: entity murni Dart (tanpa toJson), model di data layer
-- Repository interface di domain, implementasi di data
-- Use case: satu kelas = satu operasi bisnis
-- DI via Riverpod Provider (widget tidak new Repository() sendiri)
-- Unit test use case dengan FakeRepository (tanpa Firebase/Dio nyata)
-
-Tandai bagian yang berpotensi OVER-ENGINEERING untuk skala proyek ini,
-dan berikan justifikasi trade-off untuk setiap keputusan arsitektur.
+Tugas:
+1. Usulkan struktur feature-first Clean Architecture (presentation/domain/data) untuk fitur auth + announcements.
+2. Untuk tiap file lama, sebutkan tujuan barunya (pindah/pecah/hapus).
+3. Tandai bagian yang over-engineering bila diterapkan ke CRUD sederhana, dan kapan use case benar-benar dibutuhkan vs repository langsung.
+4. Tunjukkan wiring DI dengan Riverpod (tanpa package DI tambahan).
+Jelaskan trade-off setiap keputusan.
 ```
 
 ## 2. Output Awal AI (Draft Arsitektur)
 
-AI memberikan usulan struktur folder yang lengkap dengan fitur `auth` dan `announcement`.
-Draf awal mencakup penggunaan package `dartz` untuk tipe `Either<Failure, T>` pada
-semua return value use case, serta saran `abstract class UseCase<T, Params>` sebagai
-base class generik untuk semua use case.
+AI memberikan draf struktur *feature-first* secara lengkap:
+- Pemisahan `AuthRepository` (interface di Domain) dan `AuthRepositoryImpl` (implementasi di Data).
+- Pembuatan kelas *Entity* tanpa ada referensi `toJson/fromJson`.
+- Pembuatan *Use Case* terpisah seperti `GetAnnouncements` dan `LoginUseCase`.
+- Wiring menggunakan `Provider` dan `FutureProvider` dari Riverpod.
 
-## 3. Perbaikan Manual & Keputusan Arsitektur
+Namun, AI juga mengusulkan hal yang berpotensi *over-engineering* untuk skala proyek ini:
+- Menggunakan *package* `dartz` untuk mengembalikan tipe `Either<Failure, T>`.
+- Mengusulkan pembuatan *Use Case* bahkan untuk operasi CRUD sederhana satu-baris (misalnya `addNote` langsung di-pass melalui *Use Case* kosongan).
 
-### A. Menolak Either<Failure, T> dari dartz
-AI mengusulkan pola Functional Programming murni:
-```dart
-// Saran AI (DITOLAK)
-abstract class UseCase<T, P> {
-  Future<Either<Failure, T>> call(P params);
-}
+## 3. Tabel Pemetaan File Lama vs Baru (Usulan AI & Keputusan)
+
+| File Lama (Week 6) | Tujuan Baru / Keputusan Arsitektur | Keterangan |
+|---|---|---|
+| `data/auth_repository.dart` | **Dipecah** menjadi dua: `domain/repositories/auth_repository.dart` (Interface) dan `data/repositories/auth_repository_impl.dart` (Implementasi). | Penting agar bisa di-*mock* saat *testing*. |
+| `pages/home_page.dart` | **Dipindah** ke `features/announcement/presentation/pages/home_page.dart`. | Semua UI dimasukkan ke layer *Presentation*. |
+| `providers/auth_provider.dart` | **Dipecah & Dipindah**. State notif pindah ke `presentation/providers/`. Inisialisasi Storage dipindah ke `core/providers.dart`. | Mencegah kebocoran layer data ke presentasi. |
+| `data/api_client.dart` | **Dihapus/Digabung**. Instansiasi `Dio` kini dipusatkan di `lib/features/announcement/data/dio_client.dart` | Lebih rapi disuntik via *Dependency Injection*. |
+| `data/api_errors.dart` | **Diubah** menjadi `lib/core/failures.dart` (*Sealed Class*). | Error naik kasta menjadi *Domain Knowledge* agar dikenali seluruh layer tanpa import paket eksternal. |
+
+## 4. Evaluasi Over-Engineering & Penggunaan Use Case
+
+**Kapan Use Case itu *Over-engineering*?**
+Berdasarkan tinjauan, membuat *Use Case* untuk operasi *CRUD satu baris* (seperti `repo.getNotes()`) yang tidak memiliki logika validasi tambahan adalah sebuah **Over-engineering**. 
+Namun, untuk kepatuhan praktikum dan pembelajaran pemisahan tanggung jawab, *Use Case* ini tetap dibuat. Di industri nyata, untuk CRUD tanpa bisnis logika kompleks, *Presentation layer (Notifier)* diperbolehkan memanggil *Repository* secara langsung (Pola *Repository Pattern* murni, mem-bypass *Use Case*).
+
+**Kapan Use Case Wajib Digunakan?**
+*Use Case* wajib saat operasi melibatkan:
+- Pemanggilan ke lebih dari 1 repository (misal: simpan ke SQLite lokal, lalu sinkronisasi ke server REST).
+- Logika bisnis berat (validasi umur, pengurutan, kalkulasi total diskon).
+
+## 5. AI Verification Checklist & Hasil Grep
+
+| Kriteria Verifikasi | Status | Catatan Teknis |
+|---|---|---|
+| Interface repo di *domain*, impl di *data*? | ✅ Lulus | Keduanya sukses dipisah dalam folder berbeda. |
+| Domain bebas dari Flutter/Dio/SQLite? | ✅ Lulus | Diverifikasi via *Grep*. Domain hanya berisi murni Dart. |
+| AI membuat *Use Case* untuk tiap CRUD? | ⚠️ Over-eng | AI awalnya memaksa, namun ditoleransi untuk keperluan pendidikan Praktikum. |
+| Entity bebas dari *mapping*? | ✅ Lulus | `toJson/fromJson` hanya hidup di layer Data (`Model`). |
+| Wiring DI terpusat di Provider? | ✅ Lulus | Widget (UI) terbebas dari pemanggilan `new AuthRepository()`. |
+
+**Bukti Tiga Grep (Verifikasi Sterilisasi)**
+
+1. **Presentation bebas data mentah:**
+```powershell
+PS> Select-String -Path "lib\features\*\presentation\*\*.dart" -Pattern "Dio\(|openDatabase|getDatabasesPath|FlutterSecureStorage|SharedPreferences\.getInstance|jsonDecode"
+
+(Nol Hasil / Kosong) -> Sukses.
 ```
-**Alasan penolakan:** Menambah dependensi `dartz` yang tidak perlu, memperkenalkan
-konsep monad yang menambah kurva belajar tanpa manfaat nyata di skala proyek ini.
-`AsyncValue.guard` dari Riverpod sudah menangani error secara ergonomis.
 
-### B. Menolak base class UseCase generik
-AI menyarankan satu `abstract class UseCase<T, P>` untuk semua use case.
-**Alasan penolakan:** Untuk 3 use case kecil (login, logout, getSession),
-generik ini adalah *over-engineering*. Lebih mudah dibaca tanpa base class.
+2. **Domain bebas framework/package:**
+```powershell
+PS> Select-String -Path "lib\features\*\domain\*\*.dart", "lib\core\*.dart" -Pattern "import 'package:flutter|import 'package:dio|import 'package:sqflite|import 'package:firebase"
 
-### C. Menerima: Pemisahan AuthRepository menjadi interface + impl
-AI benar bahwa Week 6 mencampur interface dan implementasi dalam satu kelas.
-Saran ini **diterima penuh** — ini pelanggaran nyata yang membuat unit testing mustahil.
+(Nol Hasil / Kosong) -> Sukses.
+```
 
-### D. Menerima: Model sebagai adapter antara JSON dan Entity
-AI benar bahwa entity tidak boleh punya `toJson`/`fromJson`.
-`SessionModel.fromJson().toEntity()` adalah pola yang bersih dan diterima.
+3. **Linter & Test Bersih:**
+```powershell
+PS> flutter analyze
+No issues found! (ran in 2.3s)
 
-## 4. AI Verification Checklist
+PS> flutter test
+00:00 +9: All tests passed!
+```
 
-| Kriteria | Hasil |
-|---|---|
-| Apakah domain layer bebas dari import Dio/Flutter/SQLite? | **Lulus.** `lib/features/*/domain/` tidak ada satu pun import eksternal selain Dart murni. |
-| Apakah entity tidak punya toJson/fromJson? | **Lulus.** Session, User, Announcement — ketiganya murni Dart tanpa mapping. |
-| Apakah repository interface ada di domain? | **Lulus.** `auth_repository.dart` dan `announcement_repository.dart` adalah `abstract class` di domain. |
-| Apakah use case hanya satu operasi per kelas? | **Lulus.** LoginUseCase, LogoutUseCase, GetSessionUseCase, GetAnnouncements, GetAnnouncementById — masing-masing satu kelas. |
-| Apakah widget melakukan DI sendiri (new Repository)? | **Lulus.** Semua dependensi disuntik via Provider Riverpod. |
-| Apakah unit test berjalan tanpa Firebase/Dio nyata? | **Lulus.** 9/9 test lulus menggunakan FakeAuthRepository dan FakeAnnouncementRepository. |
-
-## 5. Keputusan Final & Justifikasi Teknis
-
-**Arsitektur yang dipilih:** Feature-first dengan tiga layer (domain, data, presentation)
-tanpa `dartz`, tanpa base class generik, menggunakan `throw Exception` + `AsyncValue.guard`.
-
-**Justifikasi:**
-1. **Kesederhanaan:** Tidak menambah dependensi eksternal untuk masalah yang bisa diselesaikan dengan alat bawaan Riverpod.
-2. **Keterbacaan:** Setiap file bisa dibaca dan dipahami tanpa perlu mengerti konsep monad atau Either.
-3. **Testabilitas:** FakeRepository sebagai implementasi `abstract class` sudah cukup untuk memisahkan unit test dari infrastruktur nyata.
-4. **Skalabilitas:** Jika proyek berkembang dan tim membutuhkan `Either`, migrasi dapat dilakukan per fitur — tidak perlu refactor masif.
+## 6. Keputusan Final
+Struktur *Feature-First* dengan pemisahan 3 layer diadopsi sepenuhnya. Penggunaan tipe pengembalian *Dart Records 3.0* (`({Data? data, Failure? failure})`) dipilih sebagai pengganti package eksternal `dartz` (saran AI) karena lebih modern, bawaan bahasa (native), dan sangat ergonomis tanpa perlu pusing dengan hirarki monad (Right/Left).
