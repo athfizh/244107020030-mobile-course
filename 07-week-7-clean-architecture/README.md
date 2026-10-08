@@ -1,7 +1,12 @@
-﻿# Minggu 7 Clean Architecture
+# (NOL HASIL)
 
 **Nama:** Athaulla Hafizh  
 **NIM:** 244107020030  
+
+---
+
+﻿# Minggu 7 Clean Architecture
+
 
 ---
 
@@ -9,7 +14,7 @@
 
 Repositori ini adalah kelanjutan dari refactoring aplikasi **Campus Notify** menjadi struktur **Feature-First Clean Architecture**. Tujuan utama dari proyek ini adalah untuk membuktikan pemisahan lapisan (Separation of Concerns), sterilisasi *Domain* dari hal berbau *Framework/Package*, dan mempermudah eksekusi *Unit Test* independen tanpa memerlukan koneksi langsung ke SQLite, API (Dio), atau Firebase.
 
-## Arsitektur & Arah Dependensi
+## Arsitektur
 
 Pola yang diterapkan memecah setiap fitur (`auth`, `announcement`, `notes`) menjadi 3 lapisan (Layers). Aturan emasnya (Dependency Rule): **Dependensi hanya boleh mengarah ke dalam (ke Domain Layer).**
 
@@ -40,7 +45,7 @@ graph TD;
 
 ---
 
-## Tahapan Praktikum & Bukti Eksekusi Verifikasi Mandiri
+## Tahapan Praktikum
 
 **1. Presentation Steril dari Akses Infrastruktur Mentah**
 ```bash
@@ -65,7 +70,7 @@ PS> flutter test
 
 ---
 
-## Refleksi Mingguan
+## Refleksi
 
 ### 1. Mengapa interface repository harus tinggal di domain, bukan di data? Apa yang rusak bila dibalik?
 Interface (*abstract class*) hidup di Domain sebagai kontrak (aturan). Jika Interface dipindah ke Data, maka Domain (Use Case) harus mengimpor file dari layer Data agar mengetahui tipe balikan datanya. Ini melanggar *Dependency Rule* di mana Domain tidak boleh tahu-menahu soal Data layer. Selain itu, ini akan menghambat kemampuan melakukan *mocking* untuk *unit testing*.
