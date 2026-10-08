@@ -5,6 +5,8 @@
 
 ---
 
+---
+
 ## Tujuan
 
 Praktikum ini bertujuan untuk memahami dan mengimplementasikan konsep keamanan modern dalam pengembangan aplikasi *mobile* menggunakan Flutter. Fokus utama mencakup penerapan otentikasi (JWT mock), pengamanan *token* rahasia menggunakan penyimpanan terenkripsi (`flutter_secure_storage`), serta pengintegrasian Firebase Cloud Messaging (FCM) secara menyeluruh. Selain itu, tahapan ini juga membahas arsitektur penanganan rotasi token, strategi intersepsi *error* 401 (Refresh Token), hingga navigasi responsif (*Deep Linking*) pada tiga status siklus hidup aplikasi (*Foreground*, *Background*, dan *Terminated*).
@@ -87,7 +89,7 @@ Token identitas unik perangkat (*FCM Token*) sewaktu-waktu dapat dirotasi (digan
 
 ---
 
-## Referensi Pendukung
+## Referensi
 - [Slide Week 6: Authentication, Security & FCM](https://jti-polinema.github.io/flutter-codelab/00-slides/Week_06_Authentication_Security_FCM.html)
 - [FCM Flutter client (setup & token)](https://firebase.google.com/docs/cloud-messaging/flutter/client)
 - [FCM message types: notification vs data](https://firebase.google.com/docs/cloud-messaging/concept-options)
