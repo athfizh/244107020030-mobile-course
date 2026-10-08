@@ -1,6 +1,6 @@
 ﻿# Minggu 5 Local Storage & Offline First
 
-**Nama:** Athfizh  
+**Nama:** Athaulla Hafizh  
 **NIM:** 244107020030  
 
 ---

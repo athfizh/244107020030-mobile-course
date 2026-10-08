@@ -1,7 +1,7 @@
 # Jurnal Belajar: Minggu 5 (Local Storage & Offline-First)
 
 ## Identitas
-- **Nama:** Athfizh
+- **Nama:** Athaulla Hafizh
 - **NIM:** 244107020030
 - **Tanggal:** 27 September 2026
 

@@ -1,7 +1,7 @@
 # 07-week-7-clean-architecture
 Tugas Minggu ke-7 Praktikum Mobile Development.
 
-**Nama:** Athfizh  
+**Nama:** Athaulla Hafizh  
 **NIM:** 244107020030  
 
 ---

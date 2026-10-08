@@ -1,6 +1,6 @@
 # Minggu 6 Authentication, Security & FCM
 
-**Nama:** Athfizh  
+**Nama:** Athaulla Hafizh  
 **NIM:** 244107020030  
 
 ---
