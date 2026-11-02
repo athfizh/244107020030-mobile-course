@@ -22,6 +22,7 @@
 <br/>
 
 [![GitHub commits](https://img.shields.io/github/commit-activity/m/athfizh/244107020030-mobile-course?style=flat-square&color=4ade80&label=Commits)](https://github.com/athfizh/244107020030-mobile-course/commits)
+[![CI](https://img.shields.io/github/actions/workflow/status/athfizh/244107020030-mobile-course/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/athfizh/244107020030-mobile-course/actions/workflows/ci.yml)
 [![GitHub repo size](https://img.shields.io/github/repo-size/athfizh/244107020030-mobile-course?style=flat-square&color=60a5fa&label=Repo%20Size)](https://github.com/athfizh/244107020030-mobile-course)
 [![GitHub last commit](https://img.shields.io/github/last-commit/athfizh/244107020030-mobile-course?style=flat-square&color=f472b6&label=Last%20Update)](https://github.com/athfizh/244107020030-mobile-course)
 
@@ -117,6 +118,13 @@ Repository ini berisi modul praktikum berbasis codelab untuk mata kuliah **Pemro
 | 15 | Secure Mobile Development | OWASP Mobile Top 10, security hardening, privacy, secure storage | [Week 15](./15-week-15-secure-mobile-development) | Coming Soon |
 | 16 | Final Project Expo | Demonstrasi proyek akhir, review arsitektur, deployment, testing, refleksi penggunaan AI | [Week 16](./16-week-16-final-project-expo) | Coming Soon |
 
+### Continuous Integration
+
+Workflow `.github/workflows/ci.yml` menjalankan `flutter analyze`,
+`dart format --set-exit-if-changed lib test`, dan `flutter test` untuk
+Week 8 sampai Week 11 pada setiap Pull Request ke `develop`/`main` serta
+setiap push ke `main`. Workflow ini gratis karena repository bersifat publik,
+dan berfungsi menolak PR yang tidak lolos pemeriksaan sebelum dibaca manusia.
 ### Catatan Menjalankan Project
 
 Folder `android/`, `ios/`, `web/`, `windows/`, `linux/`, dan `macos/` tidak

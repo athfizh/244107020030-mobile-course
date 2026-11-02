@@ -1,10 +1,13 @@
 name: ci
 
+# Modul 8 meminta CI berjalan pada Pull Request. Push ke main tetap
+# diverifikasi sebagai jaring pengaman rilis. Push ke develop tidak diulang
+# karena commit di sana sudah lolos verifikasi PR yang sama.
 on:
   pull_request:
     branches: [develop, main]
   push:
-    branches: [develop, main]
+    branches: [main]
 
 jobs:
   verify:
