@@ -16,7 +16,7 @@
 | 05 | Local Storage & Offline First | ✅ Selesai | [Folder](05-week-5-local-storage-offline-first/) |
 | 06 | Authentication, Security & FCM | ✅ Selesai | [Folder](06-week-6-authentication-security-fcm/) |
 | 07 | Clean Architecture | ✅ Selesai | [Folder](07-week-7-clean-architecture/) |
-| 08 | Mid-Project Review | ⏳ Belum | [Folder](08-week-8-mid-project-review/) |
+| 08 | Mid-Project Review | ✅ Selesai | [Folder](08-week-8-mid-project-review/) |
 | 09 | AI-Assisted Development | ⏳ Belum | [Folder](09-week-9-ai-assisted-development/) |
 | 10 | AI Feature Integration | ⏳ Belum | [Folder](10-week-10-ai-feature-integration/) |
 | 11 | Performance Optimization | ⏳ Belum | [Folder](11-week-11-performance-optimization/) |
@@ -100,6 +100,22 @@
 ### Refleksi Kunci Minggu 5
 1. **SharedPreferences vs SQLite:** Pemakaian SharedPreferences pada data skala relasional json ribuan entitas tidak dapat ditoleransi karena arsitekturnya yang merender seluruh data ke memori RAM sekali muat.
 2. **Defensive Offline:** Memprioritaskan penampakan layar lokal (*cache-first*) mencegah pengguna merasa aplikasinya tersendat maupun lumpuh secara fungsionalitas.
+
+---
+
+## Minggu 8 — Highlight
+
+### Tugas Utama: Mid Project Review & Code Review
+- **Git Flow:** `develop` dibuat sebagai target default PR, dengan branch `chore/*`, `style/*`, `feat/*`, `fix/*`, dan `docs/*` berumur pendek.
+- **Issue dan PR Asli:** Dua issue (#1, #2) dan lima Pull Request (#3 sampai #7) di-merge ke `develop`, lalu dirilis ke `main` lewat PR #8.
+- **Validasi Judul:** `AddNote` di *Domain Layer* menolak judul kosong dengan `ValidationFailure`, diuji lewat tiga unit test.
+- **Perbaikan Route:** `AppRoutes.announcementDetailPath()` menggantikan string literal yang salah escape sehingga halaman detail kembali terbuka.
+- **Mesin Hijau:** `flutter analyze` bersih, `dart format` nol perubahan, 19 tes lulus, dan workflow CI GitHub Actions sukses dalam 1 menit 18 detik.
+- **Bug Nyata Ditemukan:** Controller dialog di-*dispose* saat animasi keluar sehingga memicu `'_dependents.isEmpty': is not true`, diperbaiki dengan memindahkan controller ke `StatefulWidget` dialog.
+
+### Refleksi Kunci Minggu 8
+1. **Approve Bertanggung Jawab:** Reviewer wajib membuka diff, menjalankan mesin, dan menguji manual. Dua dari tiga bug Minggu 8 tidak akan terlihat lewat `analyze` maupun `test`.
+2. **Batas Request Changes:** Wajib `request changes` untuk kebenaran yang terlihat pengguna, pelanggaran *dependency rule*, dan test jalur gagal yang hilang. Temuan gaya diserahkan ke `dart format` dan CI.
 
 ---
 
