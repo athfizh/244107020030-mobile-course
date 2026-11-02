@@ -109,7 +109,7 @@ Status paruh semester: **lolos**. Aplikasi berjalan identik dengan akhir Minggu 
 <img src="screenshots/Refactoring - Git Graph Akhir.png" width="600" alt="Git Graph Akhir">
 
 > **Keterangan gambar**
-> - Grafik commit memperlihatkan empat branch fitur yang masing-masing di-merge dengan `--no-ff` ke `develop`.
+> - Grafik commit memperlihatkan setiap branch fitur yang di-merge dengan `--no-ff` ke `develop`.
 > - Jejak branch tetap terlihat sehingga riwayat mudah ditelusuri dan di-revert per fitur.
 > - Branch fitur dihapus setelah merge agar daftar branch tetap pendek.
 
