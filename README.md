@@ -164,7 +164,9 @@ menimpa isi `lib/`, `test/`, `docs/`, maupun `screenshots/`.
 - [x] Menerapkan autentikasi, keamanan dasar, dan notifikasi real-time dengan FCM.
 - [x] Menata arsitektur project dengan prinsip Clean Architecture & SOLID.
 - [x] Mengintegrasikan fitur AI ke dalam aplikasi mobile secara bertanggung jawab.
-- [ ] Melakukan testing, optimasi performa, serta deployment dan monitoring aplikasi.
+- [x] Melakukan optimasi performa aplikasi berdasarkan pengukuran profiling.
+- [ ] Melakukan testing dan quality assurance secara menyeluruh.
+- [ ] Melakukan deployment, monitoring, serta analisis crash dan performa.
 - [ ] Menerapkan praktik keamanan mobile (OWASP Mobile Top 10) pada proyek akhir.
 
 ---
