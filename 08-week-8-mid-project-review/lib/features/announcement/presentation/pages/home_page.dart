@@ -35,7 +35,7 @@ class HomePage extends ConsumerWidget {
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            const Text('Clean Architecture — Week 7'),
+            const Text('Mid Project Review — Week 8'),
             const SizedBox(height: 32),
             ElevatedButton.icon(
               icon: const Icon(Icons.notifications),
