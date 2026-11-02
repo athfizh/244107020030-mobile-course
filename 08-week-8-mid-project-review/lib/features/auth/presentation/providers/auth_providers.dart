@@ -1,4 +1,5 @@
-﻿import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../data/repositories/auth_repository_impl.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../../domain/usecases/login_usecase.dart';
@@ -23,7 +24,9 @@ final getSessionUseCaseProvider = Provider<GetSessionUseCase>((ref) {
 });
 
 // State Notifier
-final authStateProvider = AsyncNotifierProvider<AuthNotifier, bool>(AuthNotifier.new);
+final authStateProvider = AsyncNotifierProvider<AuthNotifier, bool>(
+  AuthNotifier.new,
+);
 
 class AuthNotifier extends AsyncNotifier<bool> {
   @override
@@ -34,7 +37,9 @@ class AuthNotifier extends AsyncNotifier<bool> {
   Future<void> login(String email, String password) async {
     state = const AsyncLoading();
     state = await AsyncValue.guard(() async {
-      await ref.read(loginUseCaseProvider).call(email: email, password: password);
+      await ref
+          .read(loginUseCaseProvider)
+          .call(email: email, password: password);
       return true;
     });
   }

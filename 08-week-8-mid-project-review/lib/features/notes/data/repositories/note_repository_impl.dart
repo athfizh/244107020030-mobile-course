@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_initializing_formals
 import 'package:sqflite/sqflite.dart';
+
 import '../../../../core/failures.dart';
 import '../../domain/entities/note.dart';
 import '../../domain/repositories/note_repository.dart';
@@ -7,7 +8,7 @@ import '../models/note_model.dart';
 
 class NoteRepositoryImpl implements NoteRepository {
   NoteRepositoryImpl({required Future<Database> Function() openDb})
-      : _openDb = openDb;
+    : _openDb = openDb;
 
   final Future<Database> Function() _openDb;
 
@@ -37,12 +38,20 @@ class NoteRepositoryImpl implements NoteRepository {
       final id = await db.insert(
         'notes',
         NoteModel(
-            title: title, body: body, updatedAt: now, dirty: true)
-            .toMap(),
+          title: title,
+          body: body,
+          updatedAt: now,
+          dirty: true,
+        ).toMap(),
       );
       return (
-        note: Note(id: id, title: title, body: body,
-            updatedAt: now, dirty: true),
+        note: Note(
+          id: id,
+          title: title,
+          body: body,
+          updatedAt: now,
+          dirty: true,
+        ),
         failure: null,
       );
     } catch (e) {

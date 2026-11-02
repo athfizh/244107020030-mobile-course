@@ -7,10 +7,7 @@ class SessionModel {
   final String accessToken;
   final String refreshToken;
 
-  const SessionModel({
-    required this.accessToken,
-    required this.refreshToken,
-  });
+  const SessionModel({required this.accessToken, required this.refreshToken});
 
   factory SessionModel.fromJson(Map<String, dynamic> json) {
     return SessionModel(
@@ -20,8 +17,6 @@ class SessionModel {
   }
 
   /// Konversi dari Model ke Entity (murni Dart, tanpa dependensi eksternal)
-  Session toEntity() => Session(
-        accessToken: accessToken,
-        refreshToken: refreshToken,
-      );
+  Session toEntity() =>
+      Session(accessToken: accessToken, refreshToken: refreshToken);
 }

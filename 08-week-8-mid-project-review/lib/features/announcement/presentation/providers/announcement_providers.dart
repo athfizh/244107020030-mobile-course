@@ -1,4 +1,5 @@
-﻿import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../data/repositories/announcement_repository_impl.dart';
 import '../../domain/entities/announcement.dart';
 import '../../domain/repositories/announcement_repository.dart';
@@ -22,6 +23,9 @@ final announcementsProvider = FutureProvider<List<Announcement>>((ref) async {
   return ref.watch(getAnnouncementsProvider).call();
 });
 
-final announcementDetailProvider = FutureProvider.family<Announcement, String>((ref, id) async {
+final announcementDetailProvider = FutureProvider.family<Announcement, String>((
+  ref,
+  id,
+) async {
   return ref.watch(getAnnouncementByIdProvider).call(id);
 });
