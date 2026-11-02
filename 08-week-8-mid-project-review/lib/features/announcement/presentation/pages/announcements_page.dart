@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../routes.dart';
 import '../providers/announcement_providers.dart';
 
 class AnnouncementsPage extends ConsumerWidget {
@@ -49,7 +50,8 @@ class AnnouncementsPage extends ConsumerWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               trailing: const Icon(Icons.chevron_right),
-              onTap: () => context.go('/pengumuman/\${item.id}'),
+              onTap: () =>
+                  context.go(AppRoutes.announcementDetailPath(item.id)),
             );
           },
         ),

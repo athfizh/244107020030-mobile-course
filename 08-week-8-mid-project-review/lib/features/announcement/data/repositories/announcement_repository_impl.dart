@@ -1,4 +1,5 @@
 // Implementasi repository menggunakan JSONPlaceholder sebagai mock server.
+// ignore_for_file: prefer_initializing_formals
 
 import 'package:dio/dio.dart';
 
@@ -7,17 +8,9 @@ import '../../domain/repositories/announcement_repository.dart';
 import '../models/announcement_model.dart';
 
 class AnnouncementRepositoryImpl implements AnnouncementRepository {
-  final Dio _dio;
+  AnnouncementRepositoryImpl({required Dio dio}) : _dio = dio;
 
-  AnnouncementRepositoryImpl({Dio? dio})
-    : _dio =
-          dio ??
-          Dio(
-            BaseOptions(
-              baseUrl: 'https://jsonplaceholder.typicode.com',
-              connectTimeout: const Duration(seconds: 10),
-            ),
-          );
+  final Dio _dio;
 
   @override
   Future<List<Announcement>> getAnnouncements() async {

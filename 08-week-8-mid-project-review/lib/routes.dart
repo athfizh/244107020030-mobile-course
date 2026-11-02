@@ -4,4 +4,6 @@ class AppRoutes {
   static const announcements = '/pengumuman';
   static const announcementDetail = '/pengumuman/:id';
   static const notes = '/notes';
+
+  static String announcementDetailPath(String id) => '/pengumuman/$id';
 }
