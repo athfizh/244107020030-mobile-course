@@ -58,7 +58,7 @@ PS> dart format --set-exit-if-changed lib test
 Formatted 65 files (0 changed)
 
 PS> flutter test
-00:02 +56: All tests passed!
+00:02 +57: All tests passed!
 ```
 
 Test baru yang mendukung optimasi:

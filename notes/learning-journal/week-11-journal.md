@@ -27,7 +27,7 @@
 - [x] Menambahkan paginasi `_limit` dan `_start` beserta *infinite scroll*.
 - [x] Membuat `AnnouncementCache` dengan TTL 5 menit dan `RefreshIndicator`.
 - [x] Membuat `FrameTimingRecorder` untuk bukti pengukuran *before/after*.
-- [x] Menulis 7 test baru untuk cache pengumuman dan paginasi.
+- [x] Menulis 8 test baru untuk cache pengumuman, paginasi, dan penghentian paginasi.
 - [x] Mengukur ulang dan menyusun laporan performa beserta trade-off.
 
 ### Kendala & Solusi

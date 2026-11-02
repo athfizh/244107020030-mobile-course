@@ -56,7 +56,7 @@ Keterangan pengukuran:
 
 ## Hasil yang Dicapai
 
-Rata-rata waktu raster turun dari 16,50 ms menjadi 8,32 ms (turun 49,6%), dan rata-rata total frame turun dari 33,34 ms menjadi 19,24 ms (turun 42,3%). Frame *jank* turun dari 93,7% menjadi 37,1%. Sebagai konsekuensi, PSS naik sekitar 4,3 MB karena cache pengumuman dan buffer chat, dan ini dicatat jujur pada laporan. Seluruh pemeriksaan mesin hijau dengan 56 tes.
+Rata-rata waktu raster turun dari 16,50 ms menjadi 8,32 ms (turun 49,6%), dan rata-rata total frame turun dari 33,34 ms menjadi 19,24 ms (turun 42,3%). Frame *jank* turun dari 93,7% menjadi 37,1%. Sebagai konsekuensi, PSS naik sekitar 4,3 MB karena cache pengumuman dan buffer chat, dan ini dicatat jujur pada laporan. Seluruh pemeriksaan mesin hijau dengan 57 tes.
 
 ---
 
@@ -117,7 +117,7 @@ Angka lengkap dan analisis trade-off ada di `docs/performance-report.md`.
 
 > **Keterangan gambar**
 > - `flutter analyze` bersih tanpa isu.
-> - Seluruh 56 tes lulus, termasuk 7 tes baru untuk cache pengumuman dan paginasi.
+> - Seluruh 57 tes lulus, termasuk 8 tes baru untuk cache pengumuman, paginasi, dan penghentian paginasi.
 
 ---
 
