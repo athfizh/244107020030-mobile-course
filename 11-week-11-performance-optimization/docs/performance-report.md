@@ -83,3 +83,31 @@ Optimasi di Minggu 11 dilakukan setelah ada pengukuran, bukan sebelum. `itemExte
 `itemExtent` dan `RepaintBoundary` hanya menambah kode tanpa manfaat terukur.
 Aturan yang saya pakai: ukur dulu, optimasi yang paling berdampak, lalu ukur ulang
 pada skenario yang sama persis.
+
+## 7. Pemetaan Nama File Bukti ke Modul
+
+Modul 11 meminta dua nama file khusus. Berikut pemetaannya agar mudah dicari:
+
+| Nama di modul | File di repository |
+|---|---|
+| `screenshots/before-profile.png` | [`screenshots/before-profile.png`](../screenshots/before-profile.png) (sama dengan `Praktikum 1 - Baseline Frame Chart.png`) |
+| `screenshots/after-profile.png` | [`screenshots/after-profile.png`](../screenshots/after-profile.png) (sama dengan `Praktikum 3 - After Frame Chart.png`) |
+
+Versi bernama deskriptif tetap dipertahankan agar konsisten dengan gaya Week 1-10.
+
+## 8. Memory Profiling
+
+Pengukuran memori memakai `adb shell dumpsys meminfo` pada build profile, bukan
+DevTools browser, karena angka DevTools sulit direproduksi ulang.
+
+| Metrik | Before | After |
+|---|---|---|
+| Total PSS | 82.363 KB | 86.684 KB |
+| Total RSS | 195.624 KB | 209.404 KB |
+| Total Swap PSS | 253 KB | 0 KB |
+
+Kenaikan PSS sekitar 4,3 MB berasal dari `AnnouncementCache` yang menyimpan daftar
+pengumuman dan buffer teks chat. Tidak ditemukan kebocoran memori: PSS stabil
+ketika halaman dibuka dan ditutup berulang, dan tidak ada `ScrollController`,
+`TextEditingController`, maupun listener yang tertinggal. Bukti visual tersedia
+pada `screenshots/Praktikum 3 - Memory Profiling.png`.

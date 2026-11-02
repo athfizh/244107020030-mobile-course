@@ -117,6 +117,21 @@ Repository ini berisi modul praktikum berbasis codelab untuk mata kuliah **Pemro
 | 15 | Secure Mobile Development | OWASP Mobile Top 10, security hardening, privacy, secure storage | [Week 15](./15-week-15-secure-mobile-development) | Coming Soon |
 | 16 | Final Project Expo | Demonstrasi proyek akhir, review arsitektur, deployment, testing, refleksi penggunaan AI | [Week 16](./16-week-16-final-project-expo) | Coming Soon |
 
+### Catatan Menjalankan Project
+
+Folder `android/`, `ios/`, `web/`, `windows/`, `linux/`, dan `macos/` tidak
+di-*commit* karena sudah masuk `.gitignore`. Setelah melakukan *clone*, jalankan
+perintah berikut di folder week yang dituju sebelum `flutter run`:
+
+```bash
+flutter pub get
+flutter create . --platforms=android,ios
+flutter run
+```
+
+Perintah `flutter create .` hanya membuat ulang folder platform dan tidak
+menimpa isi `lib/`, `test/`, `docs/`, maupun `screenshots/`.
+
 ---
 
 ## 🛠️ Tech Stack & Tools

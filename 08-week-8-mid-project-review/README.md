@@ -21,7 +21,7 @@ Praktikum ini berfokus pada disiplin kolaborasi, bukan penambahan fitur. Materi 
 | Validasi Judul Catatan | `AddNote` pada *Domain Layer* menolak judul kosong dengan `ValidationFailure` |
 | Perbaikan Route | `AppRoutes.announcementDetailPath()` menggantikan string literal yang salah escape |
 | Konfigurasi Dio Tunggal | `connectTimeout` dan `receiveTimeout` dipusatkan pada `dio_client.dart` |
-| Continuous Integration | GitHub Actions menjalankan `flutter analyze`, `dart format`, dan `flutter test` pada setiap PR |
+| Continuous Integration | GitHub Actions menjalankan `flutter analyze`, `dart format`, dan `flutter test` pada setiap PR, dengan matriks untuk Week 8 sampai Week 11 |
 
 ---
 
@@ -90,7 +90,8 @@ Status paruh semester: **lolos**. Aplikasi berjalan identik dengan akhir Minggu 
 > - `flutter analyze` selesai tanpa satu pun isu.
 > - `dart format --set-exit-if-changed lib test` melaporkan nol file berubah.
 > - Seluruh 19 tes lulus, mencakup Use Case, validasi, dan route.
-> - Workflow `ci` pada GitHub Actions berjalan sukses dalam 1 menit 18 detik, menjalankan analyze, verifikasi format, dan test sebelum PR dibaca manusia.
+> - Workflow `ci` pada GitHub Actions berjalan sukses, menjalankan analyze, verifikasi format, dan test sebelum PR dibaca manusia.
+> - Workflow yang sama kini memakai matriks sehingga Week 8, 9, 10, dan 11 diverifikasi sekaligus pada setiap push.
 
 <img src="screenshots/Praktikum 3 - Halaman Catatan Kosong.png" width="250" alt="Halaman Catatan Kosong"> <img src="screenshots/Praktikum 3 - Dialog Catatan Baru.png" width="250" alt="Dialog Catatan Baru"> <img src="screenshots/Praktikum 3 - Halaman Catatan Validasi Judul.png" width="250" alt="Validasi Judul">
 
