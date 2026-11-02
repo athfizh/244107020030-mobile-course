@@ -107,7 +107,7 @@ Repository ini berisi modul praktikum berbasis codelab untuk mata kuliah **Pemro
 | 05 | Local Storage & Offline First | SharedPreferences, Hive/SQLite, cache, pola offline-first untuk penyimpanan data lokal | [Week 5](./05-week-5-local-storage-offline-first) | ✅ |
 | 06 | Authentication, Security & FCM | Autentikasi, keamanan dasar, Firebase Cloud Messaging untuk notifikasi real-time | [Week 6](./06-week-6-authentication-security-fcm) | ✅ |
 | 07 | Clean Architecture | Prinsip SOLID, layer separation, repository, use case, dependency injection | [Week 7](./07-week-7-clean-architecture) | ✅ |
-| 08 | Mid Project Review & Code Review | Review kode, GitFlow, pull request, static analysis, evaluasi progress project | [Week 8](./08-week-8-mid-project-review) | Coming Soon |
+| 08 | Mid Project Review & Code Review | Review kode, GitFlow, pull request, static analysis, evaluasi progress project | [Week 8](./08-week-8-mid-project-review) | ✅ |
 | 09 | AI-assisted Development / Vibe Coding | Penggunaan AI coding assistant secara bertanggung jawab, validasi output AI | [Week 9](./09-week-9-ai-assisted-development) | Coming Soon |
 | 10 | AI Feature Integration | Integrasi fitur AI seperti chat, prompt, OCR, atau speech-to-text ke aplikasi mobile | [Week 10](./10-week-10-ai-feature-integration) | Coming Soon |
 | 11 | Performance Optimization | Profiling, optimasi widget, caching, lazy loading, pengurangan bottleneck | [Week 11](./11-week-11-performance-optimization) | Coming Soon |
