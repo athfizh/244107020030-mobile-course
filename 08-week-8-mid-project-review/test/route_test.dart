@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:week8_mid_review/features/announcement/data/dio_client.dart';
 import 'package:week8_mid_review/routes.dart';
 
 void main() {
@@ -21,6 +22,28 @@ void main() {
       );
 
       expect(pattern.hasMatch(path), isTrue);
+    });
+  });
+
+  group('Konfigurasi Dio', () {
+    test('baseUrl menunjuk ke mock server JSONPlaceholder', () {
+      expect(
+        announcementDio.options.baseUrl,
+        'https://jsonplaceholder.typicode.com',
+      );
+    });
+
+    test('connectTimeout dan receiveTimeout terpasang', () {
+      expect(announcementDio.options.connectTimeout, isNotNull);
+      expect(announcementDio.options.receiveTimeout, isNotNull);
+      expect(
+        announcementDio.options.connectTimeout,
+        const Duration(seconds: 10),
+      );
+      expect(
+        announcementDio.options.receiveTimeout,
+        const Duration(seconds: 15),
+      );
     });
   });
 }
