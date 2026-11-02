@@ -20,7 +20,10 @@ class FakeAuthRepository implements AuthRepository {
   String? _storedToken;
 
   @override
-  Future<Session> login({required String email, required String password}) async {
+  Future<Session> login({
+    required String email,
+    required String password,
+  }) async {
     if (email == 'test@test.com' && password == 'password') {
       _storedToken = 'fake-access-token';
       return const Session(
@@ -41,8 +44,16 @@ class FakeAuthRepository implements AuthRepository {
 // ---- Fake Announcement Repository ----
 class FakeAnnouncementRepository implements AnnouncementRepository {
   static final _data = [
-    const Announcement(id: '1', title: 'Libur Nasional', body: 'Besok tidak ada kelas.'),
-    const Announcement(id: '2', title: 'Ujian Tengah Semester', body: 'UTS dilaksanakan minggu depan.'),
+    const Announcement(
+      id: '1',
+      title: 'Libur Nasional',
+      body: 'Besok tidak ada kelas.',
+    ),
+    const Announcement(
+      id: '2',
+      title: 'Ujian Tengah Semester',
+      body: 'UTS dilaksanakan minggu depan.',
+    ),
   ];
 
   @override
@@ -96,10 +107,8 @@ void main() {
 
     test('mengembalikan true setelah login berhasil', () async {
       final repo = FakeAuthRepository();
-      await LoginUseCase(repo).call(
-        email: 'test@test.com',
-        password: 'password',
-      );
+      await LoginUseCase(repo)
+          .call(email: 'test@test.com', password: 'password');
       final useCase = GetSessionUseCase(repo);
       expect(await useCase.call(), isTrue);
     });
@@ -108,10 +117,8 @@ void main() {
   group('LogoutUseCase', () {
     test('logout membersihkan token sehingga sesi menjadi false', () async {
       final repo = FakeAuthRepository();
-      await LoginUseCase(repo).call(
-        email: 'test@test.com',
-        password: 'password',
-      );
+      await LoginUseCase(repo)
+          .call(email: 'test@test.com', password: 'password');
       await LogoutUseCase(repo).call();
       expect(await GetSessionUseCase(repo).call(), isFalse);
     });

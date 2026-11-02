@@ -1,6 +1,7 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
 import 'features/auth/presentation/pages/login_page.dart';
 import 'features/auth/presentation/providers/auth_providers.dart';
 import 'features/announcement/presentation/pages/home_page.dart';
@@ -27,10 +28,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: AppRoutes.login,
         builder: (context, _) => const LoginPage(),
       ),
-      GoRoute(
-        path: AppRoutes.home,
-        builder: (context, _) => const HomePage(),
-      ),
+      GoRoute(path: AppRoutes.home, builder: (context, _) => const HomePage()),
       GoRoute(
         path: AppRoutes.announcements,
         builder: (context, _) => const AnnouncementsPage(),
@@ -56,10 +54,7 @@ class MyApp extends ConsumerWidget {
     return MaterialApp.router(
       title: 'Campus Notify',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorSchemeSeed: Colors.blue,
-        useMaterial3: true,
-      ),
+      theme: ThemeData(colorSchemeSeed: Colors.blue, useMaterial3: true),
       routerConfig: ref.watch(routerProvider),
     );
   }

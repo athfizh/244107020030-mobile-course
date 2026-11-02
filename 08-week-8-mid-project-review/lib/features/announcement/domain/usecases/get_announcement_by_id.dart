@@ -5,6 +5,5 @@ class GetAnnouncementById {
   final AnnouncementRepository _repository;
   const GetAnnouncementById(this._repository);
 
-  Future<Announcement> call(String id) =>
-      _repository.getAnnouncementById(id);
+  Future<Announcement> call(String id) => _repository.getAnnouncementById(id);
 }
