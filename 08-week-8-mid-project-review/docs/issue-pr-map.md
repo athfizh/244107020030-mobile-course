@@ -14,7 +14,8 @@ issue #2  -> branch fix/announcement-route  -> PR #6 -> review -> merge ke devel
              branch chore/week8-scaffold    -> PR #3 -> merge ke develop
              branch style/week8-format      -> PR #4 -> merge ke develop
              branch docs/week8-review       -> PR #7 -> merge ke develop
-develop   -> PR rilis -> merge ke main
+develop   -> PR #8 (rilis Week 8)           -> merge ke main
+develop   -> branch docs/week8-root         -> PR #9 -> merge ke develop -> sinkron ke main
 ```
 
 ## 2. Tabel Peta
@@ -26,6 +27,8 @@ develop   -> PR rilis -> merge ke main
 | - | Folder Week 8 belum berisi project | `chore/week8-scaffold` | #3 | Merged | `flutter analyze` dan `flutter test` |
 | - | Format kode belum seragam | `style/week8-format` | #4 | Merged | `dart format --set-exit-if-changed lib test` |
 | - | Dokumen review dan CI belum ada | `docs/week8-review` | #7 | Merged | README dan empat dokumen di `docs/` |
+| - | Hasil Week 8 belum masuk `main` | `develop` | #8 | Merged | CI hijau, 19 tes lulus |
+| - | Root README masih menandai Week 8 *Coming Soon* | `docs/week8-root` | #9 | Merged | `README.md` dan `portfolio-summary.md` |
 
 ## 3. Tautan
 
@@ -36,6 +39,8 @@ develop   -> PR rilis -> merge ke main
 - PR #5: https://github.com/athfizh/244107020030-mobile-course/pull/5
 - PR #6: https://github.com/athfizh/244107020030-mobile-course/pull/6
 - PR #7: https://github.com/athfizh/244107020030-mobile-course/pull/7
+- PR #8: https://github.com/athfizh/244107020030-mobile-course/pull/8
+- PR #9: https://github.com/athfizh/244107020030-mobile-course/pull/9
 
 ## 4. Aturan yang Dijaga
 

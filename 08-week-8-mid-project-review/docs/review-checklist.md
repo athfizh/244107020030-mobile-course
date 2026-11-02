@@ -45,7 +45,7 @@ Aturan yang dipakai: satu commit = satu perubahan logis yang bisa direview dan d
 | `flutter analyze` bersih | Lulus | `No issues found!` |
 | `dart format --set-exit-if-changed lib test` rapi | Lulus | `Formatted 39 files (0 changed)` |
 | `flutter test` hijau | Lulus | `All tests passed!` (19 tes) |
-| PR kecil dan commit jelas | Lulus | 5 PR (#3-#7), masing-masing di bawah 300 baris perubahan kecuali PR scaffold yang bersifat salinan mekanis |
+| PR kecil dan commit jelas | Lulus | 7 PR (#3-#9), masing-masing di bawah 300 baris perubahan kecuali PR scaffold yang bersifat salinan mekanis |
 | README, screenshot, cara menjalankan lengkap | Lulus | Lihat `README.md` Week 8 |
 | Semua komentar review ditindaklanjuti | Lulus | Review pada PR #5 dan #6, tindak lanjut di `docs/pr-notes.md` |
 
@@ -62,7 +62,7 @@ PS> Select-String -Path "lib\features\*\domain\*\*.dart", "lib\core\*.dart" -Pat
 
 # 3. Widget tidak memanggil repository secara langsung
 PS> Select-String -Path "lib\features\*\presentation\pages\*.dart" -Pattern "noteRepositoryProvider|announcementRepositoryProvider"
-(0 hasil setelah PR #2)
+(0 hasil setelah PR #5)
 ```
 
 Ketiga grep di atas menjadi bukti bahwa `Dependency Rule` Minggu 7 masih utuh setelah perubahan Minggu 8.

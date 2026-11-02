@@ -73,6 +73,10 @@ Rata-rata waktu raster turun dari 16,50 ms menjadi 8,32 ms (turun 49,6%), dan ra
 
 Angka lengkap dan analisis trade-off ada di `docs/performance-report.md`.
 
+File bukti dengan nama sesuai modul juga tersedia:
+[`screenshots/before-profile.png`](screenshots/before-profile.png) dan
+[`screenshots/after-profile.png`](screenshots/after-profile.png).
+
 ---
 
 ## Tahapan Praktikum
@@ -112,12 +116,21 @@ Angka lengkap dan analisis trade-off ada di `docs/performance-report.md`.
 > - Daftar pengumuman kini memuat bertahap lewat paginasi dan tetap menampilkan data cache saat dibuka kembali.
 > - Daftar catatan memakai `NoteTile` dan `itemExtent` sehingga gulir terasa lebih ringan.
 
+<img src="screenshots/Praktikum 3 - Memory Profiling.png" width="600" alt="Memory Profiling">
+
+> **Keterangan gambar**
+> - Memory profiling memakai `adb shell dumpsys meminfo` pada build profile.
+> - PSS naik sekitar 4,3 MB karena cache pengumuman dan buffer chat, dan kenaikan itu dicatat sebagai trade-off.
+> - Tidak ditemukan kebocoran memori: PSS stabil ketika halaman dibuka dan ditutup berulang.
+
 ### Refactoring & Testing
-<img src="screenshots/Refactoring - Flutter Analyze dan Test.png" width="600" alt="Analyze dan Test">
+<img src="screenshots/Refactoring - Flutter Analyze dan Test.png" width="600" alt="Analyze dan Test"> <img src="screenshots/Praktikum 3 - Hasil Flutter Test.png" width="400" alt="Hasil Flutter Test">
+<br><img src="screenshots/Refactoring - Hasil Flutter Format.png" width="500" alt="Hasil Flutter Format">
 
 > **Keterangan gambar**
 > - `flutter analyze` bersih tanpa isu.
 > - Seluruh 57 tes lulus, termasuk 8 tes baru untuk cache pengumuman, paginasi, dan penghentian paginasi.
+> - `dart format --set-exit-if-changed lib test` melaporkan nol file berubah, sehingga temuan gaya tidak perlu diselesaikan manual.
 
 ---
 
@@ -131,6 +144,46 @@ Angka lengkap dan analisis trade-off ada di `docs/performance-report.md`.
 6. Cache *stale-while-revalidate*.
 7. `RefreshIndicator` tanpa mengosongkan layar.
 8. `FrameTimingRecorder` sebagai alat ukur.
+
+---
+
+## AI Prompt Challenge
+
+Prompt yang dipakai untuk menganalisis hasil profiling dan tabel keputusan
+terima/tolak saran AI dicatat pada bagian ini.
+
+### Prompt yang Digunakan
+
+```text
+Saya punya hasil FrameTiming pada Flutter build profile (Pixel 8):
+rata-rata build 0.66 ms, rata-rata raster 16.50 ms, total 33.34 ms,
+93.7% frame melewati 16.67 ms. Halaman yang diukur: daftar pengumuman
+dari REST API dan daftar catatan dari SQLite.
+
+Konteks: feature-first Clean Architecture, Riverpod, ListView.separated
+dengan ListTile inline, tanpa itemExtent, tanpa cache, tanpa paginasi.
+
+Tugas: urutkan 5 kandidat optimasi berdasarkan dampak terhadap angka di atas.
+Untuk tiap kandidat, sebutkan alasan teknis dan risikonya.
+Jangan menyarankan mengganti arsitektur atau menambah package baru.
+```
+
+### Ringkasan Saran AI dan Keputusan
+
+| Saran AI | Keputusan | Alasan Teknis |
+|---|---|---|
+| `ListView.builder` + `itemExtent` | **Diterima** | Menghapus biaya pengukuran tinggi item; dampak langsung ke raster |
+| `RepaintBoundary` per item | **Diterima** | Membatasi area repaint, terbukti menurunkan raster hampir separuh |
+| Ekstrak item menjadi widget `const` | **Diterima** | Memutus rantai *rebuild* dari halaman ke setiap item |
+| `ref.watch(...select(...))` | **Diterima** | Hanya bagian yang bergantung pada nilai tertentu yang ikut berubah |
+| Paginasi `_limit`/`_start` | **Diterima** | Mengurangi jumlah item yang dibangun sekaligus |
+| Ubah seluruh provider ke `AsyncNotifier` | **Ditolak** | Tidak menyentuh angka frame; hanya menambah kompleksitas |
+| Tambahkan `cached_network_image` | **Ditolak** | Aplikasi tidak memuat gambar jaringan, sehingga tidak relevan |
+| Naikkan `cacheExtent` sangat besar | **Ditolak** | Justru menambah jumlah item yang dibangun dan memori |
+
+Saran yang diterima diuji ulang dengan skenario yang sama, dan hanya dipertahankan
+bila angka `FrameTiming` benar-benar membaik. Detail angka ada pada
+`docs/performance-report.md`.
 
 ---
 

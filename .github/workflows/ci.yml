@@ -9,9 +9,18 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - 08-week-8-mid-project-review
+          - 09-week-9-ai-assisted-development
+          - 10-week-10-ai-feature-integration
+          - 11-week-11-performance-optimization
+    name: verify ${{ matrix.project }}
     defaults:
       run:
-        working-directory: 08-week-8-mid-project-review
+        working-directory: ${{ matrix.project }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4

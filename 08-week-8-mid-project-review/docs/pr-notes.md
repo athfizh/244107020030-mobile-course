@@ -69,6 +69,23 @@ Branch `develop` dibuat dari `main` satu kali, lalu dijadikan target default sel
 - **Solusi:** Menambahkan `review-checklist.md`, `ai-review-vs-keputusan.md`, `pr-notes.md`, `issue-pr-map.md`, README Week 8, workflow CI, dan seluruh screenshot bukti.
 - **Cara uji:** `flutter analyze`, `dart format --set-exit-if-changed lib test`, `flutter test` harus hijau.
 
+### PR #8 - Rilis Week 8 ke main
+
+- **Branch:** `develop` -> `main`
+- **Judul:** `release(week8): mid project review siap dirilis`
+- **Masalah:** Hasil Week 8 sudah terintegrasi di `develop`, tetapi `main` belum memuatnya padahal `main` adalah branch yang selalu bisa dirilis.
+- **Solusi:** Menggabungkan seluruh hasil Week 8 ke `main` setelah workflow `ci` berstatus hijau.
+- **Cara uji:** CI pada commit `develop` sukses, lalu jalankan `flutter analyze`, `dart format`, dan `flutter test` pada folder Week 8.
+- **Bukti:** Screenshot `Praktikum 3 - CI Workflow Hijau.png`.
+
+### PR #9 - Penanda status paruh semester
+
+- **Branch:** `docs/week8-root` -> `develop`
+- **Judul:** `docs: tandai minggu 8 selesai pada root readme dan portfolio summary`
+- **Masalah:** Root `README.md` masih menulis Week 8 sebagai *Coming Soon* dan `portfolio-summary.md` belum memuat highlight Week 8.
+- **Solusi:** Menandai Week 8 selesai pada kedua dokumen dan menambahkan bagian *Minggu 8 - Highlight* beserta refleksi kuncinya.
+- **Cara uji:** Buka `README.md` dan `portfolio-summary.md`, pastikan baris Week 8 berstatus selesai.
+
 ## 3. Template PR yang Dipakai
 
 ```text
