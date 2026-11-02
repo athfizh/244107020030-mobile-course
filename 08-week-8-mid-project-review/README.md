@@ -17,7 +17,7 @@ Praktikum ini berfokus pada disiplin kolaborasi, bukan penambahan fitur. Materi 
 |---|---|
 | Git Flow | Branch `main`, `develop`, `feature/*`, dan `fix/*` dengan aturan satu branch satu tujuan |
 | Commit Konvensional | Format `tipe(scope): deskripsi` untuk `feat`, `fix`, `refactor`, `test`, `docs`, `chore`, dan `style` |
-| Pull Request Kecil | Empat PR dengan bagian Masalah, Solusi, Cara uji, dan `Closes #<issue>` |
+| Pull Request Kecil | Tujuh PR (#3 sampai #9) dengan bagian Masalah, Solusi, Cara uji, dan `Closes #<issue>` |
 | Validasi Judul Catatan | `AddNote` pada *Domain Layer* menolak judul kosong dengan `ValidationFailure` |
 | Perbaikan Route | `AppRoutes.announcementDetailPath()` menggantikan string literal yang salah escape |
 | Konfigurasi Dio Tunggal | `connectTimeout` dan `receiveTimeout` dipusatkan pada `dio_client.dart` |
@@ -56,6 +56,23 @@ Keterangan alur aplikasi:
 ## Hasil yang Dicapai
 
 Status paruh semester: **lolos**. Aplikasi berjalan identik dengan akhir Minggu 7, dengan dua perbaikan yang lahir dari proses review. Tiga pemeriksaan mesin hijau: `flutter analyze` tanpa isu, `dart format` nol perubahan, dan 19 tes lulus. Minimal satu PR kecil di-merge melalui proses review, dan seluruh temuan review sudah ditindaklanjuti.
+
+---
+
+## Peta Issue dan Pull Request
+
+| Issue | Judul | Branch | PR | Status |
+|:--:|---|---|:--:|---|
+| #1 | Judul catatan bisa kosong saat disimpan | `feat/notes-validation` | #5 | Merged |
+| #2 | Halaman detail pengumuman gagal dibuka | `fix/announcement-route` | #6 | Merged |
+| - | Folder Week 8 belum berisi project | `chore/week8-scaffold` | #3 | Merged |
+| - | Format kode belum seragam | `style/week8-format` | #4 | Merged |
+| - | Dokumen review dan CI belum ada | `docs/week8-review` | #7 | Merged |
+| - | Hasil Week 8 belum masuk `main` | `develop` | #8 | Merged |
+| - | Root README masih menandai Week 8 *Coming Soon* | `docs/week8-root` | #9 | Merged |
+
+Tautan lengkap setiap issue dan PR, beserta alasan tiap keputusan, ada di
+[`docs/issue-pr-map.md`](docs/issue-pr-map.md) dan [`docs/pr-notes.md`](docs/pr-notes.md).
 
 ---
 
