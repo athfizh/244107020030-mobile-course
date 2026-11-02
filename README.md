@@ -109,8 +109,8 @@ Repository ini berisi modul praktikum berbasis codelab untuk mata kuliah **Pemro
 | 07 | Clean Architecture | Prinsip SOLID, layer separation, repository, use case, dependency injection | [Week 7](./07-week-7-clean-architecture) | ✅ |
 | 08 | Mid Project Review & Code Review | Review kode, GitFlow, pull request, static analysis, evaluasi progress project | [Week 8](./08-week-8-mid-project-review) | ✅ |
 | 09 | AI-assisted Development / Vibe Coding | Penggunaan AI coding assistant secara bertanggung jawab, validasi output AI | [Week 9](./09-week-9-ai-assisted-development) | ✅ |
-| 10 | AI Feature Integration | Integrasi fitur AI seperti chat, prompt, OCR, atau speech-to-text ke aplikasi mobile | [Week 10](./10-week-10-ai-feature-integration) | Coming Soon |
-| 11 | Performance Optimization | Profiling, optimasi widget, caching, lazy loading, pengurangan bottleneck | [Week 11](./11-week-11-performance-optimization) | Coming Soon |
+| 10 | AI Feature Integration | Integrasi fitur AI seperti chat, prompt, OCR, atau speech-to-text ke aplikasi mobile | [Week 10](./10-week-10-ai-feature-integration) | ✅ |
+| 11 | Performance Optimization | Profiling, optimasi widget, caching, lazy loading, pengurangan bottleneck | [Week 11](./11-week-11-performance-optimization) | ✅ |
 | 12 | Testing & Quality Assurance | Unit test, widget test, integration test untuk menjaga kualitas aplikasi | [Week 12](./12-week-12-testing-quality-assurance) | Coming Soon |
 | 13 | CI/CD & Automation | Pipeline otomatis untuk build, test, dan release, pengaturan environment variable & secret | [Week 13](./13-week-13-ci-cd-automation) | Coming Soon |
 | 14 | Deployment & Monitoring | Deployment beta, release management, monitoring aplikasi, analisis crash & performa | [Week 14](./14-week-14-deployment-monitoring) | Coming Soon |
@@ -148,7 +148,7 @@ Repository ini berisi modul praktikum berbasis codelab untuk mata kuliah **Pemro
 - [x] Menerapkan local storage dan pola offline-first pada aplikasi.
 - [x] Menerapkan autentikasi, keamanan dasar, dan notifikasi real-time dengan FCM.
 - [x] Menata arsitektur project dengan prinsip Clean Architecture & SOLID.
-- [ ] Mengintegrasikan fitur AI ke dalam aplikasi mobile secara bertanggung jawab.
+- [x] Mengintegrasikan fitur AI ke dalam aplikasi mobile secara bertanggung jawab.
 - [ ] Melakukan testing, optimasi performa, serta deployment dan monitoring aplikasi.
 - [ ] Menerapkan praktik keamanan mobile (OWASP Mobile Top 10) pada proyek akhir.
 
