@@ -7,6 +7,12 @@ class LocalFailure extends Failure {
   const LocalFailure(super.message);
 }
 
+class ValidationFailure extends Failure {
+  const ValidationFailure([
+    super.message = 'Data yang dimasukkan tidak valid.',
+  ]);
+}
+
 class NetworkFailure extends Failure {
   const NetworkFailure([super.message = 'Tidak ada koneksi internet.']);
 }

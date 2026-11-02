@@ -49,17 +49,97 @@ class NotesPage extends ConsumerWidget {
               ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          // Simulasi add note
-          final repo = ref.read(noteRepositoryProvider);
-          await repo.addNote(
-            title: 'Catatan Baru ${DateTime.now().second}',
-            body: 'Isi catatan yang dibuat secara otomatis...',
-          );
-          ref.invalidate(notesProvider);
-        },
+        onPressed: () => _handleAddNote(context, ref),
         child: const Icon(Icons.add),
       ),
+    );
+  }
+
+  Future<void> _handleAddNote(BuildContext context, WidgetRef ref) async {
+    final result = await showDialog<({String title, String body})>(
+      context: context,
+      builder: (_) => const _AddNoteDialog(),
+    );
+
+    if (result == null) return;
+
+    final saved = await ref
+        .read(addNoteProvider)
+        .call(title: result.title, body: result.body);
+
+    if (saved.failure != null) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(saved.failure!.message)));
+      }
+      return;
+    }
+
+    ref.invalidate(notesProvider);
+  }
+}
+
+class _AddNoteDialog extends StatefulWidget {
+  const _AddNoteDialog();
+
+  @override
+  State<_AddNoteDialog> createState() => _AddNoteDialogState();
+}
+
+class _AddNoteDialogState extends State<_AddNoteDialog> {
+  final _formKey = GlobalKey<FormState>();
+  final _titleController = TextEditingController();
+  final _bodyController = TextEditingController();
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _bodyController.dispose();
+    super.dispose();
+  }
+
+  void _submit() {
+    if (_formKey.currentState?.validate() ?? false) {
+      Navigator.of(context)
+          .pop((title: _titleController.text, body: _bodyController.text));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Catatan Baru'),
+      content: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextFormField(
+              controller: _titleController,
+              decoration: const InputDecoration(labelText: 'Judul'),
+              textInputAction: TextInputAction.next,
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return 'Judul tidak boleh kosong.';
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              controller: _bodyController,
+              decoration: const InputDecoration(labelText: 'Isi'),
+              maxLines: 3,
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Batal'),
+        ),
+        FilledButton(onPressed: _submit, child: const Text('Simpan')),
+      ],
     );
   }
 }
