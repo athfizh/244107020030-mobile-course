@@ -31,6 +31,35 @@ graph TD;
 
 ---
 
+## Stack Teknologi
+1. Bahasa Dart 3.13.2
+2. Framework Flutter SDK 3.47.2
+3. Package `flutter_riverpod` 2.6.1, `go_router` 14.8.1, `dio` 5.8.0, `flutter_secure_storage` 9.2.4, `sqflite` 2.4.4, `path` 1.9.1, `intl` 0.20.3
+4. Tools Android Studio, Git, Flutter CLI
+5. Pengujian menggunakan `flutter_test`
+
+## Cara Menjalankan
+```bash
+cd 07-week-7-clean-architecture
+
+flutter pub get
+
+flutter run
+
+flutter test
+```
+
+Keterangan alur aplikasi:
+1. Masuk melalui halaman Login. Sesi disimpan pada `flutter_secure_storage`.
+2. Halaman Home menyediakan pintu masuk ke Pengumuman dan Catatan Pribadi.
+3. Halaman Pengumuman mengambil data dari REST API melalui *Use Case*.
+4. Halaman Catatan membaca dan menulis ke SQLite melalui *Data Layer*.
+
+## Hasil yang Dicapai
+Struktur *feature-first* dengan tiga lapisan berhasil diterapkan pada fitur `auth`, `announcement`, dan `notes`. *Domain Layer* terbukti steril dari impor Flutter, Dio, dan SQLite berdasarkan hasil `grep`. *Entity* bebas dari proses *mapping* karena `toJson`/`fromJson` hanya hidup di *Model* pada *Data Layer*. Seluruh *Use Case* diuji memakai `FakeRepository` tanpa menyentuh *database* maupun jaringan, dan 11 unit test lulus bersama `flutter analyze` yang bersih.
+
+---
+
 ## Tahapan Praktikum
 
 ### Praktikum 1: Clean Architecture pada Fitur Lama

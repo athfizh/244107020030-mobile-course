@@ -33,3 +33,8 @@ build/
 **/macos/
 **/windows/
 **/.metadata
+
+# Environment & secrets
+.env
+*.env
+!.env.example

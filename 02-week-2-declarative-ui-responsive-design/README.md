@@ -5,8 +5,6 @@
 
 ---
 
----
-
 ## Tujuan
 Memahami prinsip dasar Declarative UI pada Flutter, membangun komponen layout dasar (Row, Column, Container, Expanded, Spacer), serta membuat aplikasi Student Dashboard dan Academic Overview yang responsif menggunakan LayoutBuilder, GridView, dan CupertinoSwitch.
 
@@ -57,7 +55,7 @@ flutter test test/academic_overview_test.dart
 
 ---
 
-## Screenshot & Bukti Visual
+## Tahapan Praktikum
 
 ### Tugas Utama: Academic Overview (Light Theme & Dark Theme)
 <img src="screenshots/Hasil Tugas Light Theme.png" width="250" alt="Hasil Tugas Light Theme"> <img src="screenshots/Hasil Tugas Dark Theme.png" width="250" alt="Hasil Tugas Dark Theme">
@@ -84,7 +82,7 @@ flutter test test/academic_overview_test.dart
 
 ---
 
-## AI Prompt Challenge & Exploration
+## AI Prompt Challenge
 
 ### 1. Desain Layout: GridView vs LayoutBuilder + Column
 - **Prompt:** "Bandingkan dua tata letak dashboard akademik untuk Flutter: versi GridView dan versi LayoutBuilder + Column. Jelaskan trade-off responsif dan aksesibilitasnya."
@@ -118,8 +116,6 @@ Saat menambahkan baris email pada kartu profil dengan pola `Expanded(child: Text
 
 ## Refleksi
 
-### Refleksi
-
 - **Apa perbedaan cara berpikir imperative dan declarative saat membangun UI?**
   Pendekatan imperative mengharuskan developer mengubah UI secara manual langkah demi langkah setiap kali state/data berubah (misal: `textView.setText("Baru")`). Sedangkan pendekatan declarative pada Flutter bersifat reaktif; developer mendeskripsikan *blueprint* UI untuk setiap kemungkinan state (`UI = f(state)`). Ketika state berubah, Flutter secara otomatis merender ulang (rebuild) bagian widget tree yang terdampak tanpa perlu intervensi manual.
 
@@ -135,7 +131,7 @@ Saat menambahkan baris email pada kartu profil dengan pola `Expanded(child: Text
   2. **Dampak Aksesibilitas**: Mengecek penggunaan widget `Semantics` apakah memberi kejelasan pembacaan pada *screen reader* tanpa merusak tata letak yang ada.
   3. **Ketersediaan Widget**: Mengonfirmasi bahwa komponen pendukung seperti `CupertinoSwitch` dan `LayoutBuilder` beroperasi stabil tanpa masalah versi pada SDK terbaru.
 
-#---
+---
 
 ## Referensi
 

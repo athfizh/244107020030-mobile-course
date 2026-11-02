@@ -5,8 +5,6 @@
 
 ---
 
----
-
 ## Tujuan
 
 Praktikum ini bertujuan untuk memahami implementasi penyimpanan lokal dan strategi *offline-first* di Flutter. Fokus utama mencakup penggunaan SharedPreferences untuk menyimpan preferensi pengguna, pemanfaatan SQLite (sqflite) untuk menyimpan daftar catatan secara persisten, dan perancangan arsitektur *cache-first* yang disinkronisasi ke cloud menggunakan antrean sinkronisasi *background*. Selain itu tahapan ini juga membahas cara melakukan refactoring dan *unit testing* dengan memanfaatkan pola *mock repository*.
@@ -18,7 +16,30 @@ Praktikum ini bertujuan untuk memahami implementasi penyimpanan lokal dan strate
 | Preferensi Pengguna | Penyimpanan Mode Gelap/Terang dan jejak waktu buka aplikasi secara ringan melalui SharedPreferences |
 | Database SQLite Terpusat | Penyimpanan tabel entitas catatan secara luring dengan *sqflite* demi meminimalisasi lonjakan konsumsi memori mematikan (OOM) |
 | Sinkronisasi Latar Belakang | Manajemen *dirty flag* (antrean sinkronisasi *cloud*) yang tereksekusi tanpa memblokir pergerakan UI menggunakan isolasi *AsyncNotifier* |
-| Pengujian Otomatis | Validasi integritas kode via lutter analyze dan lutter test yang menghasilkan 100% *clean code* |
+| Pengujian Otomatis | Validasi integritas kode via `flutter analyze` dan `flutter test` yang menghasilkan 100% *clean code* |
+
+---
+
+## Stack Teknologi
+1. Bahasa Dart 3.13.2
+2. Framework Flutter SDK 3.47.2
+3. Package `flutter_riverpod` 3.4.3, `go_router` 18.0.2, `dio` 5.11.1, `shared_preferences` 2.5.5, `sqflite` 2.4.4, `path` 1.9.1
+4. Tools Android Studio, Git, Flutter CLI
+5. Pengujian menggunakan `flutter_test`
+
+## Cara Menjalankan
+```bash
+cd 05-week-5-local-storage-offline-first
+
+flutter pub get
+
+flutter run
+
+flutter test
+```
+
+## Hasil yang Dicapai
+Preferensi tema dan jejak waktu buka aplikasi berhasil disimpan secara persisten lewat SharedPreferences. Daftar catatan berhasil dipindahkan ke SQLite sehingga tidak lagi menumpuk di memori. Antrean sinkronisasi berbasis *dirty flag* berjalan di latar belakang tanpa memblokir antarmuka. Mode *force offline* terbukti tetap menampilkan data dari cache alih-alih layar kosong. Seluruh kode lulus `flutter analyze` dan unit test dengan *mock repository*.
 
 ---
 
@@ -61,6 +82,39 @@ Praktikum ini bertujuan untuk memahami implementasi penyimpanan lokal dan strate
 
 ---
 
+## AI Prompt Challenge
+
+### Instruksi Prompt yang Digunakan
+```text
+Aplikasi Flutter Offline Notes: CRUD catatan + preferensi tema.
+Bandingkan SharedPreferences, Hive, sqflite (SQLite), dan Drift
+untuk dua kebutuhan ini. Requirements:
+- Kriteria: kompleksitas query, kebutuhan relasi, reaktivitas (stream),
+  type-safety, ukuran boilerplate, dan kemudahan testing.
+- Beri rekomendasi final: mana untuk preferensi, mana untuk catatan,
+  beserta alasannya dalam 1 tabel.
+- Tunjukkan skema tabel/kotak untuk 1000+ catatan.
+Jelaskan trade-off setiap pilihan.
+```
+
+### Hasil Verifikasi
+
+| No | Poin Verifikasi | Hasil Pengecekan |
+|---|---|---|
+| 1 | Apakah AI menempatkan daftar catatan di SharedPreferences? | Tidak, AI menempatkannya di SQLite untuk meminimalisasi lonjakan konsumsi memori mematikan (OOM). |
+| 2 | Apakah skema AI mendukung antrean sync (dirty flag / updated_at) atau hanya CRUD polos? | Ya, skema yang disusun memberikan index pendukung mutasi khusus dirty dan updated_at. |
+| 3 | Apakah klaim "real-time" AI didukung stream (Drift/watch) atau hanya asumsi? | Ya, AI memberikan penjelasan valid mengapa Drift didapuk reaktif ketimbang sqflite biasa. |
+| 4 | Apakah estimasi boilerplate AI masuk akal setelah instalasi? | Terverifikasi, AI jujur memperingatkan waktu _build_ runner memakan performa berlebih pada arsitektur Drift. |
+
+### Keputusan Final
+Arsitektur perpaduan **SharedPreferences** dan **sqflite** adalah opsi yang paling wajar. Prefs untuk data profil konfigurasi kecil, sedangkan SQL biasa dipakai untuk menyimpan relasi tabel dengan sistem sinkronisasi asinkron (_Last-Write-Wins_) tanpa harus direpotkan oleh *build runner / code generation* ala _Drift_.
+
+Diskusi lengkap bersama *AI Assistant*, termasuk matriks perbandingan empat opsi penyimpanan dan alasan penolakan Drift, dicatat pada dokumen terpisah.
+
+👉 [**Lihat Pembahasan AI Challenge (AI_Challenge.md)**](docs/AI_Challenge.md)
+
+---
+
 ## Refleksi
 
 **1. Mengapa daftar catatan tidak boleh disimpan di SharedPreferences? Apa yang rusak jika aturan ini dilanggar?**
@@ -78,35 +132,6 @@ Tugas antrean _sync_ ditarik ke dalam isolasi AsyncNotifier (Riverpod) yang meng
 **4. Bagian mana dari rekomendasi AI yang Anda tolak, dan mengapa?**
 
 Saya menolak saran dari hasil keluaran generatif AI yang memaksakan adopsi _Drift_ di setiap kondisi aplikasi *offline-first*. Pemasangan dan pembangunan _codegen_ dari *Drift* memakan waktu dan boilerplate yang tidak ringkas, saya mempertahankan *sqflite* karena efisiensi baris kode _raw SQL_ lebih mendekatkan pengetahuan pengembang ke fundamental asli.
-
----
-
-## AI Prompt Challenge
-
-### Instruksi Prompt yang Digunakan
-`	ext
-Aplikasi Flutter Offline Notes: CRUD catatan + preferensi tema.
-Bandingkan SharedPreferences, Hive, sqflite (SQLite), dan Drift
-untuk dua kebutuhan ini. Requirements:
-- Kriteria: kompleksitas query, kebutuhan relasi, reaktivitas (stream),
-  type-safety, ukuran boilerplate, dan kemudahan testing.
-- Beri rekomendasi final: mana untuk preferensi, mana untuk catatan,
-  beserta alasannya dalam 1 tabel.
-- Tunjukkan skema tabel/kotak untuk 1000+ catatan.
-Jelaskan trade-off setiap pilihan.
-`
-
-### Hasil Verifikasi
-
-| No | Poin Verifikasi | Hasil Pengecekan |
-|---|---|---|
-| 1 | Apakah AI menempatkan daftar catatan di SharedPreferences? | Tidak, AI menempatkannya di SQLite untuk meminimalisasi lonjakan konsumsi memori mematikan (OOM). |
-| 2 | Apakah skema AI mendukung antrean sync (dirty flag / updated_at) atau hanya CRUD polos? | Ya, skema yang disusun memberikan index pendukung mutasi khusus dirty dan updated_at. |
-| 3 | Apakah klaim "real-time" AI didukung stream (Drift/watch) atau hanya asumsi? | Ya, AI memberikan penjelasan valid mengapa Drift didapuk reaktif ketimbang sqflite biasa. |
-| 4 | Apakah estimasi boilerplate AI masuk akal setelah instalasi? | Terverifikasi, AI jujur memperingatkan waktu _build_ runner memakan performa berlebih pada arsitektur Drift. |
-
-### Keputusan Final
-Arsitektur perpaduan **SharedPreferences** dan **sqflite** adalah opsi yang paling wajar. Prefs untuk data profil konfigurasi kecil, sedangkan SQL biasa dipakai untuk menyimpan relasi tabel dengan sistem sinkronisasi asinkron (_Last-Write-Wins_) tanpa harus direpotkan oleh *build runner / code generation* ala _Drift_.
 
 ---
 

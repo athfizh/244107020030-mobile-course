@@ -15,7 +15,7 @@
 | 04 | Networking & REST API | ✅ Selesai | [Folder](04-week-4-networking-rest-api/) |
 | 05 | Local Storage & Offline First | ✅ Selesai | [Folder](05-week-5-local-storage-offline-first/) |
 | 06 | Authentication, Security & FCM | ✅ Selesai | [Folder](06-week-6-authentication-security-fcm/) |
-| 07 | Clean Architecture | ⏳ Belum | [Folder](07-week-7-clean-architecture/) |
+| 07 | Clean Architecture | ✅ Selesai | [Folder](07-week-7-clean-architecture/) |
 | 08 | Mid-Project Review | ⏳ Belum | [Folder](08-week-8-mid-project-review/) |
 | 09 | AI-Assisted Development | ⏳ Belum | [Folder](09-week-9-ai-assisted-development/) |
 | 10 | AI Feature Integration | ⏳ Belum | [Folder](10-week-10-ai-feature-integration/) |
@@ -103,6 +103,21 @@
 
 ---
 
+## Minggu 7 — Highlight
+
+### Tugas Utama: Clean Architecture
+- **Feature-First:** Fitur `auth`, `announcement`, dan `notes` dipecah menjadi tiga lapisan (`presentation`, `domain`, `data`).
+- **Domain Steril:** *Entity*, *Use Case*, dan kontrak *Repository* bebas dari impor Flutter, Dio, dan SQLite, dibuktikan lewat `grep`.
+- **Failure Terpusat:** Seluruh error infrastruktur diterjemahkan menjadi *Sealed Class* `Failure` di *Domain Layer*.
+- **Dart Records:** Nilai balik ganda sukses/gagal memakai `({T? data, Failure? failure})` tanpa *package* tambahan seperti `dartz`.
+- **Testing:** 11 unit test lulus memakai `FakeRepository` tanpa menyentuh database maupun jaringan.
+
+### Refleksi Kunci Minggu 7
+1. **Interface di Domain:** Kontrak *Repository* harus tinggal di *Domain* agar *Use Case* tidak perlu mengimpor *Data Layer*, sehingga *Dependency Rule* tetap terjaga dan *mocking* tetap mudah.
+2. **Kapan Use Case Perlu:** *Use Case* wajib saat operasi melibatkan lebih dari satu *Repository* atau logika bisnis kompleks. Untuk CRUD satu baris murni, *Notifier* boleh memanggil *Repository* langsung.
+
+---
+
 ## Minggu 6 — Highlight
 
 ### Tugas Utama: Authentication, Security & FCM
@@ -115,4 +130,4 @@
 1. **Rahasia Identitas:** Menyimpan tiket otentikasi di repositori yang tak ber-enkripsi (*plain-text*) adalah bencana maut bagi aplikasi standar industri/perbankan.
 2. **Segmentasi Saluran Komunikasi FCM:** Memisahkan jalur berita umum (*Topic*) dari jalur berita rahasia (*Device Token*) menyehatkan infrastruktur dan efisiensi *bandwith* notifikasi skala masif.
 
-*Diperbarui: 2 Oktober 2026*
+*Diperbarui: 2 November 2026*

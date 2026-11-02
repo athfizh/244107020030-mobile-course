@@ -4,7 +4,7 @@
 
 ---
 
-## Referensi Resmi
+## Referensi Pendukung
 
 - [Flutter installation guide](https://docs.flutter.dev/install)
 - [Flutter: declarative UI](https://docs.flutter.dev/flutter-for/declarative)

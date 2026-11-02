@@ -20,3 +20,12 @@
 - [x] Menyelesaikan Praktikum 3: Memicu notifikasi lokal pada state Foreground, Background, dan Terminated.
 - [x] Menyelesaikan Tugas Mandiri (AI Challenge): Mengeksplorasi pembuatan boilerplate dengan AI Prompt dan memperbaikinya.
 - [x] Merapikan alur error (DioException mapper) dan Unit Testing yang tervalidasi 100%.
+
+### Kendala & Solusi
+- **Masalah:** `requestPermission` dari FCM tidak memunculkan dialog izin di emulator Android 13+.
+- **Solusi:** Menambahkan `<uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>` langsung pada `AndroidManifest.xml` native.
+- **Masalah:** Pemanggilan `flutter_local_notifications` gagal karena API versi 22 mewajibkan *named parameter*.
+- **Solusi:** Mengubah `initialize()` dan `show()` ke format `id:`, `title:`, `settings:` sesuai versi terbaru.
+
+### Key Takeaway
+> Rahasia seperti *refresh token* dan *device token* tidak boleh diperlakukan sebagai data biasa. Penyimpanan terenkripsi dan pemotongan nilai saat ditampilkan adalah kebiasaan kecil yang mencegah kebocoran besar.

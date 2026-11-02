@@ -4,7 +4,7 @@
 
 ---
 
-## Referensi Resmi
+## Referensi Pendukung
 
 - [Slide: Navigation & State Management](https://drive.google.com/file/d/1NB58_3HbR6pQhPTWG1Kbr4p4bHIcm45B/view)
 - [Flutter: Navigation overview](https://docs.flutter.dev/ui/navigation)

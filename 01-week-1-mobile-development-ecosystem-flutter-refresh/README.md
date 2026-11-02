@@ -5,8 +5,6 @@
 
 ---
 
----
-
 ## Tujuan
 Memahami evolusi ekosistem pengembangan mobile (native vs cross-platform), melakukan instalasi dan verifikasi environment Flutter, menyegarkan kembali pemahaman dasar bahasa Dart (type safety, null safety, OOP), serta membuat aplikasi **Profil Mahasiswa** sebagai Mini Assignment.
 
@@ -56,18 +54,18 @@ flutter test
 
 ---
 
-## Screenshot & Bukti Visual Mini Assignment
+## Tahapan Praktikum
 
-### Versi Terbaru (setelah upgrade Mini Assignment)
+### Mini Assignment: Versi Terbaru (setelah upgrade)
 <img src="screenshots/profil_mahasiswa_v2.png" width="250" alt="Profil Mahasiswa - versi final dengan NIM badge dan info cards">
 
 > **Keterangan gambar:**
 > - **AppBar** "Profil Mahasiswa" -> widget `AppBar` + `Text`
 > - **Avatar** dengan ikon `school` -> widget `CircleAvatar` + `Icon`
-> - **> - **4 Info Card** (Program Studi, Angkatan, Minat Utama, Platform) -> widget `_InfoCard` reusable
+> - **4 Info Card** (Program Studi, Angkatan, Minat Utama, Platform) -> widget `_InfoCard` reusable
 > - **Footer** mata kuliah -> widget `Text`
 
-### Versi Awal (dari praktikum, sebelum Mini Assignment)
+### Praktikum: Versi Awal (sebelum Mini Assignment)
 <img src="screenshots/profil_mahasiswa_v1.png" width="250" alt="Profil Mahasiswa - versi awal dari praktikum">
 
 > Versi ini hanya menampilkan nama dan ikon tanpa NIM dan tanpa info tambahan. Versi ini adalah **baseline** sebelum pengerjaan Mini Assignment.

@@ -20,3 +20,12 @@
 - [x] Menyelesaikan Praktikum 3: Mengembangkan logika dirty flag dan offline queue asinkron lewat Riverpod.
 - [x] Menyelesaikan Tugas Mandiri (AI Challenge): Membandingkan skenario SharedPreferences vs SQLite vs Drift.
 - [x] Menjalankan *Flutter Analyze* dan Unit Testing Mocking Data tanpa cacat.
+
+### Kendala & Solusi
+- **Masalah:** Integrasi GoRouter dengan struktur halaman lama sempat bentrok karena beberapa widget masih memanggil `Navigator` bawaan.
+- **Solusi:** Memusatkan seluruh rute pada satu konfigurasi GoRouter dan mengganti pemanggilan navigasi manual dengan `context.go` / `context.push`.
+- **Masalah:** Draf awal AI memaksa pemakaian Drift sehingga waktu *build* membengkak.
+- **Solusi:** Menolak Drift dan mempertahankan sqflite dengan index pada kolom `dirty` dan `updated_at`.
+
+### Key Takeaway
+> Memilih media penyimpanan bukan soal mana yang paling modern, tetapi soal mencocokkan sifat data dengan alatnya. Preferensi kecil cukup di SharedPreferences, sedangkan data relasional yang perlu difilter dan disinkronkan lebih tepat di SQLite.

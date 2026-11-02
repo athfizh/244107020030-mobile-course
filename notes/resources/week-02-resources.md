@@ -4,7 +4,7 @@
 
 ---
 
-## Referensi Resmi
+## Referensi Pendukung
 
 - [Flutter UI documentation](https://docs.flutter.dev/ui)
 - [Building responsive apps](https://docs.flutter.dev/ui/adaptive-responsive)

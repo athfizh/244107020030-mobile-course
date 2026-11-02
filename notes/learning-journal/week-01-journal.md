@@ -1,4 +1,5 @@
 # Learning Journal - Semester Mobile Development
+
 **Athaulla Hafizh | NIM: 244107020030**
 
 ---

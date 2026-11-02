@@ -5,8 +5,6 @@
 
 ---
 
----
-
 ## Tujuan
 
 Praktikum ini bertujuan untuk memahami dan mengimplementasikan konsep keamanan modern dalam pengembangan aplikasi *mobile* menggunakan Flutter. Fokus utama mencakup penerapan otentikasi (JWT mock), pengamanan *token* rahasia menggunakan penyimpanan terenkripsi (`flutter_secure_storage`), serta pengintegrasian Firebase Cloud Messaging (FCM) secara menyeluruh. Selain itu, tahapan ini juga membahas arsitektur penanganan rotasi token, strategi intersepsi *error* 401 (Refresh Token), hingga navigasi responsif (*Deep Linking*) pada tiga status siklus hidup aplikasi (*Foreground*, *Background*, dan *Terminated*).
@@ -19,6 +17,35 @@ Praktikum ini bertujuan untuk memahami dan mengimplementasikan konsep keamanan m
 | Interceptor 401 Terpusat | Modul *Dio* yang dirancang cerdas untuk otomatis melakukan penyegaran (*refresh*) token saat sesi kedaluwarsa, tanpa memutus pengalaman pengguna |
 | Firebase Cloud Messaging (FCM) | Penerimaan notifikasi berbasis *Push* yang terintegrasi penuh untuk pengiriman pesan personal (*Device Token*) maupun pesan massal (*Topic*) |
 | Deep Linking Multistatus | Intersepsi ketukan (*click*) *banner* notifikasi yang mampu melempar pengguna (*redirect*) ke layar spesifik secara akurat baik saat aplikasi menyala, sembunyi, maupun mati |
+
+---
+
+## Stack Teknologi
+1. Bahasa Dart 3.13.2
+2. Framework Flutter SDK 3.47.2
+3. Package `flutter_riverpod` 3.4.3, `go_router` 18.0.2, `dio` 5.11.1, `flutter_secure_storage` 11.2.0, `firebase_core` 4.15.0, `firebase_messaging` 16.7.0, `flutter_local_notifications` 22.3.1
+4. Tools Android Studio, Git, Flutter CLI, Firebase Console
+5. Pengujian menggunakan `flutter_test`
+
+## Cara Menjalankan
+```bash
+cd 06-week-6-authentication-security-fcm
+
+flutter pub get
+
+flutter run
+
+flutter test
+```
+
+Keterangan alur aplikasi:
+1. Jalankan aplikasi, lalu masuk melalui halaman Login. Token disimpan di `flutter_secure_storage`.
+2. Buka halaman Home untuk melihat status sesi dan tombol menuju Pengumuman.
+3. Kirim notifikasi uji dari Firebase Console ke *device token* atau topik `pengumuman-kampus`.
+4. Uji ketukan notifikasi pada kondisi *foreground*, *background*, dan *terminated*.
+
+## Hasil yang Dicapai
+Login berhasil diproteksi oleh *redirect guard* GoRouter sehingga halaman internal tidak bisa diakses tanpa sesi. *Access* dan *refresh token* tersimpan terenkripsi di Keystore/Keychain, bukan di SharedPreferences. *Interceptor* Dio berhasil menyegarkan token saat menerima 401 tanpa memutus pengalaman pengguna. FCM berhasil menerima pesan pada tiga status siklus hidup aplikasi, dan ketukan notifikasi mengarah ke rute yang benar. Seluruh kode lulus `flutter analyze` dan unit test.
 
 ---
 
@@ -37,7 +64,7 @@ Praktikum ini bertujuan untuk memahami dan mengimplementasikan konsep keamanan m
 
 > **Keterangan gambar**
 > - Aplikasi dihubungkan ke Firebase dengan mengaktifkan izin notifikasi eksplisit (khususnya untuk *rule* Android 13+ `POST_NOTIFICATIONS`).
-> - Token identitas perangkat (*FCM Token*) berhasil ditangkap, lalu tampilannya dipotong (*truncate*) pada UI UI (batas 12 karakter) guna menaati protokol pencegahan kebocoran rahasia.
+> - Token identitas perangkat (*FCM Token*) berhasil ditangkap, lalu tampilannya dipotong (*truncate*) pada UI (batas 12 karakter) guna menaati protokol pencegahan kebocoran rahasia.
 
 ### Praktikum 3: Payload, Tiga App State, Klik dan Topik
 <img src="screenshots/Praktikum 3 - Uji Foreground.png" width="250" alt="Praktikum 3 - Uji Foreground.png"> <img src="screenshots/Praktikum 3 - Uji Background.png" width="250" alt="Praktikum 3 - Uji Background.png"> <img src="screenshots/Praktikum 3 - Uji Terminated.png" width="250" alt="Praktikum 3 - Uji Terminated.png">

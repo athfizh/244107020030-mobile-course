@@ -64,6 +64,8 @@
 
 Repository ini berisi modul praktikum berbasis codelab untuk mata kuliah **Pemrograman Mobile** selama **16 minggu**. Materinya mencakup Flutter modern, state management, REST API, local storage, Firebase Cloud Messaging (FCM), testing, deployment, keamanan aplikasi, hingga penggunaan AI secara bertanggung jawab dalam proses development.
 
+> **Terakhir diperbarui:** 2 November 2026
+
 ---
 
 ## 📂 Struktur Repository
@@ -143,9 +145,9 @@ Repository ini berisi modul praktikum berbasis codelab untuk mata kuliah **Pemro
 - [x] Membangun UI deklaratif yang responsif dengan widget, layout, dan material design.
 - [x] Menerapkan navigasi dan state management menggunakan Riverpod.
 - [x] Mengintegrasikan REST API serta menangani loading, error, dan success state.
-- [ ] Menerapkan local storage dan pola offline-first pada aplikasi.
-- [ ] Menerapkan autentikasi, keamanan dasar, dan notifikasi real-time dengan FCM.
-- [ ] Menata arsitektur project dengan prinsip Clean Architecture & SOLID.
+- [x] Menerapkan local storage dan pola offline-first pada aplikasi.
+- [x] Menerapkan autentikasi, keamanan dasar, dan notifikasi real-time dengan FCM.
+- [x] Menata arsitektur project dengan prinsip Clean Architecture & SOLID.
 - [ ] Mengintegrasikan fitur AI ke dalam aplikasi mobile secara bertanggung jawab.
 - [ ] Melakukan testing, optimasi performa, serta deployment dan monitoring aplikasi.
 - [ ] Menerapkan praktik keamanan mobile (OWASP Mobile Top 10) pada proyek akhir.

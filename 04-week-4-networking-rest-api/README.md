@@ -5,8 +5,6 @@
 
 ---
 
----
-
 ## Tujuan
 Praktikum ini bertujuan untuk memahami implementasi HTTP REST API di Flutter. Fokus utama mencakup pembuatan klien Dio terpusat lengkap dengan log interceptor serta konversi data JSON ke model Dart yang aman dari nilai null. Praktikum juga mencakup penerapan state management Riverpod untuk menangani fitur infinite scroll dan pengelolaan error handling. Selain itu tahapan ini juga membahas cara melakukan unit testing dengan memanfaatkan pola mock repository.
 
@@ -45,7 +43,7 @@ Keterangan navigasi dalam aplikasi
 ## Hasil yang Dicapai
 Aplikasi berhasil dibangun dengan pemisahan logika yang jelas antara antarmuka dan lapisan pengambil data. Kelas model mampu menangani data JSON yang tidak lengkap tanpa menyebabkan aplikasi crash. Mekanisme infinite scroll berjalan lancar dengan memuat blok data baru tanpa perlu menyegarkan seluruh layar. Pengelolaan error mampu merespons masalah koneksi internet dan kesalahan kode server dengan baik. Seluruh fungsi juga terbukti lulus uji unit dan pengecekan kode linter.
 
-## Screenshot dan Bukti Visual
+## Tahapan Praktikum
 
 ### Praktikum 1 & 2: Error Handling & Data Tunggal
 <img src="screenshots/Praktikum%202%20-%20State%20Sukses%20(Daftar%20Post).png" width="250" alt="Daftar Data Sukses"> <img src="screenshots/Praktikum%202%20-%20State%20Error%20Koneksi%20(Mode%20Pesawat).png" width="250" alt="Error Koneksi"> <img src="screenshots/Praktikum%202%20-%20State%20Error%20Server%20(Salah%20URL%20404).png" width="250" alt="Error 404">
@@ -68,34 +66,6 @@ Aplikasi berhasil dibangun dengan pemisahan logika yang jelas antara antarmuka d
 > **Keterangan gambar**
 > - Halaman Detail berpindah menggunakan rute path parameter dan memuat data detail pos
 > - Pengujian perangkat lunak menunjukkan hasil sukses pada tahapan pengujian linter dan kode tes unit
-
----
-
-## Refleksi
-
-**1. Mengapa UI dilarang memanggil Dio langsung? Apa yang rusak jika aturan ini dilanggar?**
-
-Antarmuka bertugas murni untuk menampilkan sisi visual aplikasi. Jika fungsi antarmuka melakukan pemanggilan API secara langsung maka arsitektur kode akan menyatu. Kode tersebut akan berimbas pada sulitnya proses pengujian dan perubahan format JSON dari server bisa memaksa developer merombak ulang banyak file tampilan. Kondisi ini juga berisiko tinggi memicu pemanggilan ganda setiap kali sistem membangun ulang layar antarmuka.
-
-**2. Kapan pagination client-side cukup, dan kapan harus mengandalkan pagination server (_page/_limit)?**
-
-Penerapan pagination sisi klien relevan digunakan untuk data statis tabel dengan jumlah entri yang masih tergolong sedikit. Namun untuk pengambilan data dinamis yang mencapai rentang ribuan baris ke atas maka pagination harus diletakkan pada sistem antrian server. Memaksakan pengolahan sisi klien untuk data skala masif akan menyebabkan beban yang signifikan pada memori perangkat pengguna dan boros konsumsi kuota data internet.
-
-**3. Bagaimana exception repository berubah menjadi AsyncError tanpa try/catch di setiap widget? Kapan try/catch eksplisit tetap dibutuhkan?**
-
-Paket Riverpod melalui kelas AsyncNotifier memiliki mekanisme proteksi error bawaan secara dasar. Segala bentuk kegagalan jaringan yang terjadi pada lapisan repository akan direkam secara otomatis sesaat setelah fungsi panggilan asinkron dijalankan. Riverpod lalu menerjemahkannya ke dalam status AsyncError. Pembuatan blok try catch eksplisit baru difungsikan saat mengelola operasi spesifik yang tidak mengikat status UI seperti aksi pengiriman formulir baru.
-
-**4. Bagian mana dari hasil AI yang Anda perbaiki, dan mengapa?**
-
-Skrip fungsi dasar yang dibuat oleh AI memerlukan beberapa penyesuaian teknis. AI menetapkan variabel batas waktu secara perorangan dalam setiap fungsi sehingga saya memindahkan variabel tersebut menuju file klien API utama untuk efisiensi koding. Saya juga merekonstruksi ulang kelas provider bawaan agar sanggup menerima input argumen parameter id. Fungsi penerjemah kode respon error AI turut saya hapus karena aplikasi telah tersambung pada modul pengelolaan error buatan praktikum sebelumnya.
-
-## Pola Keliru yang Harus Dihindari
-
-| No | Praktik Kesalahan | Dampak yang Ditimbulkan |
-|---|---|---|
-| 1 | Menulis base url langsung di setiap metode panggilan | Proses pergantian alamat server API akan memakan waktu lama karena developer wajib mencari baris alamat yang bersangkutan dan merevisinya di setiap sub folder proyek secara terpisah |
-| 2 | Melakukan konversi teks data mentah secara paksa | Eksekusi aplikasi akan berhenti seketika saat server mengirimkan objek bernilai null secara acak pada fase kompilasi waktu berjalan |
-| 3 | Mengabaikan variabel batasan waktu tunggu sambungan | Respon layar aplikasi berisiko terkunci pada animasi loading dalam waktu lama ketika kualitas jaringan sedang berada dalam batas kecepatan minim |
 
 ---
 
@@ -128,6 +98,34 @@ Jelaskan setiap bagian kode dalam komentar.
 ### Rincian Modifikasi Teknis
 - Merombak arsitektur model Notifier kepada wujud penyedia parameter argumen demi mengakomodasi masuknya nomor id pos spesifik
 - Mengumpulkan file terpisah kode terjemahan error buatan AI untuk dipadukan pada skrip tunggal bawaan kerangka repositori utama
+
+---
+
+## Refleksi
+
+**1. Mengapa UI dilarang memanggil Dio langsung? Apa yang rusak jika aturan ini dilanggar?**
+
+Antarmuka bertugas murni untuk menampilkan sisi visual aplikasi. Jika fungsi antarmuka melakukan pemanggilan API secara langsung maka arsitektur kode akan menyatu. Kode tersebut akan berimbas pada sulitnya proses pengujian dan perubahan format JSON dari server bisa memaksa developer merombak ulang banyak file tampilan. Kondisi ini juga berisiko tinggi memicu pemanggilan ganda setiap kali sistem membangun ulang layar antarmuka.
+
+**2. Kapan pagination client-side cukup, dan kapan harus mengandalkan pagination server (_page/_limit)?**
+
+Penerapan pagination sisi klien relevan digunakan untuk data statis tabel dengan jumlah entri yang masih tergolong sedikit. Namun untuk pengambilan data dinamis yang mencapai rentang ribuan baris ke atas maka pagination harus diletakkan pada sistem antrian server. Memaksakan pengolahan sisi klien untuk data skala masif akan menyebabkan beban yang signifikan pada memori perangkat pengguna dan boros konsumsi kuota data internet.
+
+**3. Bagaimana exception repository berubah menjadi AsyncError tanpa try/catch di setiap widget? Kapan try/catch eksplisit tetap dibutuhkan?**
+
+Paket Riverpod melalui kelas AsyncNotifier memiliki mekanisme proteksi error bawaan secara dasar. Segala bentuk kegagalan jaringan yang terjadi pada lapisan repository akan direkam secara otomatis sesaat setelah fungsi panggilan asinkron dijalankan. Riverpod lalu menerjemahkannya ke dalam status AsyncError. Pembuatan blok try catch eksplisit baru difungsikan saat mengelola operasi spesifik yang tidak mengikat status UI seperti aksi pengiriman formulir baru.
+
+**4. Bagian mana dari hasil AI yang Anda perbaiki, dan mengapa?**
+
+Skrip fungsi dasar yang dibuat oleh AI memerlukan beberapa penyesuaian teknis. AI menetapkan variabel batas waktu secara perorangan dalam setiap fungsi sehingga saya memindahkan variabel tersebut menuju file klien API utama untuk efisiensi koding. Saya juga merekonstruksi ulang kelas provider bawaan agar sanggup menerima input argumen parameter id. Fungsi penerjemah kode respon error AI turut saya hapus karena aplikasi telah tersambung pada modul pengelolaan error buatan praktikum sebelumnya.
+
+### Pola Keliru yang Harus Dihindari
+
+| No | Praktik Kesalahan | Dampak yang Ditimbulkan |
+|---|---|---|
+| 1 | Menulis base url langsung di setiap metode panggilan | Proses pergantian alamat server API akan memakan waktu lama karena developer wajib mencari baris alamat yang bersangkutan dan merevisinya di setiap sub folder proyek secara terpisah |
+| 2 | Melakukan konversi teks data mentah secara paksa | Eksekusi aplikasi akan berhenti seketika saat server mengirimkan objek bernilai null secara acak pada fase kompilasi waktu berjalan |
+| 3 | Mengabaikan variabel batasan waktu tunggu sambungan | Respon layar aplikasi berisiko terkunci pada animasi loading dalam waktu lama ketika kualitas jaringan sedang berada dalam batas kecepatan minim |
 
 ---
 
