@@ -35,7 +35,29 @@ p95 sedikit naik karena sampel After lebih sedikit (89 vs 111) dan memuat satu
 frame berat saat transisi ke halaman detail. Nilai rata-rata dan p90 tetap
 turun signifikan.
 
-## 3. Optimasi yang Diterapkan
+## 3. Temuan dari Profiling
+
+Lima masalah ditemukan dari data `FrameTiming` dan pembacaan kode. Uraian lengkap
+tiap temuan ada di [`performance-findings.md`](performance-findings.md).
+
+| No | Temuan | Dampak | Prioritas |
+|:--:|---|---|:--:|
+| 1 | `ListView.separated` dengan `ListTile` *inline*, tanpa `itemExtent` | Raster 16,50 ms hampir menyentuh anggaran 16,67 ms | Tinggi |
+| 2 | Tanpa `RepaintBoundary` pada item daftar dan gelembung chat | Repaint menjalar ke area luas | Tinggi |
+| 3 | `ref.watch(notesQueryProvider)` untuk seluruh kata kunci | Seluruh halaman catatan *rebuild* setiap ketukan | Sedang |
+| 4 | Tanpa paginasi dan tanpa cache pengumuman | Panggilan API berulang dan waktu tunggu lebih lama | Tinggi |
+| 5 | Chat membangun ulang seluruh daftar saat *streaming* | Aliran teks terasa berat | Sedang |
+
+Bukti visual *before* dan *after*:
+
+<img src="../screenshots/before-profile.png" width="600" alt="Baseline Frame Timing">
+<img src="../screenshots/after-profile.png" width="600" alt="After Frame Timing">
+
+> **Keterangan gambar**
+> - Before: 111 frame, rata-rata total 33,34 ms, 93,7% frame melewati anggaran.
+> - After: 89 frame, rata-rata total 19,24 ms, 37,1% frame melewati anggaran.
+
+## 4. Optimasi yang Diterapkan
 
 | No | Optimasi | Alasan Pemilihan | Bukti |
 |:--:|---|---|---|
@@ -48,14 +70,14 @@ turun signifikan.
 | 7 | `RefreshIndicator` tanpa mengosongkan layar | Pengguna tetap melihat data lama saat menyegarkan, sesuai pola Minggu 3 | `announcements_page.dart` |
 | 8 | `FrameTimingRecorder` | Bukti pengukuran *before/after* yang bisa diulang, bukan klaim tanpa angka | `lib/core/frame_timing_recorder.dart` |
 
-## 4. Verifikasi
+## 5. Verifikasi
 
 ```text
 PS> flutter analyze
 No issues found!
 
 PS> dart format --set-exit-if-changed lib test
-Formatted 65 files (0 changed)
+Formatted 67 files (0 changed)
 
 PS> flutter test
 00:02 +57: All tests passed!
@@ -66,7 +88,7 @@ Test baru yang mendukung optimasi:
 - `test/announcement_cache_test.dart` - 4 test simpan, baca, hapus, dan kedaluwarsa cache.
 - `test/pagination_test.dart` - 3 test offset halaman pertama, kedua, dan halaman terakhir.
 
-## 5. Trade-off
+## 6. Trade-off
 
 | Trade-off | Keterangan |
 |---|---|
@@ -75,7 +97,7 @@ Test baru yang mendukung optimasi:
 | Kesegaran data | TTL 5 menit berarti pengguna bisa melihat data hingga 5 menit lebih lama; ini diterima karena pengumuman bukan data *real-time* |
 | `itemExtent` tetap | Tinggi baris dipatok, sehingga teks yang sangat panjang dipotong dengan `maxLines` alih-alih membuat tinggi baris berubah |
 
-## 6. Kapan Optimasi Premature Harus Dihindari
+## 7. Kapan Optimasi Premature Harus Dihindari
 
 Optimasi di Minggu 11 dilakukan setelah ada pengukuran, bukan sebelum. `itemExtent`,
 `RepaintBoundary`, dan paginasi baru ditambahkan karena Flame Chart dan angka
@@ -84,7 +106,7 @@ Optimasi di Minggu 11 dilakukan setelah ada pengukuran, bukan sebelum. `itemExte
 Aturan yang saya pakai: ukur dulu, optimasi yang paling berdampak, lalu ukur ulang
 pada skenario yang sama persis.
 
-## 7. Pemetaan Nama File Bukti ke Modul
+## 8. Pemetaan Nama File Bukti ke Modul
 
 Modul 11 meminta dua nama file khusus. Berikut pemetaannya agar mudah dicari:
 
@@ -95,7 +117,7 @@ Modul 11 meminta dua nama file khusus. Berikut pemetaannya agar mudah dicari:
 
 Versi bernama deskriptif tetap dipertahankan agar konsisten dengan gaya Week 1-10.
 
-## 8. Memory Profiling
+## 9. Memory Profiling
 
 Pengukuran memori memakai `adb shell dumpsys meminfo` pada build profile, bukan
 DevTools browser, karena angka DevTools sulit direproduksi ulang.
