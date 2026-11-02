@@ -18,8 +18,8 @@
 | 07 | Clean Architecture | ✅ Selesai | [Folder](07-week-7-clean-architecture/) |
 | 08 | Mid-Project Review | ✅ Selesai | [Folder](08-week-8-mid-project-review/) |
 | 09 | AI-Assisted Development | ✅ Selesai | [Folder](09-week-9-ai-assisted-development/) |
-| 10 | AI Feature Integration | ⏳ Belum | [Folder](10-week-10-ai-feature-integration/) |
-| 11 | Performance Optimization | ⏳ Belum | [Folder](11-week-11-performance-optimization/) |
+| 10 | AI Feature Integration | ✅ Selesai | [Folder](10-week-10-ai-feature-integration/) |
+| 11 | Performance Optimization | ✅ Selesai | [Folder](11-week-11-performance-optimization/) |
 | 12 | Testing & Quality Assurance | ⏳ Belum | [Folder](12-week-12-testing-quality-assurance/) |
 | 13 | CI/CD Automation | ⏳ Belum | [Folder](13-week-13-ci-cd-automation/) |
 | 14 | Deployment & Monitoring | ⏳ Belum | [Folder](14-week-14-deployment-monitoring/) |
@@ -103,18 +103,31 @@
 
 ---
 
-## Minggu 9 — Highlight
+## Minggu 6 — Highlight
 
-### Tugas Utama: AI-Assisted Development / Vibe Coding
-- **Prompt 5 Slot:** Peran, konteks, tugas, batas, dan format output disusun eksplisit agar AI tidak melebar ke fitur lain.
-- **Pencarian Catatan:** `SearchNotes` di *Domain Layer* mencocokkan judul dan isi, tidak membedakan huruf besar/kecil, dan mengabaikan spasi tepi.
-- **Empty State Kontekstual:** Pesan berbeda untuk "belum ada catatan" dan "tidak ada hasil untuk kata kunci tertentu".
-- **Halusinasi Terbukti:** Klaim AI bahwa `contains` sudah *case-insensitive* dibantah lewat test merah (`Expected: length of 2, Actual: []`).
-- **Verifikasi Mesin:** `flutter analyze` bersih, `dart format` nol perubahan, 27 tes lulus, dan *Domain* tetap steril dari impor framework.
+### Tugas Utama: Authentication, Security & FCM
+- **Token JWT Terselubung:** Isolasi parameter token sensitif rahasia ke ranah native enkripsi Keychain/Keystore (modul *flutter_secure_storage*).
+- **Siklus Hidup Notifikasi:** Penanganan *deep linking* dari notifikasi *Push* FCM menembus tiga lapis keamanan kesadaran perangkat (Foreground, Background, dan Terminated).
+- **Pengunci Antarmuka:** Modul *GoRouter Redirect Guard* menyaring identitas anonim sebelum membiarkan mereka melenggang menuju halaman rumah utama.
+- **Penyegar Otomatis:** Perancangan modul tangkapan pada Dio (Interceptor) merespons error 401 dan melakukan injeksi silang penggantian Token secara senyap ke server backend tiruan.
 
-### Refleksi Kunci Minggu 9
-1. **Test Merah sebagai Bukti:** Klaim AI baru bisa disebut salah setelah ada test yang gagal. Tanpa itu, verifikasi hanya asumsi.
-2. **Batas Prompt Menentukan Kualitas:** Larangan mengubah arsitektur dan batas 80 baris membuat output AI mudah direview dan langsung bisa diuji.
+### Refleksi Kunci Minggu 6
+1. **Rahasia Identitas:** Menyimpan tiket otentikasi di repositori yang tak ber-enkripsi (*plain-text*) adalah bencana maut bagi aplikasi standar industri/perbankan.
+2. **Segmentasi Saluran Komunikasi FCM:** Memisahkan jalur berita umum (*Topic*) dari jalur berita rahasia (*Device Token*) menyehatkan infrastruktur dan efisiensi *bandwith* notifikasi skala masif.
+
+*Diperbarui: 2 November 2026*
+## Minggu 7 — Highlight
+
+### Tugas Utama: Clean Architecture
+- **Feature-First:** Fitur `auth`, `announcement`, dan `notes` dipecah menjadi tiga lapisan (`presentation`, `domain`, `data`).
+- **Domain Steril:** *Entity*, *Use Case*, dan kontrak *Repository* bebas dari impor Flutter, Dio, dan SQLite, dibuktikan lewat `grep`.
+- **Failure Terpusat:** Seluruh error infrastruktur diterjemahkan menjadi *Sealed Class* `Failure` di *Domain Layer*.
+- **Dart Records:** Nilai balik ganda sukses/gagal memakai `({T? data, Failure? failure})` tanpa *package* tambahan seperti `dartz`.
+- **Testing:** 11 unit test lulus memakai `FakeRepository` tanpa menyentuh database maupun jaringan.
+
+### Refleksi Kunci Minggu 7
+1. **Interface di Domain:** Kontrak *Repository* harus tinggal di *Domain* agar *Use Case* tidak perlu mengimpor *Data Layer*, sehingga *Dependency Rule* tetap terjaga dan *mocking* tetap mudah.
+2. **Kapan Use Case Perlu:** *Use Case* wajib saat operasi melibatkan lebih dari satu *Repository* atau logika bisnis kompleks. Untuk CRUD satu baris murni, *Notifier* boleh memanggil *Repository* langsung.
 
 ---
 
@@ -134,31 +147,48 @@
 
 ---
 
-## Minggu 7 — Highlight
+## Minggu 9 — Highlight
 
-### Tugas Utama: Clean Architecture
-- **Feature-First:** Fitur `auth`, `announcement`, dan `notes` dipecah menjadi tiga lapisan (`presentation`, `domain`, `data`).
-- **Domain Steril:** *Entity*, *Use Case*, dan kontrak *Repository* bebas dari impor Flutter, Dio, dan SQLite, dibuktikan lewat `grep`.
-- **Failure Terpusat:** Seluruh error infrastruktur diterjemahkan menjadi *Sealed Class* `Failure` di *Domain Layer*.
-- **Dart Records:** Nilai balik ganda sukses/gagal memakai `({T? data, Failure? failure})` tanpa *package* tambahan seperti `dartz`.
-- **Testing:** 11 unit test lulus memakai `FakeRepository` tanpa menyentuh database maupun jaringan.
+### Tugas Utama: AI-Assisted Development / Vibe Coding
+- **Prompt 5 Slot:** Peran, konteks, tugas, batas, dan format output disusun eksplisit agar AI tidak melebar ke fitur lain.
+- **Pencarian Catatan:** `SearchNotes` di *Domain Layer* mencocokkan judul dan isi, tidak membedakan huruf besar/kecil, dan mengabaikan spasi tepi.
+- **Empty State Kontekstual:** Pesan berbeda untuk "belum ada catatan" dan "tidak ada hasil untuk kata kunci tertentu".
+- **Halusinasi Terbukti:** Klaim AI bahwa `contains` sudah *case-insensitive* dibantah lewat test merah (`Expected: length of 2, Actual: []`).
+- **Verifikasi Mesin:** `flutter analyze` bersih, `dart format` nol perubahan, 27 tes lulus, dan *Domain* tetap steril dari impor framework.
 
-### Refleksi Kunci Minggu 7
-1. **Interface di Domain:** Kontrak *Repository* harus tinggal di *Domain* agar *Use Case* tidak perlu mengimpor *Data Layer*, sehingga *Dependency Rule* tetap terjaga dan *mocking* tetap mudah.
-2. **Kapan Use Case Perlu:** *Use Case* wajib saat operasi melibatkan lebih dari satu *Repository* atau logika bisnis kompleks. Untuk CRUD satu baris murni, *Notifier* boleh memanggil *Repository* langsung.
+### Refleksi Kunci Minggu 9
+1. **Test Merah sebagai Bukti:** Klaim AI baru bisa disebut salah setelah ada test yang gagal. Tanpa itu, verifikasi hanya asumsi.
+2. **Batas Prompt Menentukan Kualitas:** Larangan mengubah arsitektur dan batas 80 baris membuat output AI mudah direview dan langsung bisa diuji.
 
 ---
 
-## Minggu 6 — Highlight
+## Minggu 10 — Highlight
 
-### Tugas Utama: Authentication, Security & FCM
-- **Token JWT Terselubung:** Isolasi parameter token sensitif rahasia ke ranah native enkripsi Keychain/Keystore (modul *flutter_secure_storage*).
-- **Siklus Hidup Notifikasi:** Penanganan *deep linking* dari notifikasi *Push* FCM menembus tiga lapis keamanan kesadaran perangkat (Foreground, Background, dan Terminated).
-- **Pengunci Antarmuka:** Modul *GoRouter Redirect Guard* menyaring identitas anonim sebelum membiarkan mereka melenggang menuju halaman rumah utama.
-- **Penyegar Otomatis:** Perancangan modul tangkapan pada Dio (Interceptor) merespons error 401 dan melakukan injeksi silang penggantian Token secara senyap ke server backend tiruan.
+### Tugas Utama: Integrasi Fitur AI
+- **Chat Asisten Kampus:** Integrasi Gemini `gemini-3.8-flash` dengan `streamGenerateContent` dan parsing SSE.
+- **Kunci Aman:** API key disimpan di `flutter_secure_storage` dan dikirim lewat header `x-goog-api-key`, bukan *query string*.
+- **Privasi Berlapis:** `RedactSensitive` menyamarkan NIK, nomor HP, dan email sebelum request.
+- **Hemat Kuota:** `AiCache` dengan TTL 1 hari plus batas 10 permintaan per sesi.
+- **Tahan Gangguan:** Pemetaan status 401/403, 404, 429, 503, *retry* 3x untuk 503, dan Mode Demo saat key kosong.
 
-### Refleksi Kunci Minggu 6
-1. **Rahasia Identitas:** Menyimpan tiket otentikasi di repositori yang tak ber-enkripsi (*plain-text*) adalah bencana maut bagi aplikasi standar industri/perbankan.
-2. **Segmentasi Saluran Komunikasi FCM:** Memisahkan jalur berita umum (*Topic*) dari jalur berita rahasia (*Device Token*) menyehatkan infrastruktur dan efisiensi *bandwith* notifikasi skala masif.
+### Refleksi Kunci Minggu 10
+1. **Menunggu adalah UX:** Gelembung `...` muncul segera agar pengguna tahu sistem bekerja, dan jawaban ditampilkan bertahap.
+2. **Fallback Menentukan Kualitas:** Fitur AI terasa seperti produk ketika tetap berguna saat API lambat, menolak, atau tidak tersedia.
 
-*Diperbarui: 2 November 2026*
+---
+
+## Minggu 11 — Highlight
+
+### Tugas Utama: Performance Optimization
+- **Pengukuran Objektif:** `FrameTimingRecorder` mencatat `build`, `raster`, dan `total` setiap frame pada build profile di Pixel 8.
+- **Baseline Jujur:** 111 frame dengan rata-rata raster 16,50 ms dan 93,7% frame melewati anggaran 16,67 ms.
+- **Delapan Optimasi:** widget `const` terpisah, `ListView.builder` + `itemExtent`, `RepaintBoundary`, Riverpod `select`, paginasi `_limit`/`_start`, cache *stale-while-revalidate*, `RefreshIndicator`, dan alat ukur frame.
+- **Hasil Terukur:** raster turun 49,6% (16,50 menjadi 8,32 ms), total turun 42,3%, jank turun dari 93,7% ke 37,1%.
+- **Trade-off Diakui:** PSS naik 5,2% karena cache, dicatat eksplisit di `docs/performance-report.md`.
+
+### Refleksi Kunci Minggu 11
+1. **Raster, bukan Build:** Perbaikan terbesar datang dari `itemExtent` dan `RepaintBoundary` karena bottleneck ada di GPU thread, bukan di `build`.
+2. **Bukti, Bukan Rasa:** Optimasi hanya sah bila diukur pada skenario dan perangkat yang sama, dengan metrik yang sama.
+
+---
+
