@@ -49,17 +49,81 @@ class NotesPage extends ConsumerWidget {
               ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          // Simulasi add note
-          final repo = ref.read(noteRepositoryProvider);
-          await repo.addNote(
-            title: 'Catatan Baru ${DateTime.now().second}',
-            body: 'Isi catatan yang dibuat secara otomatis...',
-          );
-          ref.invalidate(notesProvider);
-        },
+        onPressed: () => _showAddNoteDialog(context, ref),
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  Future<void> _showAddNoteDialog(BuildContext context, WidgetRef ref) async {
+    final formKey = GlobalKey<FormState>();
+    final titleController = TextEditingController();
+    final bodyController = TextEditingController();
+
+    final saved = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('Catatan Baru'),
+        content: Form(
+          key: formKey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextFormField(
+                controller: titleController,
+                decoration: const InputDecoration(labelText: 'Judul'),
+                textInputAction: TextInputAction.next,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Judul tidak boleh kosong.';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: bodyController,
+                decoration: const InputDecoration(labelText: 'Isi'),
+                maxLines: 3,
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: const Text('Batal'),
+          ),
+          FilledButton(
+            onPressed: () {
+              if (formKey.currentState?.validate() ?? false) {
+                Navigator.of(dialogContext).pop(true);
+              }
+            },
+            child: const Text('Simpan'),
+          ),
+        ],
+      ),
+    );
+
+    final title = titleController.text;
+    final body = bodyController.text;
+    titleController.dispose();
+    bodyController.dispose();
+
+    if (saved != true) return;
+
+    final result = await ref
+        .read(addNoteProvider)
+        .call(title: title, body: body);
+
+    if (result.failure != null) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(result.failure!.message)));
+      }
+      return;
+    }
+
+    ref.invalidate(notesProvider);
   }
 }

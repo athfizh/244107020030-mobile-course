@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/repositories/note_repository_impl.dart';
 import '../../domain/repositories/note_repository.dart';
 import '../../domain/usecases/get_notes.dart';
+import '../../domain/usecases/add_note.dart';
 import '../../domain/entities/note.dart';
 import '../../data/db_helper.dart';
 
@@ -12,6 +13,10 @@ final noteRepositoryProvider = Provider<NoteRepository>((ref) {
 
 final getNotesProvider = Provider<GetNotes>((ref) {
   return GetNotes(ref.watch(noteRepositoryProvider));
+});
+
+final addNoteProvider = Provider<AddNote>((ref) {
+  return AddNote(ref.watch(noteRepositoryProvider));
 });
 
 final notesProvider = FutureProvider<List<Note>>((ref) async {
