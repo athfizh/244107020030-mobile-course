@@ -17,7 +17,7 @@
 | 06 | Authentication, Security & FCM | ✅ Selesai | [Folder](06-week-6-authentication-security-fcm/) |
 | 07 | Clean Architecture | ✅ Selesai | [Folder](07-week-7-clean-architecture/) |
 | 08 | Mid-Project Review | ✅ Selesai | [Folder](08-week-8-mid-project-review/) |
-| 09 | AI-Assisted Development | ⏳ Belum | [Folder](09-week-9-ai-assisted-development/) |
+| 09 | AI-Assisted Development | ✅ Selesai | [Folder](09-week-9-ai-assisted-development/) |
 | 10 | AI Feature Integration | ⏳ Belum | [Folder](10-week-10-ai-feature-integration/) |
 | 11 | Performance Optimization | ⏳ Belum | [Folder](11-week-11-performance-optimization/) |
 | 12 | Testing & Quality Assurance | ⏳ Belum | [Folder](12-week-12-testing-quality-assurance/) |
@@ -100,6 +100,21 @@
 ### Refleksi Kunci Minggu 5
 1. **SharedPreferences vs SQLite:** Pemakaian SharedPreferences pada data skala relasional json ribuan entitas tidak dapat ditoleransi karena arsitekturnya yang merender seluruh data ke memori RAM sekali muat.
 2. **Defensive Offline:** Memprioritaskan penampakan layar lokal (*cache-first*) mencegah pengguna merasa aplikasinya tersendat maupun lumpuh secara fungsionalitas.
+
+---
+
+## Minggu 9 — Highlight
+
+### Tugas Utama: AI-Assisted Development / Vibe Coding
+- **Prompt 5 Slot:** Peran, konteks, tugas, batas, dan format output disusun eksplisit agar AI tidak melebar ke fitur lain.
+- **Pencarian Catatan:** `SearchNotes` di *Domain Layer* mencocokkan judul dan isi, tidak membedakan huruf besar/kecil, dan mengabaikan spasi tepi.
+- **Empty State Kontekstual:** Pesan berbeda untuk "belum ada catatan" dan "tidak ada hasil untuk kata kunci tertentu".
+- **Halusinasi Terbukti:** Klaim AI bahwa `contains` sudah *case-insensitive* dibantah lewat test merah (`Expected: length of 2, Actual: []`).
+- **Verifikasi Mesin:** `flutter analyze` bersih, `dart format` nol perubahan, 27 tes lulus, dan *Domain* tetap steril dari impor framework.
+
+### Refleksi Kunci Minggu 9
+1. **Test Merah sebagai Bukti:** Klaim AI baru bisa disebut salah setelah ada test yang gagal. Tanpa itu, verifikasi hanya asumsi.
+2. **Batas Prompt Menentukan Kualitas:** Larangan mengubah arsitektur dan batas 80 baris membuat output AI mudah direview dan langsung bisa diuji.
 
 ---
 
