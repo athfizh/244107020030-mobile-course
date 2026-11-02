@@ -3,6 +3,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 import '../../domain/entities/session.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../models/session_model.dart';
@@ -15,7 +16,7 @@ class AuthRepositoryImpl implements AuthRepository {
   late final Dio _dio;
 
   AuthRepositoryImpl({FlutterSecureStorage? storage})
-      : _storage = storage ?? const FlutterSecureStorage() {
+    : _storage = storage ?? const FlutterSecureStorage() {
     _dio = Dio(BaseOptions(baseUrl: 'https://reqres.in/api'));
   }
 
@@ -25,10 +26,10 @@ class AuthRepositoryImpl implements AuthRepository {
     required String password,
   }) async {
     // Simulasi login dengan endpoint publik reqres.in (mengembalikan token)
-    final response = await _dio.post('/login', data: {
-      'email': email,
-      'password': password,
-    });
+    final response = await _dio.post(
+      '/login',
+      data: {'email': email, 'password': password},
+    );
 
     // reqres.in mengembalikan {token: "..."}; kita bungkus sebagai Session
     final rawToken = response.data['token'] as String? ?? 'mock-access';

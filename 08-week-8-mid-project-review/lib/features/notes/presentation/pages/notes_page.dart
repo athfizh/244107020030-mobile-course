@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../providers/notes_providers.dart';
 import '../../domain/entities/note.dart';
 
@@ -33,8 +34,15 @@ class NotesPage extends ConsumerWidget {
                 itemBuilder: (context, index) {
                   final Note note = notes[index];
                   return ListTile(
-                    title: Text(note.title, style: const TextStyle(fontWeight: FontWeight.bold)),
-                    subtitle: Text(note.body, maxLines: 2, overflow: TextOverflow.ellipsis),
+                    title: Text(
+                      note.title,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
+                      note.body,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                     trailing: const Icon(Icons.note),
                   );
                 },
@@ -45,7 +53,7 @@ class NotesPage extends ConsumerWidget {
           // Simulasi add note
           final repo = ref.read(noteRepositoryProvider);
           await repo.addNote(
-            title: 'Catatan Baru ${DateTime.now().second}', 
+            title: 'Catatan Baru ${DateTime.now().second}',
             body: 'Isi catatan yang dibuat secara otomatis...',
           );
           ref.invalidate(notesProvider);
