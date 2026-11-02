@@ -49,81 +49,97 @@ class NotesPage extends ConsumerWidget {
               ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _showAddNoteDialog(context, ref),
+        onPressed: () => _handleAddNote(context, ref),
         child: const Icon(Icons.add),
       ),
     );
   }
 
-  Future<void> _showAddNoteDialog(BuildContext context, WidgetRef ref) async {
-    final formKey = GlobalKey<FormState>();
-    final titleController = TextEditingController();
-    final bodyController = TextEditingController();
-
-    final saved = await showDialog<bool>(
+  Future<void> _handleAddNote(BuildContext context, WidgetRef ref) async {
+    final result = await showDialog<({String title, String body})>(
       context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: const Text('Catatan Baru'),
-        content: Form(
-          key: formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextFormField(
-                controller: titleController,
-                decoration: const InputDecoration(labelText: 'Judul'),
-                textInputAction: TextInputAction.next,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Judul tidak boleh kosong.';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: bodyController,
-                decoration: const InputDecoration(labelText: 'Isi'),
-                maxLines: 3,
-              ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(dialogContext).pop(false),
-            child: const Text('Batal'),
-          ),
-          FilledButton(
-            onPressed: () {
-              if (formKey.currentState?.validate() ?? false) {
-                Navigator.of(dialogContext).pop(true);
-              }
-            },
-            child: const Text('Simpan'),
-          ),
-        ],
-      ),
+      builder: (_) => const _AddNoteDialog(),
     );
 
-    final title = titleController.text;
-    final body = bodyController.text;
-    titleController.dispose();
-    bodyController.dispose();
+    if (result == null) return;
 
-    if (saved != true) return;
-
-    final result = await ref
+    final saved = await ref
         .read(addNoteProvider)
-        .call(title: title, body: body);
+        .call(title: result.title, body: result.body);
 
-    if (result.failure != null) {
+    if (saved.failure != null) {
       if (context.mounted) {
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(result.failure!.message)));
+            .showSnackBar(SnackBar(content: Text(saved.failure!.message)));
       }
       return;
     }
 
     ref.invalidate(notesProvider);
+  }
+}
+
+class _AddNoteDialog extends StatefulWidget {
+  const _AddNoteDialog();
+
+  @override
+  State<_AddNoteDialog> createState() => _AddNoteDialogState();
+}
+
+class _AddNoteDialogState extends State<_AddNoteDialog> {
+  final _formKey = GlobalKey<FormState>();
+  final _titleController = TextEditingController();
+  final _bodyController = TextEditingController();
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _bodyController.dispose();
+    super.dispose();
+  }
+
+  void _submit() {
+    if (_formKey.currentState?.validate() ?? false) {
+      Navigator.of(context)
+          .pop((title: _titleController.text, body: _bodyController.text));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Catatan Baru'),
+      content: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextFormField(
+              controller: _titleController,
+              decoration: const InputDecoration(labelText: 'Judul'),
+              textInputAction: TextInputAction.next,
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return 'Judul tidak boleh kosong.';
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              controller: _bodyController,
+              decoration: const InputDecoration(labelText: 'Isi'),
+              maxLines: 3,
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Batal'),
+        ),
+        FilledButton(onPressed: _submit, child: const Text('Simpan')),
+      ],
+    );
   }
 }
