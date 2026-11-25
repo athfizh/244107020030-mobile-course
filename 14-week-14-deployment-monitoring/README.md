@@ -70,7 +70,7 @@ Keterangan konfigurasi:
 
 ## Hasil yang Dicapai
 
-Kandidat `1.2.0+3` berhasil dibangun dan dipasang pada emulator. Firebase aktif dan terverifikasi lewat logcat: `FirebaseApp initialization successful`, event `beta_feedback_sent` masuk pipeline Analytics, dan error non-fatal diantrekan lalu di-upload dengan HTTP 204. Seluruh 65 tes lulus, integration test login sampai catatan juga lulus di emulator, `flutter analyze --fatal-infos` bersih, dan format nol perubahan. Dashboard Firebase Console tidak dapat diakses, sehingga keputusan rilis ditahan pada beta internal dan tidak diperluas.
+Kandidat `1.2.0+3` berhasil dibangun dan dipasang pada emulator. Firebase aktif dan terverifikasi lewat logcat: `FirebaseApp initialization successful`, event `beta_feedback_sent` masuk pipeline Analytics, dan error non-fatal diantrekan lalu di-upload dengan HTTP 204 pada build uji versi yang sama. Seluruh 65 tes lulus, integration test login sampai catatan juga lulus di emulator, `flutter analyze --fatal-infos` bersih, dan format nol perubahan. Dashboard Firebase Console tidak dapat diakses, sehingga keputusan rilis ditahan pada beta internal dan tidak diperluas.
 
 ---
 
@@ -162,7 +162,7 @@ Artefak build tidak di-commit. Angka dan checksum di atas dihasilkan dari build 
 <img src="screenshots/Praktikum 3 - Error Non Fatal Terkirim.png" width="700" alt="Error Non Fatal Terkirim">
 
 > **Keterangan gambar**
-> - Crashlytics mencatat `Persisting non-fatal event`, lalu `successfully enqueued to DataTransport`.
+> - Crashlytics mencatat `Persisting non-fatal event`, lalu `successfully enqueued to DataTransport` pada build uji `1.2.0+3`.
 > - Setelah aplikasi dibuka ulang, report di-upload dan server membalas HTTP 204.
 > - Baris `Successful upload. Got network response` adalah bukti upload, bukan sekadar pencatatan lokal.
 

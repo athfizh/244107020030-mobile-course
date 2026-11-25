@@ -24,7 +24,7 @@
 - [x] Membuat halaman Umpan Balik Beta untuk event dan error non-fatal.
 - [x] Membangun APK 52,23 MB dan AAB 52,21 MB.
 - [x] Memasang build beta di emulator dan memverifikasi versi `1.2.0+3`.
-- [x] Memverifikasi event `beta_feedback_sent` dan upload Crashlytics HTTP 204 lewat logcat.
+- [x] Memverifikasi event `beta_feedback_sent` dan upload Crashlytics HTTP 204 lewat logcat pada build uji versi yang sama.
 - [x] Menulis `docs/release-report.md` dan `docs/ai-log-analysis.md`.
 - [x] Menjalankan analyze, format, dan 65 tes sampai hijau.
 

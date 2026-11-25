@@ -99,6 +99,8 @@ V/FA-SVC:         string_value: beta_feedback_page
 
 ### Crashlytics
 
+Verifikasi non-fatal dilakukan pada build uji `1.2.0+3`. Build release juga menginisialisasi Crashlytics, tetapi upload report pada sesi release tidak muncul di log; report yang sama terverifikasi pada build uji dengan applicationId dan versi identik.
+
 ```text
 D/FirebaseCrashlytics: Persisting non-fatal event for session ...
 D/FirebaseCrashlytics: Crashlytics report successfully enqueued to DataTransport: ...
