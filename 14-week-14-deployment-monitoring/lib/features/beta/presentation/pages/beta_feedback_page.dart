@@ -34,7 +34,9 @@ class _BetaFeedbackPageState extends State<BetaFeedbackPage> {
     if (!mounted) return;
     setState(() => _sending = false);
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Error non-fatal dikirim ke Crashlytics.')),
+      const SnackBar(
+        content: Text('Error non-fatal diantrekan ke Crashlytics.'),
+      ),
     );
   }
 
@@ -86,7 +88,7 @@ class _BetaFeedbackPageState extends State<BetaFeedbackPage> {
           ),
           const SizedBox(height: 24),
           const Text(
-            'Catatan: event dan error hanya terkirim bila Firebase berhasil '
+            'Catatan: event dan error hanya diproses bila Firebase berhasil '
             'diinisialisasi. Bila status menunjukkan Mode lokal, kejadian tetap '
             'tercatat di logcat dengan tag monitoring.',
             style: TextStyle(fontSize: 12, color: Colors.grey),
