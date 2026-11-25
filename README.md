@@ -65,7 +65,7 @@
 
 Repository ini berisi modul praktikum berbasis codelab untuk mata kuliah **Pemrograman Mobile** selama **16 minggu**. Materinya mencakup Flutter modern, state management, REST API, local storage, Firebase Cloud Messaging (FCM), testing, deployment, keamanan aplikasi, hingga penggunaan AI secara bertanggung jawab dalam proses development.
 
-> **Terakhir diperbarui:** 2 November 2026
+> **Terakhir diperbarui:** 25 November 2026
 
 ---
 
@@ -112,9 +112,9 @@ Repository ini berisi modul praktikum berbasis codelab untuk mata kuliah **Pemro
 | 09 | AI-assisted Development / Vibe Coding | Penggunaan AI coding assistant secara bertanggung jawab, validasi output AI | [Week 9](./09-week-9-ai-assisted-development) | ✅ |
 | 10 | AI Feature Integration | Integrasi fitur AI seperti chat, prompt, OCR, atau speech-to-text ke aplikasi mobile | [Week 10](./10-week-10-ai-feature-integration) | ✅ |
 | 11 | Performance Optimization | Profiling, optimasi widget, caching, lazy loading, pengurangan bottleneck | [Week 11](./11-week-11-performance-optimization) | ✅ |
-| 12 | Testing & Quality Assurance | Unit test, widget test, integration test untuk menjaga kualitas aplikasi | [Week 12](./12-week-12-testing-quality-assurance) | Coming Soon |
-| 13 | CI/CD & Automation | Pipeline otomatis untuk build, test, dan release, pengaturan environment variable & secret | [Week 13](./13-week-13-ci-cd-automation) | Coming Soon |
-| 14 | Deployment & Monitoring | Deployment beta, release management, monitoring aplikasi, analisis crash & performa | [Week 14](./14-week-14-deployment-monitoring) | Coming Soon |
+| 12 | Testing & Quality Assurance | Unit test, widget test, integration test untuk menjaga kualitas aplikasi | [Week 12](./12-week-12-testing-quality-assurance) | ✅ |
+| 13 | CI/CD & Automation | Pipeline otomatis untuk build, test, dan release, pengaturan environment variable & secret | [Week 13](./13-week-13-ci-cd-automation) | ✅ |
+| 14 | Deployment & Monitoring | Deployment beta, release management, monitoring aplikasi, analisis crash & performa | [Week 14](./14-week-14-deployment-monitoring) | ✅ |
 | 15 | Secure Mobile Development | OWASP Mobile Top 10, security hardening, privacy, secure storage | [Week 15](./15-week-15-secure-mobile-development) | Coming Soon |
 | 16 | Final Project Expo | Demonstrasi proyek akhir, review arsitektur, deployment, testing, refleksi penggunaan AI | [Week 16](./16-week-16-final-project-expo) | Coming Soon |
 
@@ -122,9 +122,13 @@ Repository ini berisi modul praktikum berbasis codelab untuk mata kuliah **Pemro
 
 Workflow `.github/workflows/ci.yml` menjalankan `flutter analyze`,
 `dart format --set-exit-if-changed lib test`, dan `flutter test` untuk
-Week 8 sampai Week 11 pada setiap Pull Request ke `develop`/`main` serta
-setiap push ke `main`. Workflow ini gratis karena repository bersifat publik,
-dan berfungsi menolak PR yang tidak lolos pemeriksaan sebelum dibaca manusia.
+Week 8 sampai Week 14 pada setiap Pull Request ke `develop`/`main` serta
+setiap push ke `develop`/`main`. Untuk Week 13, workflow juga membangun
+APK dan AAB release lalu menyimpannya sebagai artefak selama 7 hari. Workflow
+ini gratis karena repository bersifat publik, dan berfungsi menolak perubahan
+yang tidak lolos pemeriksaan sebelum dibaca manusia. Workflow mandiri Week 13
+tersedia di `13-week-13-ci-cd-automation/.github/workflows/flutter-ci.yml`.
+
 ### Catatan Menjalankan Project
 
 Folder `android/`, `ios/`, `web/`, `windows/`, `linux/`, dan `macos/` tidak
@@ -140,6 +144,10 @@ flutter run
 Perintah `flutter create .` hanya membuat ulang folder platform dan tidak
 menimpa isi `lib/`, `test/`, `docs/`, maupun `screenshots/`.
 
+Khusus Week 14, setelah `flutter create .` salin `firebase/google-services.json`
+ke `android/app/` agar plugin Google Services dapat menemukan konfigurasi
+Firebase. Konfigurasi ini adalah pengenal klien publik, bukan keystore atau token. Langkah plugin Gradle dan izin `INTERNET` ada di `14-week-14-deployment-monitoring/docs/firebase-setup.md`.
+
 ---
 
 ## 🛠️ Tech Stack & Tools
@@ -153,8 +161,8 @@ menimpa isi `lib/`, `test/`, `docs/`, maupun `screenshots/`.
 | **State Management** | Riverpod |
 | **Networking** | HTTP, Dio, JSON |
 | **Local Storage** | SharedPreferences, Hive, SQLite |
-| **Backend Service** | Firebase (Authentication, Cloud Messaging) |
-| **Testing** | Unit Test, Widget Test, Integration Test |
+| **Backend Service** | Firebase (Authentication, Cloud Messaging, Crashlytics, Analytics) |
+| **Testing** | Unit Test, Widget Test, Integration Test, Coverage |
 | **CI/CD** | GitHub Actions |
 | **Environment** | Android Studio / VS Code, Git & GitHub |
 
@@ -173,8 +181,8 @@ menimpa isi `lib/`, `test/`, `docs/`, maupun `screenshots/`.
 - [x] Menata arsitektur project dengan prinsip Clean Architecture & SOLID.
 - [x] Mengintegrasikan fitur AI ke dalam aplikasi mobile secara bertanggung jawab.
 - [x] Melakukan optimasi performa aplikasi berdasarkan pengukuran profiling.
-- [ ] Melakukan testing dan quality assurance secara menyeluruh.
-- [ ] Melakukan deployment, monitoring, serta analisis crash dan performa.
+- [x] Melakukan testing dan quality assurance secara menyeluruh.
+- [x] Melakukan deployment, monitoring, serta analisis crash dan performa.
 - [ ] Menerapkan praktik keamanan mobile (OWASP Mobile Top 10) pada proyek akhir.
 
 ---

@@ -1,13 +1,16 @@
 name: ci
 
-# Modul 8 meminta CI berjalan pada Pull Request. Push ke main tetap
-# diverifikasi sebagai jaring pengaman rilis. Push ke develop tidak diulang
-# karena commit di sana sudah lolos verifikasi PR yang sama.
+# Pull request diverifikasi sebelum merge. Push ke main dan develop tetap
+# dijalankan sebagai jaring pengaman, termasuk untuk membuktikan pipeline
+# Week 12-14 pada branch pengembangan.
 on:
   pull_request:
     branches: [develop, main]
   push:
-    branches: [main]
+    branches: [develop, main]
+
+permissions:
+  contents: read
 
 jobs:
   verify:
@@ -20,6 +23,9 @@ jobs:
           - 09-week-9-ai-assisted-development
           - 10-week-10-ai-feature-integration
           - 11-week-11-performance-optimization
+          - 12-week-12-testing-quality-assurance
+          - 13-week-13-ci-cd-automation
+          - 14-week-14-deployment-monitoring
     name: verify ${{ matrix.project }}
     defaults:
       run:
@@ -42,7 +48,37 @@ jobs:
         run: flutter analyze
 
       - name: Verify formatting
-        run: dart format --set-exit-if-changed lib test
+        run: dart format --output=none --set-exit-if-changed lib test
 
       - name: Test
         run: flutter test
+
+      - name: Generate Android platform
+        if: matrix.project == '13-week-13-ci-cd-automation'
+        run: flutter create . --platforms=android
+
+      - name: Ensure Kotlin plugin for AGP 9 template
+        if: matrix.project == '13-week-13-ci-cd-automation'
+        run: |
+          if ! grep -q 'org.jetbrains.kotlin.android' android/app/build.gradle.kts; then
+            sed -i 's/id("com.android.application")/id("com.android.application")\n    id("org.jetbrains.kotlin.android")/' android/app/build.gradle.kts
+          fi
+
+      - name: Build APK release
+        if: matrix.project == '13-week-13-ci-cd-automation'
+        run: flutter build apk --release
+
+      - name: Build App Bundle release
+        if: matrix.project == '13-week-13-ci-cd-automation'
+        run: flutter build appbundle --release
+
+      - name: Upload Android artifacts
+        if: matrix.project == '13-week-13-ci-cd-automation'
+        uses: actions/upload-artifact@v4
+        with:
+          name: week13-android-builds
+          path: |
+            13-week-13-ci-cd-automation/build/app/outputs/flutter-apk/app-release.apk
+            13-week-13-ci-cd-automation/build/app/outputs/bundle/release/app-release.aab
+          if-no-files-found: error
+          retention-days: 7

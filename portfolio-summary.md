@@ -20,9 +20,9 @@
 | 09 | AI-Assisted Development | ✅ Selesai | [Folder](09-week-9-ai-assisted-development/) |
 | 10 | AI Feature Integration | ✅ Selesai | [Folder](10-week-10-ai-feature-integration/) |
 | 11 | Performance Optimization | ✅ Selesai | [Folder](11-week-11-performance-optimization/) |
-| 12 | Testing & Quality Assurance | ⏳ Belum | [Folder](12-week-12-testing-quality-assurance/) |
-| 13 | CI/CD Automation | ⏳ Belum | [Folder](13-week-13-ci-cd-automation/) |
-| 14 | Deployment & Monitoring | ⏳ Belum | [Folder](14-week-14-deployment-monitoring/) |
+| 12 | Testing & Quality Assurance | ✅ Selesai | [Folder](12-week-12-testing-quality-assurance/) |
+| 13 | CI/CD Automation | ✅ Selesai | [Folder](13-week-13-ci-cd-automation/) |
+| 14 | Deployment & Monitoring | ✅ Selesai | [Folder](14-week-14-deployment-monitoring/) |
 | 15 | Secure Mobile Development | ⏳ Belum | [Folder](15-week-15-secure-mobile-development/) |
 | 16 | Final Project Expo | ⏳ Belum | [Folder](16-week-16-final-project-expo/) |
 
@@ -115,7 +115,7 @@
 1. **Rahasia Identitas:** Menyimpan tiket otentikasi di repositori yang tak ber-enkripsi (*plain-text*) adalah bencana maut bagi aplikasi standar industri/perbankan.
 2. **Segmentasi Saluran Komunikasi FCM:** Memisahkan jalur berita umum (*Topic*) dari jalur berita rahasia (*Device Token*) menyehatkan infrastruktur dan efisiensi *bandwith* notifikasi skala masif.
 
-*Diperbarui: 2 November 2026*
+*Diperbarui: 25 November 2026*
 ## Minggu 7 — Highlight
 
 ### Tugas Utama: Clean Architecture
@@ -192,3 +192,49 @@
 
 ---
 
+---
+
+---
+
+## Minggu 12 - Highlight
+
+### Tugas Utama: Testing & Quality Assurance
+- **65 Tes Hijau:** 57 tes lama dari Minggu 11 ditambah 8 tes baru untuk login, dialog catatan, dan state halaman pengumuman.
+- **Fake Repository:** Autentikasi, catatan, dan pengumuman diuji tanpa jaringan maupun SQLite asli.
+- **Widget Test:** Validasi judul kosong, loading login, error kredensial, serta state loading/error pengumuman.
+- **Integration Test:** Alur login sampai catatan tersimpan berjalan di emulator Pixel 8.
+- **Coverage:** 318 dari 471 baris atau 67,52%, dengan cabang yang belum tercakup dicatat jujur.
+
+### Refleksi Kunci Minggu 12
+1. **Test sebagai Pengunci Perilaku:** Test yang tidak akan gagal saat fitur rusak tidak memberi perlindungan.
+2. **Fake untuk Determinisme:** Dependensi luar diganti fake agar test cepat, stabil, dan bisa dipaksa gagal.
+
+---
+
+## Minggu 13 - Highlight
+
+### Tugas Utama: CI/CD & Automation
+- **Workflow CI:** Format, analyze, test, build APK/AAB, dan upload artefak dalam satu pipeline.
+- **Versi 1.1.0+2:** Semantic versioning diterapkan dan diverifikasi lewat `dumpsys package` di perangkat.
+- **Artefak Nyata:** APK 51,05 MB dan AAB 50,21 MB dengan checksum SHA-256.
+- **Izin Minimum:** `contents: read` dan `concurrency` membatasi akses serta run usang.
+- **Temuan Nyata:** Build release gagal login karena izin `INTERNET` hanya ada di manifest debug; diperbaiki di manifest utama.
+
+### Refleksi Kunci Minggu 13
+1. **CI Bukan Pengganti Uji Perangkat:** Build yang lolos kompilasi belum tentu bisa login di release.
+2. **Versi Harus Bisa Ditelusuri:** Commit, versi, build number, dan artefak harus saling terhubung.
+
+---
+
+## Minggu 14 - Highlight
+
+### Tugas Utama: Deployment & Monitoring
+- **Kandidat 1.2.0+3:** APK 52,23 MB dan AAB 52,21 MB, dipasang pada emulator Pixel 8.
+- **Crashlytics:** Dashboard menampilkan issue `Monitoring.recordTestError` non-fatal pada versi `1.2.0 (3)`, 2 event / 2 installation ID.
+- **Analytics:** Event `beta_feedback_sent` muncul di DebugView dan hanya membawa `screen_name`, tanpa data pribadi.
+- **Fallback Lokal:** Aplikasi tetap berjalan bila Firebase gagal diinisialisasi.
+- **Keputusan Jujur:** Beta internal dilanjutkan, rilis publik ditahan karena signing, dashboard, dan tester eksternal belum siap.
+
+### Refleksi Kunci Minggu 14
+1. **Bukti Mengalahkan Klaim:** Dashboard membuktikan event dan error diterima; HTTP 204 di logcat tetap milik Analytics, bukan Crashlytics.
+2. **Keterbatasan Harus Ditulis:** Dashboard dan Play Console tidak tersedia, dan itu dicatat, bukan ditutupi.
