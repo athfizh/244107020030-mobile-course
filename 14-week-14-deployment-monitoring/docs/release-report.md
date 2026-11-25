@@ -11,7 +11,7 @@
 
 ## 1. Ringkasan
 
-Kandidat rilis Week 14 dibangun dari project Week 13 dengan tambahan Firebase Crashlytics dan Analytics. Build release berhasil dibuat, dipasang pada emulator, dan diuji alur utama. Satu event Analytics non-sensitif (`beta_feedback_sent`) terkirim dan terverifikasi lewat logcat (HTTP 204). Satu error non-fatal berhasil diantrekan ke DataTransport, tetapi upload final Crashlytics tidak terlihat di log sehingga tidak diklaim terkirim. Dashboard Firebase Console tidak dapat diakses pada praktikum ini, sehingga verifikasi dilakukan dari log perangkat dan status di aplikasi.
+Kandidat rilis Week 14 dibangun dari project Week 13 dengan tambahan Firebase Crashlytics dan Analytics. Build release berhasil dibuat, dipasang pada emulator, dan diuji alur utama. Satu event Analytics non-sensitif (`beta_feedback_sent`) terkirim dan terverifikasi lewat logcat (HTTP 204) serta Analytics DebugView. Satu error non-fatal terverifikasi di dashboard Crashlytics sebagai issue `Monitoring.recordTestError` pada versi `1.2.0 (3)`, dengan 2 event dari 2 installation ID dan stack trace `monitoring.dart:78`.
 
 ---
 
@@ -90,6 +90,8 @@ Halaman **Umpan Balik Beta** dipakai untuk memicu keduanya. Halaman ini tidak me
 
 ### Analytics
 
+Dashboard Analytics DebugView menampilkan event `beta_feedback_sent` secara real-time dari build release, dan logcat mencatat upload berhasil dengan HTTP 204.
+
 ```text
 V/FA-SVC: Logging event: origin=app,name=beta_feedback_sent,
 params=Bundle[{screen_name=beta_feedback_page, ga_event_origin(_o)=app, ...}]
@@ -101,13 +103,24 @@ V/FA-SVC: Successful upload. Got network response. code, size: 204, 0
 
 ### Crashlytics
 
-Verifikasi non-fatal dilakukan pada build uji `1.2.0+3`. Build release juga menginisialisasi Crashlytics. Yang terbukti di log adalah report berhasil diantrekan ke DataTransport, lalu berkas report lokal dihapus. Upload final Crashlytics tidak muncul di log, sehingga statusnya **diantrekan**, bukan **terkirim**.
+Logcat menunjukkan report diantrekan ke DataTransport. Dashboard Crashlytics kemudian mengonfirmasi penerimaan: issue `Monitoring.recordTestError` tercatat sebagai non-fatal pada versi `1.2.0 (3)`, dengan 2 event dari 2 installation ID dan stack trace `monitoring.dart:78` -> `beta_feedback_page.dart:33`.
 
 ```text
 D/FirebaseCrashlytics: Persisting non-fatal event for session ...
 D/FirebaseCrashlytics: Crashlytics report successfully enqueued to DataTransport: ...
 D/FirebaseCrashlytics: Deleted report file: .../reports/...
 ```
+
+Dashboard:
+
+| Metrik | Nilai |
+|---|---|
+| Release | `1.2.0 (3)` |
+| Active users | 1 |
+| Non-fatal events | 2 |
+| Users terdampak | 2 installation ID |
+| Crash-free users | 100% (sampel kecil) |
+| Perangkat | 100% Google, Android 17 |
 
 ### Inisialisasi
 
@@ -122,6 +135,9 @@ Bukti:
 - `screenshots/Praktikum 3 - Event Beta Dikirim.png`
 - `screenshots/Praktikum 3 - Error Non Fatal Diantrekan di Aplikasi.png`
 - `screenshots/Praktikum 3 - Error Non Fatal Diantrekan.png`
+- `screenshots/Praktikum 4 - Dashboard Crashlytics.png`
+- `screenshots/Praktikum 4 - Stack Trace Crashlytics.png`
+- `screenshots/Praktikum 4 - Dashboard Analytics.png`
 - `screenshots/Praktikum 4 - Verifikasi Telemetri.png`
 
 ---
@@ -132,8 +148,8 @@ Bukti:
 |:--:|---|---|---|
 | 1 | Build release gagal login karena izin `INTERNET` hanya ada di manifest debug | Alur utama tidak bisa dipakai pada build release | **Diperbaiki**: izin ditambahkan ke `android/app/src/main/AndroidManifest.xml` |
 | 2 | Firebase gagal init sebelum plugin `com.google.gms.google-services` dipasang | Analytics melaporkan `Missing google_app_id` | **Diperbaiki**: plugin dan `google-services.json` ditambahkan |
-| 3 | Crashlytics report baru diantrekan setelah aplikasi dibuka ulang | Upload final belum terverifikasi | **Diterima**: report masuk DataTransport, tetapi tidak ada bukti upload di log |
-| 4 | Dashboard Firebase Console tidak dapat diakses | Tidak ada tangkapan layar dashboard | **Dicatat sebagai keterbatasan**; verifikasi memakai logcat |
+| 3 | Crashlytics report baru diantrekan setelah aplikasi dibuka ulang | Dashboard sempat belum menunjukkan issue | **Diterima dan terverifikasi**: issue `Monitoring.recordTestError` muncul di dashboard versi `1.2.0 (3)` |
+| 4 | Sampel dashboard sangat kecil: 1 active user, 2 event non-fatal | Belum bisa menyimpulkan kestabilan umum | **Dicatat sebagai keterbatasan**; perlu tester eksternal |
 | 5 | Play Console tidak tersedia | Tidak ada track Internal Testing | **Dicatat**; distribusi memakai ADB ke perangkat uji |
 | 6 | Build memakai debug signing | Tidak layak untuk Play Store | **Ditahan** untuk rilis publik sampai keystore produksi disiapkan |
 
@@ -143,12 +159,12 @@ Bukti:
 
 **Lanjutkan beta internal dengan syarat**, bukan rilis publik.
 
-Alasannya: alur utama berjalan pada build release, event Analytics terkirim (HTTP 204), error non-fatal diantrekan ke DataTransport, dan tidak ada data sensitif yang dikirim. Namun build belum ditandatangani dengan keystore produksi, dashboard monitoring belum ditinjau langsung, dan belum ada tester selain emulator. Karena itu distribusi tidak diperluas.
+Alasannya: alur utama berjalan pada build release, event Analytics terkirim (HTTP 204), dan error non-fatal terverifikasi di dashboard Crashlytics. Tidak ada data sensitif yang dikirim. Namun build belum ditandatangani dengan keystore produksi, Play Console belum tersedia, dan sampel dashboard baru 1 active user dari emulator. Karena itu distribusi tidak diperluas.
 
 Kriteria untuk memperluas distribusi:
 1. Keystore produksi dibuat dan disimpan di GitHub Actions Secrets.
 2. AAB ditandatangani dan diunggah ke track Internal Testing.
-3. Dashboard Crashlytics/Analytics ditinjau pada versi yang sama.
+3. Dashboard Crashlytics/Analytics ditinjau pada versi yang sama dengan minimal tiga perangkat berbeda.
 4. Minimal tiga tester eksternal menyelesaikan alur login, pengumuman, catatan, dan AI.
 5. Tidak ada crash fatal pada 24 jam pertama.
 
@@ -168,7 +184,7 @@ Event `beta_feedback_sent` hanya membawa `screen_name`. Logika `RedactSensitive`
 
 ## 10. Keterbatasan
 
-1. **Dashboard tidak diverifikasi.** Tidak ada akses Firebase Console, sehingga tidak ada tangkapan layar dashboard. Bukti yang tersedia adalah logcat dan status aplikasi.
+1. **Sampel dashboard masih kecil.** Dashboard sudah diverifikasi, tetapi hanya 1 active user dan 2 event non-fatal dari 2 installation ID. Angka itu belum cukup untuk menyimpulkan kestabilan aplikasi secara umum.
 2. **Distribusi bukan track resmi.** ADB install tidak memiliki mekanisme opt-in, daftar tester, atau rollback seperti Play Console.
 3. **Signing debug.** APK/AAB tidak dapat dipublikasikan ke Play Store.
 4. **Project Firebase dipakai bersama Minggu 6.** Data Analytics/Crashlytics masuk ke project yang sama dan `applicationId` juga sama, sehingga memasang build Week 14 akan menggantikan aplikasi Minggu 6 di perangkat uji. Ini disengaja karena pendaftaran aplikasi baru butuh akses console.

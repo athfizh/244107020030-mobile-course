@@ -21,6 +21,7 @@ Praktikum ini membawa project hasil Minggu 13 ke tahap kandidat rilis: versi din
 | Firebase Crashlytics | Error fatal dan non-fatal dicatat, termasuk `FlutterError.onError` |
 | Firebase Analytics | Event `beta_feedback_sent` hanya membawa `screen_name` |
 | Halaman Umpan Balik Beta | Memicu event dan error uji tanpa data pribadi |
+| Verifikasi Dashboard | Crashlytics dan Analytics DebugView diperiksa langsung di Firebase Console |
 | Fallback Lokal | Bila Firebase gagal init, aplikasi tetap jalan dan mencatat ke logcat |
 | Release Report | `docs/release-report.md` berisi bukti, temuan, keputusan, dan langkah berikutnya |
 | Analisis Log dengan AI | `docs/ai-log-analysis.md` memakai log yang sudah disamarkan |
@@ -71,7 +72,7 @@ Keterangan konfigurasi:
 
 ## Hasil yang Dicapai
 
-Kandidat `1.2.0+3` berhasil dibangun dan dipasang pada emulator. Firebase aktif dan terverifikasi lewat logcat: `FirebaseApp initialization successful`, event `beta_feedback_sent` masuk pipeline Analytics dan upload Analytics berhasil dengan HTTP 204. Error non-fatal berhasil diantrekan ke DataTransport, tetapi upload final Crashlytics tidak muncul di log sehingga tidak diklaim terkirim. Seluruh 65 tes lulus, integration test login sampai catatan juga lulus di emulator, `flutter analyze --fatal-infos` bersih, dan format nol perubahan. Dashboard Firebase Console tidak dapat diakses, sehingga keputusan rilis ditahan pada beta internal dan tidak diperluas.
+Kandidat `1.2.0+3` berhasil dibangun dan dipasang pada emulator. Firebase aktif dan terverifikasi lewat logcat: `FirebaseApp initialization successful`, event `beta_feedback_sent` masuk pipeline Analytics dan upload Analytics berhasil dengan HTTP 204. Error non-fatal terverifikasi di dashboard Crashlytics: issue `Monitoring.recordTestError` pada versi `1.2.0 (3)`, 2 event / 2 installation ID, dengan stack trace `monitoring.dart:78`. Seluruh 65 tes lulus, integration test login sampai catatan juga lulus di emulator, `flutter analyze --fatal-infos` bersih, dan format nol perubahan. Dashboard Crashlytics dan Analytics sudah ditinjau langsung; keputusan tetap menahan rilis publik karena signing, Play Console, dan sampel tester masih kurang.
 
 ---
 
@@ -175,21 +176,41 @@ Artefak build tidak di-commit. Angka dan checksum di atas dihasilkan dari build 
 > - Gambar ini menggabungkan dua cuplikan logcat dari build yang sama: event non-fatal dan antrean DataTransport.
 > - Report diantrekan ke DataTransport, lalu berkas report lokal dihapus. Upload final Crashlytics tidak muncul di log, jadi statusnya **diantrekan**, bukan **terkirim**.
 
-### Praktikum 4: Triage dan Release Report
+### Praktikum 4: Verifikasi Dashboard dan Triage
+
+<img src="screenshots/Praktikum 4 - Dashboard Crashlytics.png" width="700" alt="Dashboard Crashlytics">
+
+> **Keterangan gambar**
+> - Dashboard Crashlytics menampilkan release `1.2.0 (3)` dan 1 active user.
+> - Non-fatals berjumlah 2 dengan 2 users; crash-free 100% pada sampel sekecil ini belum bermakna statistik.
+> - Angka non-fatal tampil di panel Trends karena filter masih `Event type = "Crashes" and 1 more`.
+
+<img src="screenshots/Praktikum 4 - Stack Trace Crashlytics.png" width="700" alt="Stack Trace Crashlytics">
+
+> **Keterangan gambar**
+> - Issue `Monitoring.recordTestError` tercatat sebagai non-fatal pada versi `1.2.0 (3)`.
+> - Stack trace menunjuk `monitoring.dart:78` lalu `beta_feedback_page.dart:33`, sesuai tombol **Uji Error Non-Fatal**.
+> - Ini membuktikan report yang diantrekan di logcat benar-benar diterima Crashlytics.
+
+<img src="screenshots/Praktikum 4 - Dashboard Analytics.png" width="700" alt="Dashboard Analytics">
+
+> **Keterangan gambar**
+> - Analytics DebugView menampilkan event `beta_feedback_sent` secara real-time.
+> - Event dikirim dari build release dengan `debug.firebase.analytics.app` aktif.
+> - Yang tampil hanya nama event; tidak ada email, token, atau isi catatan.
 
 <img src="screenshots/Praktikum 4 - Verifikasi Telemetri.png" width="700" alt="Verifikasi Telemetri">
 
 > **Keterangan gambar**
-> - Ringkasan bukti Analytics dan Crashlytics dikumpulkan dalam satu tampilan.
-> - Verifikasi memakai logcat karena dashboard Firebase Console tidak dapat diakses.
-> - HTTP 204 berasal dari `FA-SVC` (Analytics). Crashlytics baru sampai tahap enqueue ke DataTransport, sehingga tidak diklaim terkirim.
+> - Ringkasan logcat: event Analytics, upload HTTP 204, dan antrean Crashlytics.
+> - Dashboard sudah dikonfirmasi terpisah; logcat tetap disimpan sebagai bukti teknis.
+> - HTTP 204 berasal dari `FA-SVC` (Analytics), sedangkan Crashlytics dibuktikan lewat dashboard.
 
 <img src="screenshots/Praktikum 4 - Triage Rilis.png" width="700" alt="Triage Rilis">
 
 > **Keterangan gambar**
 > - Alur utama release lulus di emulator.
-> - Analytics terkirim (HTTP 204); Crashlytics baru diantrekan ke DataTransport.
-> - Dashboard belum ditinjau dan upload final Crashlytics belum terverifikasi.
+> - Analytics dan Crashlytics terverifikasi di dashboard, bukan hanya di logcat.
 > - Keputusan: lanjutkan beta internal dengan syarat, tahan rilis publik.
 
 <img src="screenshots/Praktikum 4 - Release Report.png" width="700" alt="Release Report">
@@ -197,7 +218,7 @@ Artefak build tidak di-commit. Angka dan checksum di atas dihasilkan dari build 
 > **Keterangan gambar**
 > - `docs/release-report.md` memuat artefak, checksum, hasil pemeriksaan, temuan, keputusan, dan langkah berikutnya.
 > - Setiap temuan punya keputusan eksplisit: diperbaiki, diterima, atau ditahan.
-> - Keterbatasan ditulis apa adanya, termasuk dashboard dan Play Console yang tidak tersedia.
+> - Keterbatasan ditulis apa adanya; dashboard sudah diverifikasi, Play Console dan signing belum.
 
 ### Refactoring & Testing
 
@@ -240,8 +261,8 @@ Bila `Firebase.initializeApp` gagal, `Monitoring.enabled` bernilai false, status
 
 ## Risiko dan Keterbatasan
 
-1. **Dashboard belum diverifikasi.** Tidak ada akses Firebase Console, sehingga tidak ada tangkapan layar dashboard. Bukti yang sah adalah logcat dan status aplikasi.
-2. **Distribusi bukan track resmi.** ADB install tidak punya opt-in, daftar tester, atau rollback.
+1. **Sampel dashboard masih kecil.** Dashboard sudah diverifikasi, tetapi hanya 1 active user dan 2 event non-fatal dari 2 installation ID. Angka itu belum cukup untuk menyimpulkan kestabilan aplikasi secara umum.
+2. **Distribusi bukan track resmi.** ADB install tidak punya opt-in, daftar tester, atau rollback seperti Play Console.
 3. **Signing debug.** APK/AAB belum layak untuk Play Store.
 4. **Project Firebase dipakai bersama Minggu 6.** Data telemetry masuk ke project yang sama.
 5. **Symbol native belum diunggah.** Crashlytics mencatat laporan Dart, tetapi mapping native belum dikonfigurasi.
@@ -256,8 +277,8 @@ Prompt untuk menganalisis log rilis beta sudah disamarkan dan dicatat lengkap di
 
 | Saran AI | Keputusan | Alasan Teknis |
 |---|---|---|
-| `enqueued` belum berarti `uploaded` | **Diterima** | HTTP 204 adalah upload Analytics; Crashlytics baru enqueue |
-| Cek dashboard sebelum memperluas beta | **Diterima** | Dashboard adalah sinyal agregat yang tidak bisa diganti log satu perangkat |
+| `enqueued` belum berarti `uploaded` | **Diterima** | HTTP 204 adalah upload Analytics; Crashlytics dibuktikan lewat dashboard |
+| Cek dashboard sebelum memperluas beta | **Diterima** | Dashboard menampilkan `Monitoring.recordTestError` dan `beta_feedback_sent` |
 | Hitung crash-free rate dari logcat | **Ditolak** | Log satu perangkat tidak mewakili populasi |
 | Kirim `user_id` untuk analisis | **Ditolak** | Melanggar minimalisasi data |
 | Tambahkan event untuk setiap layar | **Ditolak** | Menambah noise dan risiko data pribadi tanpa pertanyaan yang jelas |
@@ -269,11 +290,11 @@ Prompt untuk menganalisis log rilis beta sudah disamarkan dan dicatat lengkap di
 
 **1. Bukti apa yang diperlukan sebelum memperluas distribusi beta?**
 
-Bukti bahwa build yang sama sudah diuji pada beberapa perangkat, tidak ada crash fatal dalam 24 jam, dashboard menunjukkan crash-free users yang tinggi, dan tidak ada temuan yang menghalangi alur utama. Untuk praktikum ini, bukti yang ada baru satu perangkat dan satu event; itu cukup untuk uji internal, belum untuk memperluas.
+Bukti bahwa build yang sama sudah diuji pada beberapa perangkat, tidak ada crash fatal dalam 24 jam, dashboard menunjukkan crash-free users yang tinggi pada sampel yang memadai, dan tidak ada temuan yang menghalangi alur utama. Untuk praktikum ini, dashboard sudah menunjukkan crash-free 100%, tetapi hanya dari 1 active user dan 2 event; itu cukup untuk uji internal, belum untuk memperluas.
 
 **2. Bagaimana Anda memutuskan untuk menahan atau melanjutkan rilis?**
 
-Saya menahan perluasan karena tiga syarat belum terpenuhi: signing produksi, dashboard monitoring, dan tester eksternal. Saya tetap melanjutkan beta internal karena alur utama lulus, event Analytics terbukti terkirim, dan error non-fatal tercatat sampai antrean DataTransport. Keputusan ini dicatat eksplisit di `docs/release-report.md`, bukan disimpulkan diam-diam.
+Saya menahan perluasan karena tiga syarat belum terpenuhi: signing produksi, Play Console, dan tester eksternal. Dashboard sudah saya tinjau: Crashlytics menerima issue `Monitoring.recordTestError` dan Analytics menerima `beta_feedback_sent`. Namun sampelnya baru 1 active user dan 2 event, jadi belum cukup untuk memperluas beta. Keputusan ini dicatat eksplisit di `docs/release-report.md`.
 
 **3. Data apa yang tidak perlu dikirim ke layanan monitoring?**
 

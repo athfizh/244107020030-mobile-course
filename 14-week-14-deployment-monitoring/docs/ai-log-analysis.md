@@ -59,7 +59,7 @@ dari log ini, dan jangan menyarankan menambahkan data pribadi ke parameter.
 | HTTP 204 berarti upload diterima server | **Diterima, tetapi untuk Analytics** | Baris 204 berasal dari `FA-SVC`, bukan Crashlytics |
 | Event Analytics terkirim karena ada `Logging event` dan upload 204 | **Diterima** | `Uploading bundle` dan `Network upload successful` muncul setelah event |
 | `Crashlytics report enqueued` sama dengan `uploaded` | **Ditolak** | Enqueue dan upload adalah dua tahap berbeda; tidak ada bukti upload Crashlytics di log |
-| Dashboard harus dicek untuk memastikan data muncul | **Diterima** | Tidak bisa dilakukan tanpa akses console; dicatat sebagai keterbatasan |
+| Dashboard harus dicek untuk memastikan data muncul | **Diterima** | Sudah dicek: Crashlytics menampilkan `Monitoring.recordTestError`, Analytics menampilkan `beta_feedback_sent` |
 | Crash-free rate bisa dihitung dari log ini | **Ditolak** | Log satu perangkat tidak mewakili populasi; butuh dashboard agregat |
 | Kirim `user_id` agar analisis lebih mudah | **Ditolak** | Melanggar prinsip minimalisasi data |
 
@@ -67,4 +67,4 @@ dari log ini, dan jangan menyarankan menambahkan data pribadi ke parameter.
 
 ## 5. Kesimpulan
 
-AI berguna untuk memisahkan dua jalur telemetri yang terlihat mirip di log. Kesimpulan yang saya pakai: **Analytics** `beta_feedback_sent` terkirim (HTTP 204), sedangkan **Crashlytics** baru sampai tahap enqueue ke DataTransport dan upload finalnya belum terverifikasi. Dashboard juga belum ditinjau, sehingga distribusi belum boleh diperluas.
+AI berguna untuk memisahkan dua jalur telemetri yang terlihat mirip di log. Kesimpulan awal: Analytics `beta_feedback_sent` terkirim (HTTP 204), sedangkan Crashlytics baru sampai enqueue. Setelah dashboard ditinjau, kesimpulan itu terbukti benar: issue `Monitoring.recordTestError` muncul di Crashlytics pada versi `1.2.0 (3)`, dan event `beta_feedback_sent` muncul di Analytics DebugView. Distribusi tetap belum diperluas karena sampel dashboard baru 1 active user.
