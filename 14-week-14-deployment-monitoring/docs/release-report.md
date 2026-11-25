@@ -4,7 +4,7 @@
 **NIM:** 244107020030  
 **Tanggal:** 25 November 2026  
 **Kandidat:** `1.2.0+3` (build akhir setelah perbaikan teks status monitoring)  
-**Commit kandidat:** `dacca92` (perbaikan teks status monitoring; build akhir dibuat dari source yang sama)  
+**Commit kandidat:** `dacca92`; dirilis ke `main` lewat PR #19 (`0eb842d`) dan tag `v1.2.0`  
 **Perangkat uji:** Emulator Pixel 8, Android 17 (API 37), x86_64, 1080x2400
 
 ---
@@ -202,6 +202,21 @@ Event `beta_feedback_sent` hanya membawa `screen_name`. Logika `RedactSensitive`
 
 ---
 
-## 12. Penggunaan AI
+## 12. Distribusi dan Rilis
+
+| Item | Nilai |
+|---|---|
+| PR rilis | #19 (develop -> main) |
+| Merge commit | `0eb842d` |
+| Tag | `v1.2.0` |
+| GitHub Release | Pre-release Week 14 Beta 1.2.0+3 |
+| Check CI PR | 14 check sukses (7 job x 2 event) |
+| Issue tertutup | #1 dan #2, otomatis lewat PR |
+
+Build tetap memakai debug signing dan tidak diunggah ke Play Store. Release ditandai pre-release agar tidak disalahartikan sebagai rilis produksi.
+
+---
+
+## 13. Penggunaan AI
 
 Log yang dikirim ke AI sudah disamarkan: app ID, installation ID, session ID, dan timestamp dihapus. Prompt, ringkasan jawaban, serta cara verifikasi tiap saran dicatat di [i-log-analysis.md](ai-log-analysis.md). Klaim yang tidak bisa dibuktikan dari log, seperti crash-free rate, ditolak.

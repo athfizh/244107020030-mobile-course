@@ -231,6 +231,21 @@ Artefak build tidak di-commit. Angka dan checksum di atas dihasilkan dari build 
 
 ---
 
+## Rilis
+
+| Item | Nilai |
+|---|---|
+| PR rilis | #19 (`develop` -> `main`) |
+| Merge commit | `0eb842d` |
+| Tag | `v1.2.0` |
+| GitHub Release | Pre-release `Week 14 Beta 1.2.0+3` |
+| Issue tertutup | #1 dan #2 otomatis lewat PR |
+| Check CI PR | 14 check sukses |
+
+Rilis ditandai **pre-release** karena build masih memakai debug signing dan distribusi baru lewat ADB. Detail ada di [`docs/release-report.md`](docs/release-report.md) bagian 12.
+
+---
+
 ## Catatan Implementasi
 
 | Berkas | Peran |
