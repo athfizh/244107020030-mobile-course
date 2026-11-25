@@ -146,7 +146,7 @@ menimpa isi `lib/`, `test/`, `docs/`, maupun `screenshots/`.
 
 Khusus Week 14, setelah `flutter create .` salin `firebase/google-services.json`
 ke `android/app/` agar plugin Google Services dapat menemukan konfigurasi
-Firebase. Konfigurasi ini adalah pengenal klien publik, bukan keystore atau token.
+Firebase. Konfigurasi ini adalah pengenal klien publik, bukan keystore atau token. Langkah plugin Gradle dan izin `INTERNET` ada di `14-week-14-deployment-monitoring/docs/firebase-setup.md`.
 
 ---
 

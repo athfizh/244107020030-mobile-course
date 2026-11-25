@@ -65,7 +65,7 @@ Keterangan versi:
 
 ## Hasil yang Dicapai
 
-Workflow berhasil menjalankan seluruh tahap pada project ini: format nol perubahan, `flutter analyze --fatal-infos` bersih, 65 tes lulus, lalu build APK 51,05 MB dan AAB 50,21 MB. APK release dipasang pada emulator Pixel 8 dan menampilkan `versionName=1.1.0`, `versionCode=2`. Tidak ada material signing produksi yang dibuat; build memakai debug signing agar bisa diuji, dan itu dicatat sebagai risiko yang belum diselesaikan.
+Workflow berhasil menjalankan seluruh tahap pada project ini: format nol perubahan, `flutter analyze --fatal-infos` bersih, 65 tes lulus, lalu build APK 51,05 MB dan AAB 50,21 MB. Setelah perubahan di-push ke `develop`, GitHub Actions menjalankan 7 job matriks (Week 8-14) dan semuanya sukses; job Week 13 selesai dalam 6 menit 45 detik dan menghasilkan artefak `week13-android-builds` berukuran 73,6 MB. APK release dipasang pada emulator Pixel 8 dan menampilkan `versionName=1.1.0`, `versionCode=2`. Tidak ada material signing produksi yang dibuat; build memakai debug signing agar bisa diuji, dan itu dicatat sebagai risiko yang belum diselesaikan.
 
 ---
 
@@ -104,6 +104,14 @@ Workflow berhasil menjalankan seluruh tahap pada project ini: format nol perubah
 > - Retensi 7 hari cukup untuk peninjauan, tanpa menyimpan artefak selamanya.
 
 ### Praktikum 3: Versioning, Secrets, dan Verifikasi
+
+<img src="screenshots/Praktikum 3 - Workflow Actions Sukses.png" width="700" alt="Workflow Actions Sukses">
+
+> **Keterangan gambar**
+> - Push ke `develop` memicu run #35 pada commit `3cb7d9c`. Semua 7 job matriks Week 8-14 berstatus sukses.
+> - Job Week 13 menyelesaikan format, analyze, test, build APK/AAB, dan upload artefak.
+> - Artefak `week13-android-builds` berukuran 73,6 MB tersedia pada bagian **Artifacts**.
+> - Anotasi `Node.js 20 deprecated` berasal dari action pihak ketiga, bukan kegagalan build.
 
 <img src="screenshots/Praktikum 3 - Versi Aplikasi di Perangkat.png" width="700" alt="Versi Aplikasi di Perangkat">
 

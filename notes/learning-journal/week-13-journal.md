@@ -25,12 +25,13 @@
 - [x] Memeriksa tidak ada keystore, `.env`, atau API key pada berkas yang dilacak.
 - [x] Menambahkan Week 12-14 ke matriks CI repository.
 - [x] Menambahkan langkah build dan upload artefak untuk Week 13 pada CI.
+- [x] Push ke `develop` dan memverifikasi run #35: 7 job matriks sukses, artefak 73,6 MB.
 
 ### Kendala & Solusi
 - **Masalah:** Build release berhasil dipasang, tetapi login gagal tanpa pesan yang jelas.
 - **Solusi:** `adb logcat` menunjukkan tidak ada koneksi; ternyata izin `INTERNET` hanya ada di manifest debug. Izin ditambahkan ke `AndroidManifest.xml` utama, lalu build diuji ulang.
 - **Masalah:** Workflow tidak dapat dibuktikan berjalan sebelum perubahan di-push.
-- **Solusi:** Pemeriksaan lokal dijalankan lebih dulu dengan perintah identik; bukti run GitHub Actions diambil setelah push ke `develop`.
+- **Solusi:** Pemeriksaan lokal dijalankan lebih dulu dengan perintah identik; setelah push ke `develop`, run #35 sukses pada 7 job dan artefak `week13-android-builds` (73,6 MB) dapat diunduh.
 - **Masalah:** Build pertama lambat dan memakan RAM karena Gradle memakai 8 GB heap.
 - **Solusi:** Heap diturunkan ke 3 GB, worker dibatasi 4, dan emulator dijalankan headless.
 - **Masalah:** Artefak besar tidak boleh masuk repository.

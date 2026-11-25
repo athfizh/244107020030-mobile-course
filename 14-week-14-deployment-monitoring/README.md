@@ -63,6 +63,7 @@ Keterangan konfigurasi:
 2. `firebase/google-services.json` disalin dari Minggu 6 dan dipakai plugin Gradle.
 3. `applicationId` disamakan dengan aplikasi yang terdaftar di Firebase, yaitu `com.example.week6_auth_fcm`.
 4. Keystore, password, dan token tidak ada di repository.
+5. Langkah lengkap untuk membangun ulang folder Android dan Firebase dari clone baru ada di [docs/firebase-setup.md](docs/firebase-setup.md).
 5. Untuk build release dari clone baru, tambahkan `<uses-permission android:name="android.permission.INTERNET"/>` pada `android/app/src/main/AndroidManifest.xml`; manifest debug sudah memuatnya, manifest release tidak.
 
 ---
