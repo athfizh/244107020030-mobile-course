@@ -18,7 +18,7 @@ Praktikum ini membawa project hasil Minggu 13 ke tahap kandidat rilis: versi din
 | Kandidat Rilis | Versi `1.2.0+3` dengan catatan perubahan dari Minggu 13 |
 | Build Release | APK 52,23 MB dan AAB 52,21 MB dengan checksum SHA-256 |
 | Distribusi Privat | APK dipasang pada emulator Pixel 8 melalui `adb install` |
-| Distribusi App Distribution | Workflow `distribute-beta` siap dijalankan untuk kirim APK ke grup tester |
+| Distribusi App Distribution | APK 1.2.0 (3) didistribusikan ke grup `internal-testers` (Invited: 1) |
 | Firebase Crashlytics | Error fatal dan non-fatal dicatat, termasuk `FlutterError.onError` |
 | Firebase Analytics | Event `beta_feedback_sent` hanya membawa `screen_name` |
 | Halaman Umpan Balik Beta | Memicu event dan error uji tanpa data pribadi |
@@ -221,6 +221,20 @@ Artefak build tidak di-commit. Angka dan checksum di atas dihasilkan dari build 
 > - Setiap temuan punya keputusan eksplisit: diperbaiki, diterima, atau ditahan.
 > - Keterbatasan ditulis apa adanya; dashboard sudah diverifikasi, Play Console dan signing belum.
 
+<img src="screenshots/Praktikum 4 - App Distribution Release.png" width="700" alt="App Distribution Release">
+
+> **Keterangan gambar**
+> - Dashboard App Distribution menampilkan release `1.2.0 (3)` dengan catatan `Week 14 beta 1.2.0+3 - build uji internal`.
+> - Status distribusi: `Invited 1, Accepted 0, Downloaded 0`; satu tester diundang lewat email.
+> - Ini jalur distribusi resmi yang diminta Modul 14, bukan hanya `adb install` lokal.
+
+<img src="screenshots/Praktikum 4 - App Distribution Testers.png" width="700" alt="App Distribution Testers">
+
+> **Keterangan gambar**
+> - Grup `internal-testers` berisi 1 tester (`athaullahafizh@gmail.com`) dengan 1 release.
+> - Email undangan testing sudah terkirim dan diverifikasi di Gmail.
+> - Tester belum membuka undangan, sehingga `Accepted` dan `Downloaded` masih 0.
+
 ### Refactoring & Testing
 
 <img src="screenshots/Refactoring - Flutter Analyze dan Test.png" width="600" alt="Flutter Analyze dan Test"> <img src="screenshots/Refactoring - Hasil Flutter Format.png" width="500" alt="Hasil Flutter Format">
@@ -279,7 +293,7 @@ Bila `Firebase.initializeApp` gagal, `Monitoring.enabled` bernilai false, status
 ## Risiko dan Keterbatasan
 
 1. **Sampel dashboard masih kecil.** Dashboard sudah diverifikasi, tetapi hanya 1 active user dan 2 event non-fatal dari 2 installation ID. Angka itu belum cukup untuk menyimpulkan kestabilan aplikasi secara umum.
-2. **Distribusi App Distribution belum dijalankan.** Workflow `distribute-beta` sudah disiapkan, tetapi masih menunggu grup tester dan secret service account diaktifkan; ADB install dipakai sebagai bukti instalasi lokal.
+2. **Distribusi via App Distribution dengan 1 tester.** Grup `internal-testers` sudah dibuat dan release `1.2.0 (3)` sudah didistribusikan lewat App Distribution dengan status `Invited: 1`. Belum ada Accepted/Downloaded karena tester adalah email pribadi yang belum membuka undangan.
 3. **Signing debug.** APK/AAB belum layak untuk Play Store.
 4. **Project Firebase dipakai bersama Minggu 6.** Data telemetry masuk ke project yang sama.
 5. **Symbol native belum diunggah.** Crashlytics mencatat laporan Dart, tetapi mapping native belum dikonfigurasi.
@@ -311,7 +325,7 @@ Bukti bahwa build yang sama sudah diuji pada beberapa perangkat, tidak ada crash
 
 **2. Bagaimana Anda memutuskan untuk menahan atau melanjutkan rilis?**
 
-Saya menahan perluasan karena tiga syarat belum terpenuhi: signing produksi, Play Console, dan tester eksternal. Dashboard sudah saya tinjau: Crashlytics menerima issue `Monitoring.recordTestError` dan Analytics menerima `beta_feedback_sent`. Namun sampelnya baru 1 active user dan 2 event, jadi belum cukup untuk memperluas beta. Keputusan ini dicatat eksplisit di `docs/release-report.md`.
+Saya menahan perluasan karena signing produksi dan jumlah tester eksternal. Distribusi sudah berjalan lewat Firebase App Distribution ke grup `internal-testers`, tetapi Accepted masih 0 karena undangan belum dibuka. Dashboard sudah saya tinjau: Crashlytics menerima issue `Monitoring.recordTestError` dan Analytics menerima `beta_feedback_sent`. Namun sampelnya baru 1 active user dan 2 event, jadi belum cukup untuk memperluas beta. Keputusan ini dicatat eksplisit di `docs/release-report.md`.
 
 **3. Data apa yang tidak perlu dikirim ke layanan monitoring?**
 
