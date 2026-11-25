@@ -134,6 +134,13 @@ Workflow berhasil menjalankan seluruh tahap pada project ini: format nol perubah
 > - API key Gemini pada aplikasi disimpan lewat input pengguna di `flutter_secure_storage`, bukan ditanam di kode.
 > - Risiko tersisa: workflow belum menandatangani APK/AAB dengan keystore produksi. Untuk rilis nyata, keystore dan password harus disimpan di GitHub Actions Secrets dan hanya dipakai pada workflow rilis terbatas.
 
+<img src="screenshots/Praktikum 3 - Rilis v1.2.0.png" width="700" alt="Rilis v1.2.0">
+
+> **Keterangan gambar**
+> - Tag `v1.2.0` dibuat dari `main` setelah PR rilis #19 merge.
+> - GitHub Release ditandai **Pre-release** karena build masih debug signing dan distribusi baru lewat ADB.
+> - Rilis ini menautkan source, log CI, dan artefak sesuai aturan versioning Modul 13.
+
 ### Refactoring & Testing
 
 <img src="screenshots/Refactoring - Flutter Analyze dan Test.png" width="600" alt="Flutter Analyze dan Test"> <img src="screenshots/Refactoring - Hasil Flutter Format.png" width="500" alt="Hasil Flutter Format">
