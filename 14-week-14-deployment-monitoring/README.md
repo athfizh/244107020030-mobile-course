@@ -18,7 +18,7 @@ Praktikum ini membawa project hasil Minggu 13 ke tahap kandidat rilis: versi din
 | Kandidat Rilis | Versi `1.2.0+3` dengan catatan perubahan dari Minggu 13 |
 | Build Release | APK 52,23 MB dan AAB 52,21 MB dengan checksum SHA-256 |
 | Distribusi Privat | APK dipasang pada emulator Pixel 8 melalui `adb install` |
-| Distribusi App Distribution | APK 1.2.0 (3) didistribusikan ke grup `internal-testers` (Invited: 1) |
+| Distribusi App Distribution | APK 1.2.0 (3) didistribusikan ke grup `internal-testers` (Invited: 1), manual dan via workflow `distribute-beta` |
 | Firebase Crashlytics | Error fatal dan non-fatal dicatat, termasuk `FlutterError.onError` |
 | Firebase Analytics | Event `beta_feedback_sent` hanya membawa `screen_name` |
 | Halaman Umpan Balik Beta | Memicu event dan error uji tanpa data pribadi |
@@ -234,6 +234,13 @@ Artefak build tidak di-commit. Angka dan checksum di atas dihasilkan dari build 
 > - Grup `internal-testers` berisi 1 tester (`athaullahafizh@gmail.com`) dengan 1 release.
 > - Email undangan testing sudah terkirim dan diverifikasi di Gmail.
 > - Tester belum membuka undangan, sehingga `Accepted` dan `Downloaded` masih 0.
+
+<img src="screenshots/Praktikum 4 - App Distribution Workflow.png" width="700" alt="App Distribution Workflow">
+
+> **Keterangan gambar**
+> - Workflow `distribute-beta` dijalankan manual (`workflow_dispatch`) pada commit `7295ba1`.
+> - Seluruh step sukses: unduh APK dari release, verifikasi checksum, tulis service account, lalu distribusi ke grup `internal-testers`.
+> - Ini membuktikan distribusi beta bisa diulang otomatis tanpa upload manual dari console.
 
 ### Refactoring & Testing
 

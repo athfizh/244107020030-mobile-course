@@ -55,7 +55,7 @@ adb install -r build/app/outputs/flutter-apk/app-release.apk
 adb shell am start -n com.example.week6_auth_fcm/com.example.week14_deploy.MainActivity
 ```
 
-Dashboard App Distribution mencatat status distribusi: `Invited 1, Accepted 0, Downloaded 0`. Status Accepted masih 0 karena tester adalah email pribadi yang belum membuka undangan di perangkat.
+Dashboard App Distribution mencatat status distribusi: `Invited 1, Accepted 0, Downloaded 0`. Status Accepted masih 0 karena tester adalah email pribadi yang belum membuka undangan di perangkat. Distribusi juga diulang lewat workflow `distribute-beta` (run #1) yang seluruh step-nya sukses, sehingga jalur otomatis terbukti bekerja.
 
 Bukti:
 - `screenshots/Praktikum 2 - Instalasi Build Beta.png`
@@ -140,6 +140,7 @@ Bukti:
 - `screenshots/Praktikum 4 - Dashboard Analytics.png`
 - `screenshots/Praktikum 4 - App Distribution Release.png`
 - `screenshots/Praktikum 4 - App Distribution Testers.png`
+- `screenshots/Praktikum 4 - App Distribution Workflow.png`
 - `screenshots/Praktikum 4 - Verifikasi Telemetri.png`
 
 ---
