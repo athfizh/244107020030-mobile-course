@@ -170,7 +170,7 @@ Event `beta_feedback_sent` hanya membawa `screen_name`. Logika `RedactSensitive`
 1. **Dashboard tidak diverifikasi.** Tidak ada akses Firebase Console, sehingga tidak ada tangkapan layar dashboard. Bukti yang tersedia adalah logcat dan status aplikasi.
 2. **Distribusi bukan track resmi.** ADB install tidak memiliki mekanisme opt-in, daftar tester, atau rollback seperti Play Console.
 3. **Signing debug.** APK/AAB tidak dapat dipublikasikan ke Play Store.
-4. **Project Firebase dipakai bersama Minggu 6.** Data Analytics/Crashlytics masuk ke project yang sama; ini disengaja karena pendaftaran aplikasi baru butuh akses console.
+4. **Project Firebase dipakai bersama Minggu 6.** Data Analytics/Crashlytics masuk ke project yang sama dan `applicationId` juga sama, sehingga memasang build Week 14 akan menggantikan aplikasi Minggu 6 di perangkat uji. Ini disengaja karena pendaftaran aplikasi baru butuh akses console.
 5. **Symbol upload belum dikonfigurasi.** Crashlytics menerima laporan Dart, tetapi symbol native belum diunggah lewat Gradle plugin Crashlytics.
 
 ---
