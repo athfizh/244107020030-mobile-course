@@ -83,7 +83,7 @@ Yang diharapkan:
 
 ## 6. Distribusi Beta via Firebase App Distribution
 
-Jalur distribusi yang disarankan modul. Disiapkan sebagai workflow `workflow_dispatch`, sehingga service account tidak pernah tersedia untuk pull request.
+Jalur distribusi yang disarankan modul. APK 1.2.0 (3) sudah diunggah ke App Distribution dan didistribusikan ke grup `internal-testers`. Workflow `distribute-beta` disiapkan untuk mengulang distribusi otomatis.
 
 1. Firebase Console -> **App Distribution** -> Get started.
 2. Buat grup tester `internal-testers` dan tambahkan email Anda.

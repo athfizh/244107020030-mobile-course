@@ -48,14 +48,14 @@ Keduanya memakai **debug signing** karena keystore produksi tidak dibuat pada pr
 
 ## 4. Distribusi Beta
 
-Firebase App Distribution disiapkan sebagai jalur distribusi utama lewat workflow `distribute-beta`, tetapi belum dijalankan karena grup tester dan service account belum diaktifkan. Sebagai bukti instalasi lokal, build dipasang langsung ke perangkat uji memakai ADB:
+Distribusi dilakukan lewat dua jalur. **Firebase App Distribution** sebagai jalur resmi: APK 1.2.0 (3) diunggah ke App Distribution dan didistribusikan ke grup `internal-testers` dengan 1 tester terundang. Sebagai bukti instalasi lokal pada perangkat uji, build juga dipasang memakai ADB:
 
 ```bash
 adb install -r build/app/outputs/flutter-apk/app-release.apk
 adb shell am start -n com.example.week6_auth_fcm/com.example.week14_deploy.MainActivity
 ```
 
-Perangkat uji bertindak sebagai satu-satunya tester internal. Setelah grup `internal-testers` dibuat dan secret `FIREBASE_SERVICE_ACCOUNT` diaktifkan, workflow `distribute-beta` akan mengirim build yang sama ke tester tersebut.
+Dashboard App Distribution mencatat status distribusi: `Invited 1, Accepted 0, Downloaded 0`. Status Accepted masih 0 karena tester adalah email pribadi yang belum membuka undangan di perangkat.
 
 Bukti:
 - `screenshots/Praktikum 2 - Instalasi Build Beta.png`
@@ -138,6 +138,8 @@ Bukti:
 - `screenshots/Praktikum 4 - Dashboard Crashlytics.png`
 - `screenshots/Praktikum 4 - Stack Trace Crashlytics.png`
 - `screenshots/Praktikum 4 - Dashboard Analytics.png`
+- `screenshots/Praktikum 4 - App Distribution Release.png`
+- `screenshots/Praktikum 4 - App Distribution Testers.png`
 - `screenshots/Praktikum 4 - Verifikasi Telemetri.png`
 
 ---
@@ -150,7 +152,7 @@ Bukti:
 | 2 | Firebase gagal init sebelum plugin `com.google.gms.google-services` dipasang | Analytics melaporkan `Missing google_app_id` | **Diperbaiki**: plugin dan `google-services.json` ditambahkan |
 | 3 | Crashlytics report baru diantrekan setelah aplikasi dibuka ulang | Dashboard sempat belum menunjukkan issue | **Diterima dan terverifikasi**: issue `Monitoring.recordTestError` muncul di dashboard versi `1.2.0 (3)` |
 | 4 | Sampel dashboard sangat kecil: 1 active user, 2 event non-fatal | Belum bisa menyimpulkan kestabilan umum | **Dicatat sebagai keterbatasan**; perlu tester eksternal |
-| 5 | Distribusi App Distribution belum dijalankan | Grup tester dan secret belum diaktifkan | **Ditunda**: workflow `distribute-beta` disiapkan, ADB dipakai sebagai bukti lokal |
+| 5 | Accepted dan Downloaded masih 0 di App Distribution | Tester belum membuka undangan | **Diterima**: undangan terkirim; perlu tester eksternal untuk data yang bermakna |
 | 6 | Build memakai debug signing | Tidak layak untuk Play Store | **Ditahan** untuk rilis publik sampai keystore produksi disiapkan |
 
 ---
