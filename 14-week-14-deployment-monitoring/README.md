@@ -70,7 +70,7 @@ Keterangan konfigurasi:
 
 ## Hasil yang Dicapai
 
-Kandidat `1.2.0+3` berhasil dibangun dan dipasang pada emulator. Firebase aktif dan terverifikasi lewat logcat: `FirebaseApp initialization successful`, event `beta_feedback_sent` masuk pipeline Analytics, dan error non-fatal diantrekan lalu di-upload dengan HTTP 204. Seluruh 65 tes lulus, `flutter analyze --fatal-infos` bersih, dan format nol perubahan. Dashboard Firebase Console tidak dapat diakses, sehingga keputusan rilis ditahan pada beta internal dan tidak diperluas.
+Kandidat `1.2.0+3` berhasil dibangun dan dipasang pada emulator. Firebase aktif dan terverifikasi lewat logcat: `FirebaseApp initialization successful`, event `beta_feedback_sent` masuk pipeline Analytics, dan error non-fatal diantrekan lalu di-upload dengan HTTP 204. Seluruh 65 tes lulus, integration test login sampai catatan juga lulus di emulator, `flutter analyze --fatal-infos` bersih, dan format nol perubahan. Dashboard Firebase Console tidak dapat diakses, sehingga keputusan rilis ditahan pada beta internal dan tidak diperluas.
 
 ---
 

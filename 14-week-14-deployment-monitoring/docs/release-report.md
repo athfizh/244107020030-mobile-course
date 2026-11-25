@@ -4,7 +4,7 @@
 **NIM:** 244107020030  
 **Tanggal:** 25 November 2026  
 **Kandidat:** `1.2.0+3`  
-**Commit kandidat:** HEAD `e8e1b7c` + perubahan Week 14 (commit rilis menyusul)  
+**Commit kandidat:** `3cb7d9c` (build dibuat dari working tree yang sama; dokumentasi rilis di `d3821f7`)  
 **Perangkat uji:** Emulator Pixel 8, Android 17 (API 37), x86_64, 1080x2400
 
 ---

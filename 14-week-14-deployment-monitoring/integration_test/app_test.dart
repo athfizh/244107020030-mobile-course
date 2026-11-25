@@ -21,7 +21,7 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets('pengguna dapat login lalu menambah catatan', (tester) async {
-    app.main();
+    await app.main();
     await tester.pumpAndSettle();
 
     if (find.text('Selamat Datang!').evaluate().isEmpty) {
