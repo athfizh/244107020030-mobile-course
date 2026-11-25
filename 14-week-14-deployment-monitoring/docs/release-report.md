@@ -211,6 +211,8 @@ Event `beta_feedback_sent` hanya membawa `screen_name`. Logika `RedactSensitive`
 | Tag | `v1.2.0` |
 | GitHub Release | Pre-release Week 14 Beta 1.2.0+3 |
 | Check CI PR | 14 check sukses (7 job x 2 event) |
+| Artefak rilis | `app-release.apk` 52,23 MB dan `app-release.aab` 52,21 MB, checksum cocok |
+| Unduhan | https://github.com/athfizh/244107020030-mobile-course/releases/tag/v1.2.0 |
 | Issue tertutup | #1 dan #2, otomatis lewat PR |
 
 Build tetap memakai debug signing dan tidak diunggah ke Play Store. Release ditandai pre-release agar tidak disalahartikan sebagai rilis produksi.

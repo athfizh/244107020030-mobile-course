@@ -139,7 +139,7 @@ Workflow berhasil menjalankan seluruh tahap pada project ini: format nol perubah
 > **Keterangan gambar**
 > - Tag `v1.2.0` dibuat dari `main` setelah PR rilis #19 merge.
 > - GitHub Release ditandai **Pre-release** karena build masih debug signing dan distribusi baru lewat ADB.
-> - Rilis ini menautkan source, log CI, dan artefak sesuai aturan versioning Modul 13.
+> - Rilis ini menautkan source, log CI, dan artefak APK/AAB sesuai aturan versioning Modul 13.
 
 ### Refactoring & Testing
 
