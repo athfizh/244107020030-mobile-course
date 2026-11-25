@@ -83,7 +83,7 @@ Yang diharapkan:
 
 ## 6. Batasan
 
-1. Dashboard Firebase Console tidak dapat diakses tanpa login pemilik project, sehingga verifikasi pada praktikum ini memakai logcat.
+1. Dashboard Crashlytics dan Analytics sudah diverifikasi lewat Firebase Console; sampelnya masih kecil (1 active user, 2 event non-fatal).
 2. Track Internal Testing Play Console tidak tersedia; distribusi memakai ADB ke perangkat uji.
 3. Build memakai debug signing sampai keystore produksi disiapkan.
 4. `applicationId` sama dengan aplikasi Minggu 6, jadi build ini menggantikan aplikasi Minggu 6 pada perangkat yang sama.
