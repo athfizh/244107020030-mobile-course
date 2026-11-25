@@ -1,0 +1,43 @@
+name: distribute-beta
+
+# Distribusi manual kandidat beta ke grup tester Firebase App Distribution.
+# Tidak berjalan pada pull_request agar service account tidak pernah
+# tersedia untuk kode dari luar.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  distribute:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download APK dari GitHub Release
+        run: |
+          curl -L --fail --retry 3 \
+            -o app-release.apk \
+            https://github.com/athfizh/244107020030-mobile-course/releases/download/v1.2.0/app-release.apk
+          sha256sum app-release.apk
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Firebase CLI
+        run: npm install --global firebase-tools
+
+      - name: Tulis service account
+        env:
+          SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: printf '%s' "$SERVICE_ACCOUNT" > "$RUNNER_TEMP/service-account.json"
+
+      - name: Distribusikan ke tester internal
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/service-account.json
+        run: |
+          firebase appdistribution:distribute app-release.apk \
+            --app "${{ vars.FIREBASE_APP_ID }}" \
+            --groups "internal-testers" \
+            --release-notes "Week 14 beta 1.2.0+3 - build uji internal"
