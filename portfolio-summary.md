@@ -230,11 +230,11 @@
 
 ### Tugas Utama: Deployment & Monitoring
 - **Kandidat 1.2.0+3:** APK 52,23 MB dan AAB 52,21 MB, dipasang pada emulator Pixel 8.
-- **Crashlytics:** Error fatal dan non-fatal tercatat; report non-fatal terkirim dengan HTTP 204.
+- **Crashlytics:** Error fatal dan non-fatal tercatat; report non-fatal diantrekan ke DataTransport, upload finalnya belum terverifikasi.
 - **Analytics:** Event `beta_feedback_sent` hanya membawa `screen_name`, tanpa data pribadi.
 - **Fallback Lokal:** Aplikasi tetap berjalan bila Firebase gagal diinisialisasi.
 - **Keputusan Jujur:** Beta internal dilanjutkan, rilis publik ditahan karena signing, dashboard, dan tester eksternal belum siap.
 
 ### Refleksi Kunci Minggu 14
-1. **Bukti Mengalahkan Klaim:** `enqueued` bukan `uploaded`; HTTP 204 yang membuktikan report diterima.
+1. **Bukti Mengalahkan Klaim:** `enqueued` bukan `uploaded`; HTTP 204 membuktikan upload Analytics, bukan Crashlytics.
 2. **Keterbatasan Harus Ditulis:** Dashboard dan Play Console tidak tersedia, dan itu dicatat, bukan ditutupi.

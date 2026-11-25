@@ -3,15 +3,15 @@
 **Nama:** Athaulla Hafizh  
 **NIM:** 244107020030  
 **Tanggal:** 25 November 2026  
-**Kandidat:** `1.2.0+3`  
-**Commit kandidat:** `3cb7d9c` (build dibuat dari working tree yang sama; dokumentasi rilis ada pada commit setelahnya)  
+**Kandidat:** `1.2.0+3` (build akhir setelah perbaikan teks status monitoring)  
+**Commit kandidat:** `dacca92` (perbaikan teks status monitoring; build akhir dibuat dari source yang sama)  
 **Perangkat uji:** Emulator Pixel 8, Android 17 (API 37), x86_64, 1080x2400
 
 ---
 
 ## 1. Ringkasan
 
-Kandidat rilis Week 14 dibangun dari project Week 13 dengan tambahan Firebase Crashlytics dan Analytics. Build release berhasil dibuat, dipasang pada emulator, dan diuji alur utama. Satu event Analytics non-sensitif (`beta_feedback_sent`) dan satu error non-fatal berhasil dikirim serta terverifikasi lewat logcat pada build uji versi yang sama. Dashboard Firebase Console tidak dapat diakses pada praktikum ini, sehingga verifikasi dilakukan dari log perangkat dan status di aplikasi.
+Kandidat rilis Week 14 dibangun dari project Week 13 dengan tambahan Firebase Crashlytics dan Analytics. Build release berhasil dibuat, dipasang pada emulator, dan diuji alur utama. Satu event Analytics non-sensitif (`beta_feedback_sent`) terkirim dan terverifikasi lewat logcat (HTTP 204). Satu error non-fatal berhasil diantrekan ke DataTransport, tetapi upload final Crashlytics tidak terlihat di log sehingga tidak diklaim terkirim. Dashboard Firebase Console tidak dapat diakses pada praktikum ini, sehingga verifikasi dilakukan dari log perangkat dan status di aplikasi.
 
 ---
 
@@ -19,8 +19,8 @@ Kandidat rilis Week 14 dibangun dari project Week 13 dengan tambahan Firebase Cr
 
 | Artefak | Ukuran | SHA-256 |
 |---|---:|---|
-| `app-release.apk` | 52,23 MB | `8F8AA2799351AC0E52701B95A8F7F6F751CDA54D6039E9BB43EA1161144AD6B6` |
-| `app-release.aab` | 52,21 MB | `97EA1981C3C8DFC8E02B571663A573979383A7E45AFD445565F7FE5B85B9CEEB` |
+| `app-release.apk` | 52,23 MB | `D55641F8D95B945C3F494863F52D7DB72CFE67C354352883B4E9BC88E6EEDE71` |
+| `app-release.aab` | 52,21 MB | `249E68EC69D8A8A6ED12B5749A111B0C24A44E43EBF566E9A7D55D20C96ECC88` |
 
 Lokasi build:
 
@@ -95,18 +95,18 @@ V/FA-SVC: Logging event: origin=app,name=beta_feedback_sent,
 params=Bundle[{screen_name=beta_feedback_page, ga_event_origin(_o)=app, ...}]
 V/FA-SVC:       name: beta_feedback_sent
 V/FA-SVC:         string_value: beta_feedback_page
+V/FA-SVC: Network upload successful with code, uploadAttempted: 204, true
+V/FA-SVC: Successful upload. Got network response. code, size: 204, 0
 ```
 
 ### Crashlytics
 
-Verifikasi non-fatal dilakukan pada build uji `1.2.0+3`. Build release juga menginisialisasi Crashlytics, tetapi upload report pada sesi release tidak muncul di log; report yang sama terverifikasi pada build uji dengan applicationId dan versi identik.
+Verifikasi non-fatal dilakukan pada build uji `1.2.0+3`. Build release juga menginisialisasi Crashlytics. Yang terbukti di log adalah report berhasil diantrekan ke DataTransport, lalu berkas report lokal dihapus. Upload final Crashlytics tidak muncul di log, sehingga statusnya **diantrekan**, bukan **terkirim**.
 
 ```text
 D/FirebaseCrashlytics: Persisting non-fatal event for session ...
 D/FirebaseCrashlytics: Crashlytics report successfully enqueued to DataTransport: ...
 D/FirebaseCrashlytics: Deleted report file: .../reports/...
-V/FA-SVC: Network upload successful with code, uploadAttempted: 204, true
-V/FA-SVC: Successful upload. Got network response. code, size: 204, 0
 ```
 
 ### Inisialisasi
@@ -120,7 +120,8 @@ Bukti:
 - `screenshots/Praktikum 3 - Firebase Terinisialisasi.png`
 - `screenshots/Praktikum 3 - Event Analytics Terkirim.png`
 - `screenshots/Praktikum 3 - Event Beta Dikirim.png`
-- `screenshots/Praktikum 3 - Error Non Fatal Dikirim.png`
+- `screenshots/Praktikum 3 - Error Non Fatal Diantrekan di Aplikasi.png`
+- `screenshots/Praktikum 3 - Error Non Fatal Diantrekan.png`
 - `screenshots/Praktikum 4 - Verifikasi Telemetri.png`
 
 ---
@@ -131,7 +132,7 @@ Bukti:
 |:--:|---|---|---|
 | 1 | Build release gagal login karena izin `INTERNET` hanya ada di manifest debug | Alur utama tidak bisa dipakai pada build release | **Diperbaiki**: izin ditambahkan ke `android/app/src/main/AndroidManifest.xml` |
 | 2 | Firebase gagal init sebelum plugin `com.google.gms.google-services` dipasang | Analytics melaporkan `Missing google_app_id` | **Diperbaiki**: plugin dan `google-services.json` ditambahkan |
-| 3 | Crashlytics report baru terkirim setelah aplikasi dibuka ulang | Verifikasi dashboard tertunda | **Diterima**: report diantrekan ke DataTransport lalu di-upload pada sesi berikutnya |
+| 3 | Crashlytics report baru diantrekan setelah aplikasi dibuka ulang | Upload final belum terverifikasi | **Diterima**: report masuk DataTransport, tetapi tidak ada bukti upload di log |
 | 4 | Dashboard Firebase Console tidak dapat diakses | Tidak ada tangkapan layar dashboard | **Dicatat sebagai keterbatasan**; verifikasi memakai logcat |
 | 5 | Play Console tidak tersedia | Tidak ada track Internal Testing | **Dicatat**; distribusi memakai ADB ke perangkat uji |
 | 6 | Build memakai debug signing | Tidak layak untuk Play Store | **Ditahan** untuk rilis publik sampai keystore produksi disiapkan |
@@ -142,7 +143,7 @@ Bukti:
 
 **Lanjutkan beta internal dengan syarat**, bukan rilis publik.
 
-Alasannya: alur utama berjalan pada build release, event Analytics dan error non-fatal terverifikasi terkirim, dan tidak ada data sensitif yang dikirim. Namun build belum ditandatangani dengan keystore produksi, dashboard monitoring belum ditinjau langsung, dan belum ada tester selain emulator. Karena itu distribusi tidak diperluas.
+Alasannya: alur utama berjalan pada build release, event Analytics terkirim (HTTP 204), error non-fatal diantrekan ke DataTransport, dan tidak ada data sensitif yang dikirim. Namun build belum ditandatangani dengan keystore produksi, dashboard monitoring belum ditinjau langsung, dan belum ada tester selain emulator. Karena itu distribusi tidak diperluas.
 
 Kriteria untuk memperluas distribusi:
 1. Keystore produksi dibuat dan disimpan di GitHub Actions Secrets.
@@ -171,7 +172,7 @@ Event `beta_feedback_sent` hanya membawa `screen_name`. Logika `RedactSensitive`
 2. **Distribusi bukan track resmi.** ADB install tidak memiliki mekanisme opt-in, daftar tester, atau rollback seperti Play Console.
 3. **Signing debug.** APK/AAB tidak dapat dipublikasikan ke Play Store.
 4. **Project Firebase dipakai bersama Minggu 6.** Data Analytics/Crashlytics masuk ke project yang sama dan `applicationId` juga sama, sehingga memasang build Week 14 akan menggantikan aplikasi Minggu 6 di perangkat uji. Ini disengaja karena pendaftaran aplikasi baru butuh akses console.
-5. **Symbol upload belum dikonfigurasi.** Crashlytics menerima laporan Dart, tetapi symbol native belum diunggah lewat Gradle plugin Crashlytics.
+5. **Symbol upload belum dikonfigurasi.** Crashlytics mencatat laporan Dart, tetapi symbol native belum diunggah lewat Gradle plugin Crashlytics.
 
 ---
 

@@ -24,7 +24,8 @@
 - [x] Membuat halaman Umpan Balik Beta untuk event dan error non-fatal.
 - [x] Membangun APK 52,23 MB dan AAB 52,21 MB.
 - [x] Memasang build beta di emulator dan memverifikasi versi `1.2.0+3`.
-- [x] Memverifikasi event `beta_feedback_sent` dan upload Crashlytics HTTP 204 lewat logcat pada build uji versi yang sama.
+- [x] Memverifikasi event `beta_feedback_sent` dan upload Analytics HTTP 204 lewat logcat pada build uji versi yang sama.
+- [x] Memastikan report non-fatal Crashlytics sampai tahap enqueue DataTransport; upload finalnya tidak diklaim karena tidak muncul di log.
 - [x] Menulis `docs/release-report.md` dan `docs/ai-log-analysis.md`.
 - [x] Menjalankan analyze, format, dan 65 tes sampai hijau.
 
@@ -32,7 +33,7 @@
 - **Masalah:** Firebase gagal init dan Analytics melaporkan `Missing google_app_id` meskipun `firebase_options.dart` sudah diisi.
 - **Solusi:** Plugin `com.google.gms.google-services` dan `google-services.json` ditambahkan; setelah itu `FirebaseApp initialization successful`.
 - **Masalah:** Crashlytics mencatat non-fatal tetapi report belum terlihat terkirim.
-- **Solusi:** Report diantrekan ke DataTransport dan baru di-upload pada sesi berikutnya; setelah aplikasi dibuka ulang, log menunjukkan HTTP 204.
+- **Solusi:** Report diantrekan ke DataTransport setelah aplikasi dibuka ulang. HTTP 204 yang muncul berasal dari Analytics, bukan Crashlytics, sehingga status Crashlytics dicatat sebagai **diantrekan**, bukan **terkirim**.
 - **Masalah:** Build release gagal login karena izin `INTERNET` hanya ada di manifest debug.
 - **Solusi:** Izin dipindahkan ke manifest utama dan build diuji ulang di emulator.
 - **Masalah:** Firebase Console dan Play Console tidak dapat diakses.
@@ -41,4 +42,4 @@
 - **Solusi:** Tidak dipalsukan sebagai rilis produksi; keputusan rilis ditahan pada beta internal.
 
 ### Key Takeaway
-> Rilis bukan sekadar build berhasil. Bukti bahwa event dan error benar-benar terkirim, bahwa tidak ada data pribadi yang bocor, dan bahwa keterbatasan dicatat jujur jauh lebih penting daripada dashboard yang terlihat hijau.
+> Rilis bukan sekadar build berhasil. Bukti bahwa event Analytics benar-benar terkirim, bahwa error tercatat sampai antrean, bahwa tidak ada data pribadi yang bocor, dan bahwa keterbatasan dicatat jujur jauh lebih penting daripada dashboard yang terlihat hijau.

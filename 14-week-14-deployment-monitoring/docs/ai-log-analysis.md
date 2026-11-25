@@ -19,10 +19,12 @@ I/FirebaseInitProvider: FirebaseApp initialization successful
 I/FirebaseCrashlytics: Initializing Firebase Crashlytics 21.1.0 for <APP_ID>
 V/FA-SVC: Logging event: origin=app,name=beta_feedback_sent,
 params=Bundle[{screen_name=<SCREEN>, ga_event_origin(_o)=app, ...}]
-D/FirebaseCrashlytics: Persisting non-fatal event for session <SESSION>
-D/FirebaseCrashlytics: Crashlytics report successfully enqueued to DataTransport: <SESSION>
+V/FA-SVC: Uploading data. app, uncompressed size, data: <APP_ID>, 628,
 V/FA-SVC: Network upload successful with code, uploadAttempted: 204, true
 V/FA-SVC: Successful upload. Got network response. code, size: 204, 0
+D/FirebaseCrashlytics: Persisting non-fatal event for session <SESSION>
+D/FirebaseCrashlytics: Crashlytics report successfully enqueued to DataTransport: <SESSION>
+D/FirebaseCrashlytics: Deleted report file: .../reports/<SESSION>
 ```
 
 Yang dihapus sebelum dikirim: `mobilesdk_app_id`, `firebaseInstallationId`, `crashlyticsInstallId`, `org_id`, nama paket lengkap, timestamp, dan seluruh isi pesan error yang mungkin memuat data pengguna.
@@ -33,13 +35,12 @@ Yang dihapus sebelum dikirim: `mobilesdk_app_id`, `firebaseInstallationId`, `cra
 
 ```text
 Konteks: ini logcat dari Flutter release build yang memakai Firebase
-Crashlytics dan Analytics. Event beta_feedback_sent tercatat, lalu satu
-error non-fatal dikirim. Report muncul sebagai "enqueued to DataTransport"
-dan upload berhasil dengan HTTP 204.
+Crashlytics dan Analytics. Event beta_feedback_sent tercatat dan FA-SVC
+melaporkan upload HTTP 204. Satu error non-fatal masuk Crashlytics dan
+muncul sebagai "enqueued to DataTransport".
 
 Tugas:
-1. Jelaskan apakah rangkaian log ini membuktikan event dan error benar-benar
-   terkirim, atau hanya tercatat lokal.
+1. Tentukan mana yang benar-benar terkirim dan mana yang baru diantrekan.
 2. Sebutkan bukti minimum yang masih kurang sebelum saya boleh memperluas
    distribusi beta.
 3. Tunjukkan bagian log yang tidak boleh dikirim ke layanan AI.
@@ -55,15 +56,15 @@ dari log ini, dan jangan menyarankan menambahkan data pribadi ke parameter.
 | Klaim AI | Keputusan | Verifikasi |
 |---|---|---|
 | `Persisting non-fatal event` berarti error baru disimpan lokal | **Diterima** | Log berikutnya menunjukkan `successfully enqueued to DataTransport` |
-| HTTP 204 berarti upload diterima server | **Diterima** | Baris `Successful upload. Got network response` muncul setelahnya |
-| Event Analytics terbukti terkirim karena ada `Logging event` | **Diterima sebagian** | `Logging event` membuktikan event masuk pipeline; upload Analytics terpisah terlihat pada `Uploading bundle` dan `Network upload successful` |
+| HTTP 204 berarti upload diterima server | **Diterima, tetapi untuk Analytics** | Baris 204 berasal dari `FA-SVC`, bukan Crashlytics |
+| Event Analytics terkirim karena ada `Logging event` dan upload 204 | **Diterima** | `Uploading bundle` dan `Network upload successful` muncul setelah event |
+| `Crashlytics report enqueued` sama dengan `uploaded` | **Ditolak** | Enqueue dan upload adalah dua tahap berbeda; tidak ada bukti upload Crashlytics di log |
 | Dashboard harus dicek untuk memastikan data muncul | **Diterima** | Tidak bisa dilakukan tanpa akses console; dicatat sebagai keterbatasan |
 | Crash-free rate bisa dihitung dari log ini | **Ditolak** | Log satu perangkat tidak mewakili populasi; butuh dashboard agregat |
 | Kirim `user_id` agar analisis lebih mudah | **Ditolak** | Melanggar prinsip minimalisasi data |
-| `Crashlytics report enqueued` sama dengan `uploaded` | **Ditolak** | Enqueue dan upload adalah dua tahap berbeda; bukti upload ada di baris HTTP 204 |
 
 ---
 
 ## 5. Kesimpulan
 
-AI berguna untuk menjelaskan urutan tahap Crashlytics, tetapi tidak boleh dipakai untuk menyimpulkan keberhasilan rilis hanya dari satu potong log. Kesimpulan yang saya pakai: event Analytics dan error non-fatal **terkirim** (bukti enqueue + HTTP 204), tetapi **dashboard belum diverifikasi** dan distribusi belum boleh diperluas.
+AI berguna untuk memisahkan dua jalur telemetri yang terlihat mirip di log. Kesimpulan yang saya pakai: **Analytics** `beta_feedback_sent` terkirim (HTTP 204), sedangkan **Crashlytics** baru sampai tahap enqueue ke DataTransport dan upload finalnya belum terverifikasi. Dashboard juga belum ditinjau, sehingga distribusi belum boleh diperluas.

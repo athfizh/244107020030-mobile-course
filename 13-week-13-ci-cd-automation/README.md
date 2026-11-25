@@ -65,7 +65,7 @@ Keterangan versi:
 
 ## Hasil yang Dicapai
 
-Workflow berhasil menjalankan seluruh tahap pada project ini: format nol perubahan, `flutter analyze --fatal-infos` bersih, 65 tes lulus, lalu build APK 51,05 MB dan AAB 50,21 MB. Setelah perubahan di-push ke `develop`, GitHub Actions menjalankan 7 job matriks (Week 8-14) dan semuanya sukses; job Week 13 selesai dalam 6 menit 45 detik dan menghasilkan artefak `week13-android-builds` berukuran 73,6 MB. APK release dipasang pada emulator Pixel 8 dan menampilkan `versionName=1.1.0`, `versionCode=2`. Tidak ada material signing produksi yang dibuat; build memakai debug signing agar bisa diuji, dan itu dicatat sebagai risiko yang belum diselesaikan.
+Workflow berhasil menjalankan seluruh tahap pada project ini: format nol perubahan, `flutter analyze --fatal-infos` bersih, 65 tes lulus, lalu build APK 51,05 MB dan AAB 50,21 MB. Setelah perubahan di-push ke `develop`, GitHub Actions menjalankan 7 job matriks (Week 8-14) dan semuanya sukses; job Week 13 selesai dalam 6 menit 45 detik dan menghasilkan artefak `week13-android-builds` berukuran 73,6 MB. APK release dipasang pada emulator Pixel 8 dan menampilkan `versionName=1.1.0`, `versionCode=2`. Checksum build lokal: APK `D3DEBCEC1185670DFB1D64C24336EB5A813E57C114F2C2865973C47E95BCE05A` dan AAB `13960AE4E9C7C1D44D8907C766017960B80AC18C993B8913BF7E68F24B787769`. Tidak ada material signing produksi yang dibuat; build memakai debug signing agar bisa diuji, dan itu dicatat sebagai risiko yang belum diselesaikan.
 
 ---
 
@@ -99,8 +99,8 @@ Workflow berhasil menjalankan seluruh tahap pada project ini: format nol perubah
 <img src="screenshots/Praktikum 2 - Artefak Android.png" width="700" alt="Artefak Android">
 
 > **Keterangan gambar**
-> - Artefak disimpan di `build/app/outputs/` dan diunggah oleh `actions/upload-artifact@v4`.
-> - `if-no-files-found: error` membuat workflow gagal bila build tidak benar-benar menghasilkan berkas.
+> - Artefak nyata tersimpan di `build/app/outputs/`: APK 51,05 MB dan AAB 50,21 MB beserta checksum SHA-256.
+> - Pada GitHub Actions, `actions/upload-artifact@v4` mengunggah kedua berkas itu dengan `if-no-files-found: error`.
 > - Retensi 7 hari cukup untuk peninjauan, tanpa menyimpan artefak selamanya.
 
 ### Praktikum 3: Versioning, Secrets, dan Verifikasi
@@ -123,7 +123,7 @@ Workflow berhasil menjalankan seluruh tahap pada project ini: format nol perubah
 <img src="screenshots/Praktikum 3 - Aplikasi Release di Emulator.png" width="300" alt="Aplikasi Release di Emulator"> <img src="screenshots/Praktikum 3 - Home Aplikasi Release.png" width="300" alt="Home Aplikasi Release">
 
 > **Keterangan gambar**
-> - APK release dipasang di emulator dan berhasil login, membuktikan build release tidak hanya lolos kompilasi.
+> - Screenshot pertama menunjukkan halaman login build release; screenshot kedua menunjukkan Home setelah login berhasil.
 > - Build release sempat gagal login karena manifest utama belum memuat izin `INTERNET`; masalah diperbaiki dengan menambahkannya ke `AndroidManifest.xml` utama, bukan hanya manifest debug.
 > - Halaman Home menampilkan penanda `CI/CD & Automation - Week 13`.
 
@@ -147,7 +147,7 @@ Workflow berhasil menjalankan seluruh tahap pada project ini: format nol perubah
 
 ## Catatan Workflow
 
-Workflow pada folder modul ini adalah salinan mandiri untuk project Week 13. Pada repository monorepo ini, workflow yang benar-benar dieksekusi GitHub berada di `.github/workflows/` pada root repository dan menjalankan project Week 12 sampai Week 14. Keduanya memakai perintah yang sama; yang berbeda hanya `working-directory`.
+Workflow pada folder modul ini adalah salinan mandiri untuk project Week 13. Pada repository monorepo ini, workflow yang benar-benar dieksekusi GitHub berada di `.github/workflows/` pada root repository dan menjalankan project Week 8 sampai Week 14. Keduanya menjalankan format, analyze, dan test. Workflow mandiri memakai `--fatal-infos` dan format `.`; CI root memakai `flutter analyze` dan format `lib test` agar tetap kompatibel dengan Week 8-11. Yang berbeda juga `working-directory`.
 
 | Tahap | Perintah | Gagal berarti |
 |---|---|---|

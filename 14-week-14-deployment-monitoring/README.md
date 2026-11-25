@@ -71,7 +71,7 @@ Keterangan konfigurasi:
 
 ## Hasil yang Dicapai
 
-Kandidat `1.2.0+3` berhasil dibangun dan dipasang pada emulator. Firebase aktif dan terverifikasi lewat logcat: `FirebaseApp initialization successful`, event `beta_feedback_sent` masuk pipeline Analytics, dan error non-fatal diantrekan lalu di-upload dengan HTTP 204 pada build uji versi yang sama. Seluruh 65 tes lulus, integration test login sampai catatan juga lulus di emulator, `flutter analyze --fatal-infos` bersih, dan format nol perubahan. Dashboard Firebase Console tidak dapat diakses, sehingga keputusan rilis ditahan pada beta internal dan tidak diperluas.
+Kandidat `1.2.0+3` berhasil dibangun dan dipasang pada emulator. Firebase aktif dan terverifikasi lewat logcat: `FirebaseApp initialization successful`, event `beta_feedback_sent` masuk pipeline Analytics dan upload Analytics berhasil dengan HTTP 204. Error non-fatal berhasil diantrekan ke DataTransport, tetapi upload final Crashlytics tidak muncul di log sehingga tidak diklaim terkirim. Seluruh 65 tes lulus, integration test login sampai catatan juga lulus di emulator, `flutter analyze --fatal-infos` bersih, dan format nol perubahan. Dashboard Firebase Console tidak dapat diakses, sehingga keputusan rilis ditahan pada beta internal dan tidak diperluas.
 
 ---
 
@@ -83,8 +83,8 @@ Kandidat `1.2.0+3` berhasil dibangun dan dipasang pada emulator. Firebase aktif 
 | Build number | `3` |
 | APK | 52,23 MB |
 | AAB | 52,21 MB |
-| SHA-256 APK | `8F8AA2799351AC0E52701B95A8F7F6F751CDA54D6039E9BB43EA1161144AD6B6` |
-| SHA-256 AAB | `97EA1981C3C8DFC8E02B571663A573979383A7E45AFD445565F7FE5B85B9CEEB` |
+| SHA-256 APK | `D55641F8D95B945C3F494863F52D7DB72CFE67C354352883B4E9BC88E6EEDE71` |
+| SHA-256 AAB | `249E68EC69D8A8A6ED12B5749A111B0C24A44E43EBF566E9A7D55D20C96ECC88` |
 | Perangkat uji | Pixel 8, Android 17 (API 37) |
 
 Artefak build tidak di-commit. Angka dan checksum di atas dihasilkan dari build pada 25 November 2026.
@@ -100,7 +100,7 @@ Artefak build tidak di-commit. Angka dan checksum di atas dihasilkan dari build 
 > **Keterangan gambar**
 > - Versi dinaikkan dari `1.1.0+2` menjadi `1.2.0+3`.
 > - Kenaikan minor dipakai karena ada fitur baru (monitoring beta), dan build number naik untuk unggahan baru.
-> - Commit kandidat dicatat agar artefak bisa dihubungkan ke source.
+> - Commit yang tampil adalah `dacca92`, source yang dipakai untuk build akhir.
 
 <img src="screenshots/Praktikum 1 - Build AAB Release.png" width="700" alt="Build AAB Release">
 
@@ -110,6 +110,13 @@ Artefak build tidak di-commit. Angka dan checksum di atas dihasilkan dari build 
 > - Keduanya memakai debug signing; ini cukup untuk uji internal, tetapi belum layak untuk Play Store.
 
 ### Praktikum 2: Distribusi Beta ke Perangkat Uji
+
+<img src="screenshots/Praktikum 2 - Integration Test Beta.png" width="700" alt="Integration Test Beta">
+
+> **Keterangan gambar**
+> - Integration test dijalankan pada source final `dacca92` di emulator Pixel 8.
+> - Alur login sampai catatan tersimpan lulus (`All tests passed!`) tanpa crash.
+> - Ini bukti tambahan bahwa perbaikan teks status tidak merusak alur utama.
 
 <img src="screenshots/Praktikum 2 - Instalasi Build Beta.png" width="700" alt="Instalasi Build Beta">
 
@@ -121,7 +128,7 @@ Artefak build tidak di-commit. Angka dan checksum di atas dihasilkan dari build 
 <img src="screenshots/Praktikum 2 - Aplikasi Beta di Emulator.png" width="300" alt="Aplikasi Beta di Emulator">
 
 > **Keterangan gambar**
-> - Build release berhasil login dan menampilkan Home.
+> - Build release dipasang, lalu login berhasil dan menampilkan Home (screenshot diambil setelah aplikasi dipastikan foreground).
 > - Halaman Home menampilkan penanda `Deployment & Monitoring - Week 14`.
 > - Ikon umpan balik di kanan atas membuka halaman pengujian telemetri.
 
@@ -139,7 +146,7 @@ Artefak build tidak di-commit. Angka dan checksum di atas dihasilkan dari build 
 > **Keterangan gambar**
 > - Status monitoring ditampilkan jujur: `Firebase aktif (campus-notify-20030)`.
 > - Halaman ini hanya mengirim nama event dan nama layar.
-> - Tombol **Uji Error Non-Fatal** memicu error buatan untuk membuktikan Crashlytics menerima laporan.
+> - Tombol **Uji Error Non-Fatal** memicu error buatan untuk membuktikan Crashlytics mencatat dan mengantrekan laporan.
 
 <img src="screenshots/Praktikum 3 - Event Beta Dikirim.png" width="300" alt="Event Beta Dikirim">
 
@@ -147,11 +154,11 @@ Artefak build tidak di-commit. Angka dan checksum di atas dihasilkan dari build 
 > - Snackbar menegaskan event dikirim tanpa data pribadi.
 > - Event yang dikirim bernama `beta_feedback_sent` dengan parameter `screen_name=beta_feedback_page`.
 
-<img src="screenshots/Praktikum 3 - Error Non Fatal Dikirim.png" width="300" alt="Error Non Fatal Dikirim">
+<img src="screenshots/Praktikum 3 - Error Non Fatal Diantrekan di Aplikasi.png" width="300" alt="Error Non Fatal Diantrekan di Aplikasi">
 
 > **Keterangan gambar**
-> - Snackbar menegaskan error non-fatal dikirim ke Crashlytics.
-> - Error yang dikirim adalah error buatan `Uji error non-fatal Week 14` tanpa data pengguna.
+> - Snackbar menegaskan error non-fatal diantrekan ke Crashlytics, bukan diklaim sudah terkirim.
+> - Error yang diproses adalah error buatan `Uji error non-fatal Week 14` tanpa data pengguna.
 
 <img src="screenshots/Praktikum 3 - Event Analytics Terkirim.png" width="700" alt="Event Analytics Terkirim">
 
@@ -160,12 +167,12 @@ Artefak build tidak di-commit. Angka dan checksum di atas dihasilkan dari build 
 > - Parameter yang tercatat hanya `screen_name=beta_feedback_page`.
 > - Tidak ada email, token, atau isi catatan pada event.
 
-<img src="screenshots/Praktikum 3 - Error Non Fatal Terkirim.png" width="700" alt="Error Non Fatal Terkirim">
+<img src="screenshots/Praktikum 3 - Error Non Fatal Diantrekan.png" width="700" alt="Error Non Fatal Diantrekan">
 
 > **Keterangan gambar**
 > - Crashlytics mencatat `Persisting non-fatal event`, lalu `successfully enqueued to DataTransport` pada build uji `1.2.0+3`.
-> - Setelah aplikasi dibuka ulang, report di-upload dan server membalas HTTP 204.
-> - Baris `Successful upload. Got network response` adalah bukti upload, bukan sekadar pencatatan lokal.
+> - Report diantrekan ke DataTransport, lalu berkas report lokal dihapus. Upload final Crashlytics tidak muncul di log, jadi statusnya **diantrekan**, bukan **terkirim**.
+> - Baris `Successful upload. Got network response` pada `FA-SVC` adalah bukti upload **Analytics**, bukan Crashlytics.
 
 ### Praktikum 4: Triage dan Release Report
 
@@ -174,13 +181,14 @@ Artefak build tidak di-commit. Angka dan checksum di atas dihasilkan dari build 
 > **Keterangan gambar**
 > - Ringkasan bukti Analytics dan Crashlytics dikumpulkan dalam satu tampilan.
 > - Verifikasi memakai logcat karena dashboard Firebase Console tidak dapat diakses.
-> - HTTP 204 pada upload Crashlytics menunjukkan server menerima report.
+> - HTTP 204 berasal dari `FA-SVC` (Analytics). Crashlytics baru sampai tahap enqueue ke DataTransport, sehingga tidak diklaim terkirim.
 
 <img src="screenshots/Praktikum 4 - Triage Rilis.png" width="700" alt="Triage Rilis">
 
 > **Keterangan gambar**
 > - Alur utama release lulus di emulator.
-> - Analytics dan Crashlytics terkirim, tetapi dashboard belum ditinjau.
+> - Analytics terkirim (HTTP 204); Crashlytics baru diantrekan ke DataTransport.
+> - Dashboard belum ditinjau dan upload final Crashlytics belum terverifikasi.
 > - Keputusan: lanjutkan beta internal dengan syarat, tahan rilis publik.
 
 <img src="screenshots/Praktikum 4 - Release Report.png" width="700" alt="Release Report">
@@ -235,7 +243,7 @@ Bila `Firebase.initializeApp` gagal, `Monitoring.enabled` bernilai false, status
 2. **Distribusi bukan track resmi.** ADB install tidak punya opt-in, daftar tester, atau rollback.
 3. **Signing debug.** APK/AAB belum layak untuk Play Store.
 4. **Project Firebase dipakai bersama Minggu 6.** Data telemetry masuk ke project yang sama.
-5. **Symbol native belum diunggah.** Crashlytics menerima laporan Dart, tetapi mapping native belum dikonfigurasi.
+5. **Symbol native belum diunggah.** Crashlytics mencatat laporan Dart, tetapi mapping native belum dikonfigurasi.
 
 ---
 
@@ -247,7 +255,7 @@ Prompt untuk menganalisis log rilis beta sudah disamarkan dan dicatat lengkap di
 
 | Saran AI | Keputusan | Alasan Teknis |
 |---|---|---|
-| `enqueued` belum berarti `uploaded` | **Diterima** | Upload dibuktikan baris HTTP 204 |
+| `enqueued` belum berarti `uploaded` | **Diterima** | HTTP 204 adalah upload Analytics; Crashlytics baru enqueue |
 | Cek dashboard sebelum memperluas beta | **Diterima** | Dashboard adalah sinyal agregat yang tidak bisa diganti log satu perangkat |
 | Hitung crash-free rate dari logcat | **Ditolak** | Log satu perangkat tidak mewakili populasi |
 | Kirim `user_id` untuk analisis | **Ditolak** | Melanggar minimalisasi data |
@@ -264,7 +272,7 @@ Bukti bahwa build yang sama sudah diuji pada beberapa perangkat, tidak ada crash
 
 **2. Bagaimana Anda memutuskan untuk menahan atau melanjutkan rilis?**
 
-Saya menahan perluasan karena tiga syarat belum terpenuhi: signing produksi, dashboard monitoring, dan tester eksternal. Saya tetap melanjutkan beta internal karena alur utama lulus dan telemetry terbukti terkirim. Keputusan ini dicatat eksplisit di `docs/release-report.md`, bukan disimpulkan diam-diam.
+Saya menahan perluasan karena tiga syarat belum terpenuhi: signing produksi, dashboard monitoring, dan tester eksternal. Saya tetap melanjutkan beta internal karena alur utama lulus, event Analytics terbukti terkirim, dan error non-fatal tercatat sampai antrean DataTransport. Keputusan ini dicatat eksplisit di `docs/release-report.md`, bukan disimpulkan diam-diam.
 
 **3. Data apa yang tidak perlu dikirim ke layanan monitoring?**
 

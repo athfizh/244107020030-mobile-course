@@ -97,8 +97,8 @@ Seluruh **65 tes** lulus: 57 tes lama dari Minggu 11 dan 8 tes baru untuk login,
 <img src="screenshots/Praktikum 1 - Struktur Berkas Test.png" width="700" alt="Struktur Berkas Test">
 
 > **Keterangan gambar**
-> - Delapan berkas test baru ditambahkan di samping 13 berkas test Minggu 11.
-> - `integration_test/app_test.dart` dipisahkan dari folder `test/` karena dijalankan pada perangkat, bukan di VM pengujian.
+> - Tiga berkas widget test baru dan satu berkas integration test ditambahkan di samping 13 berkas test Minggu 11.
+> - Total ada 16 berkas test dan 8 kasus uji baru, sehingga jumlah tes menjadi 65.
 
 <img src="screenshots/Praktikum 1 - Hasil Unit dan Widget Test.png" width="700" alt="Hasil Unit dan Widget Test">
 
@@ -158,7 +158,7 @@ Seluruh **65 tes** lulus: 57 tes lama dari Minggu 11 dan 8 tes baru untuk login,
 ## Temuan yang Belum Terselesaikan
 
 1. **Streaming AI belum diuji end-to-end.** Pengujian berhenti pada `AskAi` dan cache; parsing SSE serta pembatalan stream belum punya test karena membutuhkan server tiruan.
-2. **`flutter_secure_storage` hanya diuji lewat fake.** Perilaku Keystore asli baru terbukti saat integration test berjalan di perangkat.
+2. **`flutter_secure_storage` tidak diuji terpisah.** Unit test memakai fake; perilaku Keystore asli hanya tersentuh lewat integration test, tanpa pemeriksaan langsung.
 3. **Cakupan halaman detail pengumuman masih rendah.** Halaman ini hanya diuji secara tidak langsung lewat route.
 4. **Test integrasi bergantung pada jaringan.** `reqres.in` adalah layanan demo; jika kuota harian habis, test akan gagal karena alasan yang bukan bug aplikasi.
 
