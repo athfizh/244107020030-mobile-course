@@ -87,3 +87,4 @@ Yang diharapkan:
 2. Track Internal Testing Play Console tidak tersedia; distribusi memakai ADB ke perangkat uji.
 3. Build memakai debug signing sampai keystore produksi disiapkan.
 4. `applicationId` sama dengan aplikasi Minggu 6, jadi build ini menggantikan aplikasi Minggu 6 pada perangkat yang sama.
+5. Jika build Windows gagal karena incremental cache Kotlin, tambahkan `kotlin.incremental=false` dan `kotlin.compiler.execution.strategy=in-process` pada `android/gradle.properties`.

@@ -4,14 +4,14 @@
 **NIM:** 244107020030  
 **Tanggal:** 25 November 2026  
 **Kandidat:** `1.2.0+3`  
-**Commit kandidat:** `3cb7d9c` (build dibuat dari working tree yang sama; dokumentasi rilis di `d3821f7`)  
+**Commit kandidat:** `3cb7d9c` (build dibuat dari working tree yang sama; dokumentasi rilis ada pada commit setelahnya)  
 **Perangkat uji:** Emulator Pixel 8, Android 17 (API 37), x86_64, 1080x2400
 
 ---
 
 ## 1. Ringkasan
 
-Kandidat rilis Week 14 dibangun dari project Week 13 dengan tambahan Firebase Crashlytics dan Analytics. Build release berhasil dibuat, dipasang pada emulator, dan diuji alur utama. Satu event Analytics non-sensitif (`beta_feedback_sent`) dan satu error non-fatal berhasil dikirim serta terverifikasi lewat logcat. Dashboard Firebase Console tidak dapat diakses pada praktikum ini, sehingga verifikasi dilakukan dari log perangkat dan status di aplikasi.
+Kandidat rilis Week 14 dibangun dari project Week 13 dengan tambahan Firebase Crashlytics dan Analytics. Build release berhasil dibuat, dipasang pada emulator, dan diuji alur utama. Satu event Analytics non-sensitif (`beta_feedback_sent`) dan satu error non-fatal berhasil dikirim serta terverifikasi lewat logcat pada build uji versi yang sama. Dashboard Firebase Console tidak dapat diakses pada praktikum ini, sehingga verifikasi dilakukan dari log perangkat dan status di aplikasi.
 
 ---
 
@@ -182,3 +182,9 @@ Event `beta_feedback_sent` hanya membawa `screen_name`. Logika `RedactSensitive`
 3. Tambahkan `FirebaseAnalyticsObserver` pada GoRouter untuk `screen_view` otomatis.
 4. Siapkan track Internal Testing di Play Console dan undang tester.
 5. Tambahkan uji asap build release ke pipeline CI.
+
+---
+
+## 12. Penggunaan AI
+
+Log yang dikirim ke AI sudah disamarkan: app ID, installation ID, session ID, dan timestamp dihapus. Prompt, ringkasan jawaban, serta cara verifikasi tiap saran dicatat di [i-log-analysis.md](ai-log-analysis.md). Klaim yang tidak bisa dibuktikan dari log, seperti crash-free rate, ditolak.
