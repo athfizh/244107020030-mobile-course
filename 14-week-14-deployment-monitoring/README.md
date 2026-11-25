@@ -107,8 +107,8 @@ Artefak build tidak di-commit. Angka dan checksum di atas dihasilkan dari build 
 <img src="screenshots/Praktikum 1 - Build AAB Release.png" width="700" alt="Build AAB Release">
 
 > **Keterangan gambar**
-> - `flutter build appbundle --release` menghasilkan AAB 52,2 MB.
-> - `flutter build apk --release` menghasilkan APK 52,2 MB untuk instalasi langsung.
+> - `flutter build appbundle --release` menghasilkan AAB 52,21 MB.
+> - `flutter build apk --release` menghasilkan APK 52,23 MB untuk instalasi langsung.
 > - Keduanya memakai debug signing; ini cukup untuk uji internal, tetapi belum layak untuk Play Store.
 
 ### Praktikum 2: Distribusi Beta ke Perangkat Uji

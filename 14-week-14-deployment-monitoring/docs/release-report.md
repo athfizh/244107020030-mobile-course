@@ -71,7 +71,7 @@ Project Firebase yang dipakai adalah `campus-notify-20030`, project yang sama de
 
 Konfigurasi klien disimpan di `lib/firebase_options.dart` dan `firebase/google-services.json`. Nilai `apiKey` pada berkas tersebut adalah pengenal klien publik, bukan rahasia server. Yang tidak boleh masuk repository adalah keystore, password, dan token.
 
-### Inisialisasi
+### Inisialisasi Firebase
 
 `Monitoring.init()` memanggil `Firebase.initializeApp`, memasang `FlutterError.onError` dan `PlatformDispatcher.instance.onError`, lalu mengaktifkan koleksi Crashlytics. Bila inisialisasi gagal, aplikasi tetap berjalan dengan status **Mode lokal** dan mencatat kejadian ke logcat.
 

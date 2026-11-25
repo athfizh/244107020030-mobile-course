@@ -92,8 +92,8 @@ Workflow berhasil menjalankan seluruh tahap pada project ini: format nol perubah
 <img src="screenshots/Praktikum 2 - Build APK dan AAB Release.png" width="700" alt="Build APK dan AAB">
 
 > **Keterangan gambar**
-> - `flutter build apk --release` menghasilkan APK 51,1 MB untuk instalasi dan uji internal.
-> - `flutter build appbundle --release` menghasilkan AAB 50,2 MB untuk alur Google Play.
+> - `flutter build apk --release` menghasilkan APK 51,05 MB untuk instalasi dan uji internal.
+> - `flutter build appbundle --release` menghasilkan AAB 50,21 MB untuk alur Google Play.
 > - Kedua build memakai signing debug karena keystore produksi tidak dibuat pada praktikum ini.
 
 <img src="screenshots/Praktikum 2 - Artefak Android.png" width="700" alt="Artefak Android">
