@@ -32,6 +32,8 @@
 - **Solusi:** `adb logcat` menunjukkan tidak ada koneksi; ternyata izin `INTERNET` hanya ada di manifest debug. Izin ditambahkan ke `AndroidManifest.xml` utama, lalu build diuji ulang.
 - **Masalah:** Workflow tidak dapat dibuktikan berjalan sebelum perubahan di-push.
 - **Solusi:** Pemeriksaan lokal dijalankan lebih dulu dengan perintah identik; setelah push ke `develop`, run #35 dan run #41 sukses pada 7 job dan artefak `week13-android-builds` (73,6 MB) dapat diunduh.
+- **Masalah:** CI main sempat gagal di job Week 13 karena Maven Central membalas HTTP 429 Too Many Requests saat Gradle mengunduh dependency.
+- **Solusi:** Job dijalankan ulang dan sukses; ditambahkan cache `~/.gradle/caches` dan `~/.gradle/wrapper` agar unduhan dependency tidak berulang di setiap run.
 - **Masalah:** Build pertama lambat dan memakan RAM karena Gradle memakai 8 GB heap.
 - **Solusi:** Heap diturunkan ke 3 GB, worker dibatasi 4, dan emulator dijalankan headless.
 - **Masalah:** Artefak besar tidak boleh masuk repository.

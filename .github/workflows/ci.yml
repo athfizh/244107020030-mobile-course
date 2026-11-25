@@ -64,6 +64,17 @@ jobs:
             sed -i 's/id("com.android.application")/id("com.android.application")\n    id("org.jetbrains.kotlin.android")/' android/app/build.gradle.kts
           fi
 
+      - name: Cache Gradle
+        if: matrix.project == '13-week-13-ci-cd-automation'
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('13-week-13-ci-cd-automation/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
       - name: Build APK release
         if: matrix.project == '13-week-13-ci-cd-automation'
         run: flutter build apk --release
