@@ -81,7 +81,30 @@ Yang diharapkan:
 3. `Logging event: origin=app,name=beta_feedback_sent` setelah tombol **Kirim Event Beta** ditekan
 4. `Crashlytics report successfully enqueued to DataTransport` setelah tombol **Uji Error Non-Fatal** ditekan
 
-## 6. Batasan
+## 6. Distribusi Beta via Firebase App Distribution
+
+Jalur distribusi yang disarankan modul. Disiapkan sebagai workflow `workflow_dispatch`, sehingga service account tidak pernah tersedia untuk pull request.
+
+1. Firebase Console -> **App Distribution** -> Get started.
+2. Buat grup tester `internal-testers` dan tambahkan email Anda.
+3. Project settings -> **Service accounts** -> Generate new private key (JSON).
+4. GitHub repo -> Settings -> Secrets and variables -> Actions:
+   - Secret `FIREBASE_SERVICE_ACCOUNT` = isi JSON tersebut.
+   - Variable `FIREBASE_APP_ID` = `1:174960433216:android:a61a15e007477bb37a67a5`.
+5. Jalankan workflow `distribute-beta` pada tab Actions.
+6. Tester menerima email undangan; bukti distribusi dicatat dengan screenshot dashboard App Distribution dan email tester.
+
+Workflow `distribute-beta` mengunduh APK dari release `v1.2.0`, memverifikasi checksum, lalu mendistribusikannya lewat Firebase CLI dengan `GOOGLE_APPLICATION_CREDENTIALS`.
+
+---
+
+## 7. Batasan
+
+1. Dashboard Crashlytics dan Analytics sudah diverifikasi lewat Firebase Console; sampelnya masih kecil (1 active user, 2 event non-fatal).
+2. Track Internal Testing Play Console tidak tersedia; distribusi memakai ADB ke perangkat uji.
+3. Build memakai debug signing sampai keystore produksi disiapkan.
+4. `applicationId` sama dengan aplikasi Minggu 6, jadi build ini menggantikan aplikasi Minggu 6 pada perangkat yang sama.
+5. Jika build Windows gagal karena incremental cache Kotlin, tambahkan `kotlin.incremental=false` dan `kotlin.compiler.execution.strategy=in-process` pada `android/gradle.properties`.
 
 1. Dashboard Crashlytics dan Analytics sudah diverifikasi lewat Firebase Console; sampelnya masih kecil (1 active user, 2 event non-fatal).
 2. Track Internal Testing Play Console tidak tersedia; distribusi memakai ADB ke perangkat uji.

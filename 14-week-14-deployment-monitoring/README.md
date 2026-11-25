@@ -18,6 +18,7 @@ Praktikum ini membawa project hasil Minggu 13 ke tahap kandidat rilis: versi din
 | Kandidat Rilis | Versi `1.2.0+3` dengan catatan perubahan dari Minggu 13 |
 | Build Release | APK 52,23 MB dan AAB 52,21 MB dengan checksum SHA-256 |
 | Distribusi Privat | APK dipasang pada emulator Pixel 8 melalui `adb install` |
+| Distribusi App Distribution | Workflow `distribute-beta` siap dijalankan untuk kirim APK ke grup tester |
 | Firebase Crashlytics | Error fatal dan non-fatal dicatat, termasuk `FlutterError.onError` |
 | Firebase Analytics | Event `beta_feedback_sent` hanya membawa `screen_name` |
 | Halaman Umpan Balik Beta | Memicu event dan error uji tanpa data pribadi |
@@ -124,7 +125,7 @@ Artefak build tidak di-commit. Angka dan checksum di atas dihasilkan dari build 
 > **Keterangan gambar**
 > - APK dipasang dengan `adb install -r` pada emulator Pixel 8.
 > - `dumpsys package` membuktikan perangkat menerima `versionName=1.2.0` dan `versionCode=3`.
-> - Cara ini dipakai karena Play Console dan Firebase App Distribution memerlukan akses console yang tidak tersedia.
+> - Cara ini dipakai sebagai bukti instalasi lokal. Jalur resmi distribusi beta, Firebase App Distribution, disiapkan lewat workflow `distribute-beta` (lihat `docs/firebase-setup.md` bagian 6).
 
 <img src="screenshots/Praktikum 2 - Aplikasi Beta di Emulator.png" width="300" alt="Aplikasi Beta di Emulator">
 
@@ -278,7 +279,7 @@ Bila `Firebase.initializeApp` gagal, `Monitoring.enabled` bernilai false, status
 ## Risiko dan Keterbatasan
 
 1. **Sampel dashboard masih kecil.** Dashboard sudah diverifikasi, tetapi hanya 1 active user dan 2 event non-fatal dari 2 installation ID. Angka itu belum cukup untuk menyimpulkan kestabilan aplikasi secara umum.
-2. **Distribusi bukan track resmi.** ADB install tidak punya opt-in, daftar tester, atau rollback seperti Play Console.
+2. **Distribusi App Distribution belum dijalankan.** Workflow `distribute-beta` sudah disiapkan, tetapi masih menunggu grup tester dan secret service account diaktifkan; ADB install dipakai sebagai bukti instalasi lokal.
 3. **Signing debug.** APK/AAB belum layak untuk Play Store.
 4. **Project Firebase dipakai bersama Minggu 6.** Data telemetry masuk ke project yang sama.
 5. **Symbol native belum diunggah.** Crashlytics mencatat laporan Dart, tetapi mapping native belum dikonfigurasi.
