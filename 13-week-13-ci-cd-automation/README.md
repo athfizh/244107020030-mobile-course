@@ -65,7 +65,7 @@ Keterangan versi:
 
 ## Hasil yang Dicapai
 
-Workflow berhasil menjalankan seluruh tahap pada project ini: format nol perubahan, `flutter analyze --fatal-infos` bersih, 65 tes lulus, lalu build APK 51,05 MB dan AAB 50,21 MB. Setelah perubahan di-push ke `develop`, GitHub Actions menjalankan 7 job matriks (Week 8-14) dan semuanya sukses; job Week 13 selesai dalam 6 menit 45 detik dan menghasilkan artefak `week13-android-builds` berukuran 73,6 MB. APK release dipasang pada emulator Pixel 8 dan menampilkan `versionName=1.1.0`, `versionCode=2`. Checksum build lokal: APK `D3DEBCEC1185670DFB1D64C24336EB5A813E57C114F2C2865973C47E95BCE05A` dan AAB `13960AE4E9C7C1D44D8907C766017960B80AC18C993B8913BF7E68F24B787769`. Tidak ada material signing produksi yang dibuat; build memakai debug signing agar bisa diuji, dan itu dicatat sebagai risiko yang belum diselesaikan.
+Workflow berhasil menjalankan seluruh tahap pada project ini: format nol perubahan, `flutter analyze --fatal-infos` bersih, 65 tes lulus, lalu build APK 51,05 MB dan AAB 50,21 MB. Setelah perubahan di-push ke `develop`, GitHub Actions menjalankan 7 job matriks (Week 8-14) dan semuanya sukses; job Week 13 selesai dalam 6 menit 5 detik pada run audit #41 dan menghasilkan artefak `week13-android-builds` berukuran 73,6 MB. APK release dipasang pada emulator Pixel 8 dan menampilkan `versionName=1.1.0`, `versionCode=2`. Checksum build lokal: APK `D3DEBCEC1185670DFB1D64C24336EB5A813E57C114F2C2865973C47E95BCE05A` dan AAB `13960AE4E9C7C1D44D8907C766017960B80AC18C993B8913BF7E68F24B787769`. Tidak ada material signing produksi yang dibuat; build memakai debug signing agar bisa diuji, dan itu dicatat sebagai risiko yang belum diselesaikan.
 
 ---
 
@@ -108,8 +108,8 @@ Workflow berhasil menjalankan seluruh tahap pada project ini: format nol perubah
 <img src="screenshots/Praktikum 3 - Workflow Actions Sukses.png" width="700" alt="Workflow Actions Sukses">
 
 > **Keterangan gambar**
-> - Push ke `develop` memicu run #35 pada commit `3cb7d9c`. Semua 7 job matriks Week 8-14 berstatus sukses.
-> - Job Week 13 menyelesaikan format, analyze, test, build APK/AAB, dan upload artefak.
+> - Run audit #41 pada commit `f21a595` menjalankan 7 job matriks Week 8-14 dan semuanya sukses.
+> - Job Week 13 menyelesaikan format, analyze, test, build APK/AAB, dan upload artefak dalam 6 menit 5 detik.
 > - Artefak `week13-android-builds` berukuran 73,6 MB tersedia pada bagian **Artifacts**.
 > - Anotasi `Node.js 20 deprecated` berasal dari action pihak ketiga, bukan kegagalan build.
 

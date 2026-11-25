@@ -145,7 +145,7 @@ Artefak build tidak di-commit. Angka dan checksum di atas dihasilkan dari build 
 
 > **Keterangan gambar**
 > - Status monitoring ditampilkan jujur: `Firebase aktif (campus-notify-20030)`.
-> - Halaman ini hanya mengirim nama event dan nama layar.
+> - Halaman ini tidak mengirim email, token, atau isi catatan; hanya nama event, nama layar, dan error uji.
 > - Tombol **Uji Error Non-Fatal** memicu error buatan untuk membuktikan Crashlytics mencatat dan mengantrekan laporan.
 
 <img src="screenshots/Praktikum 3 - Event Beta Dikirim.png" width="300" alt="Event Beta Dikirim">
@@ -166,13 +166,14 @@ Artefak build tidak di-commit. Angka dan checksum di atas dihasilkan dari build 
 > - Log `FA-SVC` menampilkan `Logging event: origin=app,name=beta_feedback_sent`.
 > - Parameter yang tercatat hanya `screen_name=beta_feedback_page`.
 > - Tidak ada email, token, atau isi catatan pada event.
+> - Baris `Network upload successful ... 204` adalah bukti upload Analytics, bukan Crashlytics.
 
 <img src="screenshots/Praktikum 3 - Error Non Fatal Diantrekan.png" width="700" alt="Error Non Fatal Diantrekan">
 
 > **Keterangan gambar**
 > - Crashlytics mencatat `Persisting non-fatal event`, lalu `successfully enqueued to DataTransport` pada build uji `1.2.0+3`.
+> - Gambar ini menggabungkan dua cuplikan logcat dari build yang sama: event non-fatal dan antrean DataTransport.
 > - Report diantrekan ke DataTransport, lalu berkas report lokal dihapus. Upload final Crashlytics tidak muncul di log, jadi statusnya **diantrekan**, bukan **terkirim**.
-> - Baris `Successful upload. Got network response` pada `FA-SVC` adalah bukti upload **Analytics**, bukan Crashlytics.
 
 ### Praktikum 4: Triage dan Release Report
 
