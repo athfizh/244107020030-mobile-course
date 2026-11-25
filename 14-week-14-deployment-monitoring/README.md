@@ -241,6 +241,7 @@ Artefak build tidak di-commit. Angka dan checksum di atas dihasilkan dari build 
 | GitHub Release | Pre-release `Week 14 Beta 1.2.0+3` |
 | Issue tertutup | #1 dan #2 otomatis lewat PR |
 | Check CI PR | 14 check sukses |
+| Artefak | APK 52,23 MB dan AAB 52,21 MB terlampir di GitHub Release |
 
 Rilis ditandai **pre-release** karena build masih memakai debug signing dan distribusi baru lewat ADB. Detail ada di [`docs/release-report.md`](docs/release-report.md) bagian 12.
 
